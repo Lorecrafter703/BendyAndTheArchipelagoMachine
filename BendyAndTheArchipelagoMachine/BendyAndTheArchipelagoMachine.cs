@@ -1,4 +1,5 @@
 ﻿using BendyAndTheArchipelagoMachine.Archipelago;
+using BendyAndTheArchipelagoMachine.Data;
 using BendyAndTheArchipelagoMachine.Utils;
 using BepInEx;
 using BepInEx.Logging;

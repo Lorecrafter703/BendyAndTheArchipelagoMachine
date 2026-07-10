@@ -17,6 +17,7 @@ namespace BendyAndTheArchipelagoMachine.Data
             { 5, "CH1 Inkwell" },
             { 6, "CH1 Record" },
             { 7, "CH1 Wrench" },
+            { 8, "Unlock CH2" },
         };
 
         private static readonly Dictionary<string, long> locationNametoID = new Dictionary<string, long>
@@ -48,6 +49,9 @@ namespace BendyAndTheArchipelagoMachine.Data
             { "CH1 Inkwell", 25 },
             { "CH1 Record", 26 },
             { "CH1 Wrench", 27 },
+            { "CH1 Audio Log Thomas 1", 28 },
+            { "CH1 Audio Log Wally 1", 29 },
+            { "CH1 Complete", 30 },
         };
 
         public static string GetItemName(long id)

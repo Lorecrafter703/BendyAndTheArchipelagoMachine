@@ -59,7 +59,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         private void SetupSession()
         {
             session.MessageLog.OnMessageReceived += (message) => ArchipelagoConsole.LogMessage(message.ToString());
-            session.Items.ItemReceived += OnItemReceived;
+            session.Items.ItemReceived += (receivedItemsHelper) => OnItemReceived(receivedItemsHelper);
             session.Socket.ErrorReceived += OnSessionErrorReceived;
             session.Socket.SocketClosed += OnSessionSocketClosed;
         }
@@ -74,7 +74,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
                         session.TryConnectAndLogin(
                             GAME_NAME,
                             serverData.SlotName,
-                            ItemsHandlingFlags.NoItems,
+                            ItemsHandlingFlags.AllItems,
                             new Version(AP_VERSION),
                             password: serverData.Password,
                             requestSlotData: serverData.NeedSlotData
@@ -168,7 +168,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         }
 
 
-        public static void SendCheck(string itemName)
+        public static void SendLocation(string itemName)
         {
             long itemID = IDTables.GetLocationID(itemName);
 
@@ -180,6 +180,12 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         public static bool HasItem(string itemName)
         {
             return ReceivedItems.HasItem(itemName);
+        }
+
+
+        public static void CompleteGoal()
+        {
+            session.SetGoalAchieved();
         }
     }
 }

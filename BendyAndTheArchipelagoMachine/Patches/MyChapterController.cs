@@ -1,9 +1,11 @@
-﻿using HarmonyLib;
+﻿using BendyAndTheArchipelagoMachine.Archipelago;
+using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 namespace BendyAndTheArchipelagoMachine.Patches
 {
@@ -12,9 +14,28 @@ namespace BendyAndTheArchipelagoMachine.Patches
     {
         public static ChapterController currentChapter;
 
-        [HarmonyReversePatch]
+        [HarmonyReversePatch(HarmonyReversePatchType.Original)]
+        [HarmonyPatch("LoadChapter")]
+        public static void MyLoadChapter(ChapterController instance, string chapter) => throw (new NotImplementedException());
+
+
+        [HarmonyPrefix]
         [HarmonyPatch("CompleteChapter")]
-        public static void MyCompleteChapter(ChapterController instance) => throw (new NotImplementedException());
+        public static bool OnChapterComplete(ChapterController __instance, Chapters ___m_Chapter, ref bool ___m_IsActive)
+        {
+            // send check
+            switch (___m_Chapter)
+            {
+                case Chapters.ONE:
+                    Client.SendLocation("CH1 Complete");
+                    break;
+            }
+            // Return to hub
+            MyLoadChapter(currentChapter, "Archives");
+
+            return false;
+        }
+
 
         [HarmonyPostfix]
         [HarmonyPatch("Init")]
