@@ -1,4 +1,5 @@
-﻿using BendyAndTheArchipelagoMachine.Patches;
+﻿using BendyAndTheArchipelagoMachine.Archipelago;
+using BendyAndTheArchipelagoMachine.Patches;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,17 +18,26 @@ namespace BendyAndTheArchipelagoMachine.Utils
         //        BendyAndTheArchipelagoMachine.Logger.LogMessage("Player entered the zone!");
         //    }
         //}
+        private int targetChapter = -1;
+
+
+        public void setTargetChapter(int chapter) { this.targetChapter = chapter; }
+
 
         public override void OnInteract()
         {
-            BendyAndTheArchipelagoMachine.Logger.LogWarning("INTERACTION WORKS!!!");
-            MyChapterController.MyLoadChapter(MyChapterController.currentChapter, "CH2");
+            if (targetChapter < 1 || targetChapter > 5)
+            {
+                BendyAndTheArchipelagoMachine.Logger.LogError($"Invalid chapter: {targetChapter}");
+                return;
+            }
+            if (!Client.HasItem($"Unlock CH{targetChapter}"))
+            {
+                BendyAndTheArchipelagoMachine.Logger.LogWarning($"Chapter not yet unlocked: {targetChapter}");
+                return;
+            }
+            MyChapterController.MyLoadChapter(MyChapterController.currentChapter, $"CH{targetChapter}");
             base.OnInteract();
         }
-
-        //public override void Init()
-        //{
-        //    BendyAndTheArchipelagoMachine.Logger.LogWarning("Overridden Init perhaps?");
-        //}
     }
 }

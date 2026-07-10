@@ -18,11 +18,11 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch("Init")]
         public static void InteractableInit(Interactable __instance)
         {
-            if (__instance is CannedSoupEdible)
-            {
-                CannedSoupEdible soup = (CannedSoupEdible)__instance;
-                BendyAndTheArchipelagoMachine.Logger.LogMessage("Initialized Bacon Soup # " + soup.GetID());
-            }
+            //if (__instance is CannedSoupEdible)
+            //{
+            //    CannedSoupEdible soup = (CannedSoupEdible)__instance;
+            //    BendyAndTheArchipelagoMachine.Logger.LogMessage("Initialized Bacon Soup # " + soup.GetID());
+            //}
         }
 
 
@@ -43,32 +43,10 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch("Interact")]
         public static bool InteractPatch(Interactable __instance)
         {
-            if (!RitualItems.CH1RitualItemInteractablesToType.ContainsKey(__instance)) return true;
-            var itemType = RitualItems.CH1RitualItemInteractablesToType[__instance];
-            switch (itemType)
-            {
-                case CH1Pedestal.CollectableType.BOOK:
-                    Client.SendLocation("CH1 Book");
-                    return Client.HasItem("CH1 Book");
-                case CH1Pedestal.CollectableType.DOLL:
-                    Client.SendLocation("CH1 Doll");
-                    return Client.HasItem("CH1 Doll");
-                case CH1Pedestal.CollectableType.GEAR:
-                    Client.SendLocation("CH1 Gear");
-                    return Client.HasItem("CH1 Gear");
-                case CH1Pedestal.CollectableType.INKWELL:
-                    Client.SendLocation("CH1 Inkwell");
-                    return Client.HasItem("CH1 Inkwell");
-                case CH1Pedestal.CollectableType.RECORD:
-                    Client.SendLocation("CH1 Record");
-                    return Client.HasItem("CH1 Record");
-                case CH1Pedestal.CollectableType.WRENCH:
-                    Client.SendLocation("CH1 Wrench");
-                    return Client.HasItem("CH1 Wrench");
-                default:
-                    BendyAndTheArchipelagoMachine.Logger.LogError($"Unknown Item Type {itemType}");
-                    return false;
-            }
+            if (RitualItems.CH1RitualItemInteractablesToType.ContainsKey(__instance)) return RitualItems.HandleRitualItemPickup(__instance);
+            if (LostKeys.keysReference != null && LostKeys.keysReference == __instance) return LostKeys.HandleKeysPickup();
+            if (ValvePickup.valveReference != null && ValvePickup.valveReference == __instance) return ValvePickup.HandleValvePickup();
+            return true;
         }
     }
 }

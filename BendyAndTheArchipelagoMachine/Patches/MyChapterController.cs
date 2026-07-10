@@ -13,6 +13,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
     internal class MyChapterController
     {
         public static ChapterController currentChapter;
+        public static Chapters currentChapterNumber;
 
         [HarmonyReversePatch(HarmonyReversePatchType.Original)]
         [HarmonyPatch("LoadChapter")]
@@ -21,13 +22,28 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPrefix]
         [HarmonyPatch("CompleteChapter")]
-        public static bool OnChapterComplete(ChapterController __instance, Chapters ___m_Chapter, ref bool ___m_IsActive)
+        public static bool OnChapterComplete(ChapterController __instance, Chapters ___m_Chapter)
         {
             // send check
             switch (___m_Chapter)
             {
                 case Chapters.ONE:
                     Client.SendLocation("CH1 Complete");
+                    break;
+                case Chapters.TWO:
+                    Client.SendLocation("CH2 Complete");
+                    break;
+                case Chapters.THREE:
+                    Client.SendLocation("CH3 Complete");
+                    break;
+                case Chapters.FOUR:
+                    Client.SendLocation("CH4 Complete");
+                    break;
+                case Chapters.FIVE:
+                    Client.SendLocation("CH5 Complete");
+                    break;
+                default:
+                    BendyAndTheArchipelagoMachine.Logger.LogWarning($"Unknown Chapter: {___m_Chapter}");
                     break;
             }
             // Return to hub
@@ -39,10 +55,31 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPostfix]
         [HarmonyPatch("Init")]
-        public static void ChapterControllerInit(ChapterController __instance)
+        public static void ChapterControllerInit(ChapterController __instance, Chapters ___m_Chapter)
         {
             currentChapter = __instance;
+            currentChapterNumber = ___m_Chapter;
             BendyAndTheArchipelagoMachine.Logger.LogWarning("Tracking Chapter Controller Instance");
+        }
+
+
+        public static int GetChapterNumber()
+        {
+            switch (currentChapterNumber)
+            {
+                case Chapters.ONE:
+                    return 1;
+                case Chapters.TWO:
+                    return 2;
+                case Chapters.THREE:
+                    return 3;
+                case Chapters.FOUR:
+                    return 4;
+                case Chapters.FIVE:
+                    return 5;
+                default:
+                    return -1;
+            }
         }
     }
 }

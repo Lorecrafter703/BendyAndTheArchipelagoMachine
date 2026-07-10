@@ -21,26 +21,28 @@ namespace BendyAndTheArchipelagoMachine.Patches
             BendyAndTheArchipelagoMachine.Logger.LogInfo($"Player Spawn: {spawnPoint} | Player Tag: {GameManager.Instance.Player.gameObject.tag}");
 
             //GameObject go = MakeTriggerBall(new Vector3(-24, 2, 29));
-            GameObject go = MakeInteractableBall(new Vector3(-24, 2, 29));
+            GameObject go1 = MakeInteractableBall(new Vector3(-24, 2, 29), 1);
+            GameObject go2 = MakeInteractableBall(new Vector3(0, 2, 29), 2);
         }
 
         
-        public static GameObject MakeTriggerBall(Vector3 spawn)
+        //public static GameObject MakeTriggerBall(Vector3 spawn)
+        //{
+        //    GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        //    sphere.transform.position = spawn;
+        //    Collider collider = sphere.GetComponent<Collider>();
+        //    collider.isTrigger = true;
+        //    sphere.AddComponent(typeof(ChapterLoader));
+
+        //    return sphere;
+        //}
+
+        public static GameObject MakeInteractableBall(Vector3 spawn, int chapter)
         {
             GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             sphere.transform.position = spawn;
-            Collider collider = sphere.GetComponent<Collider>();
-            collider.isTrigger = true;
-            sphere.AddComponent(typeof(ChapterLoader));
-
-            return sphere;
-        }
-
-        public static GameObject MakeInteractableBall(Vector3 spawn)
-        {
-            GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            sphere.transform.position = spawn;
-            sphere.AddComponent(typeof(ChapterLoader));
+            ChapterLoader chLoader = sphere.AddComponent(typeof(ChapterLoader)) as ChapterLoader;
+            chLoader.setTargetChapter(chapter);
 
             return sphere;
         }

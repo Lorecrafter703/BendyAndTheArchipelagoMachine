@@ -23,5 +23,34 @@ namespace BendyAndTheArchipelagoMachine.Patches
             CH1RitualItemsTypeToPedestal.Add(___m_CollectableType, __instance);
             CH1RitualItemInteractablesToType.Add(___m_Collectable, ___m_CollectableType);
         }
+
+
+        public static bool HandleRitualItemPickup(Interactable item)
+        {
+            switch (CH1RitualItemInteractablesToType[item])
+            {
+                case CH1Pedestal.CollectableType.BOOK:
+                    Client.SendLocation("CH1 Book");
+                    return Client.HasItem("CH1 Book");
+                case CH1Pedestal.CollectableType.DOLL:
+                    Client.SendLocation("CH1 Doll");
+                    return Client.HasItem("CH1 Doll");
+                case CH1Pedestal.CollectableType.GEAR:
+                    Client.SendLocation("CH1 Gear");
+                    return Client.HasItem("CH1 Gear");
+                case CH1Pedestal.CollectableType.INKWELL:
+                    Client.SendLocation("CH1 Inkwell");
+                    return Client.HasItem("CH1 Inkwell");
+                case CH1Pedestal.CollectableType.RECORD:
+                    Client.SendLocation("CH1 Record");
+                    return Client.HasItem("CH1 Record");
+                case CH1Pedestal.CollectableType.WRENCH:
+                    Client.SendLocation("CH1 Wrench");
+                    return Client.HasItem("CH1 Wrench");
+                default:
+                    BendyAndTheArchipelagoMachine.Logger.LogError($"Unknown Item Type {CH1RitualItemInteractablesToType[item]}");
+                    return false;
+            }
+        }
     }
 }
