@@ -21,6 +21,14 @@ namespace BendyAndTheArchipelagoMachine.Patches
         }
 
 
+        [HarmonyPostfix]
+        [HarmonyPatch("OnDisposed")]
+        public static void ClearValveRef()
+        {
+            valveReference = null;
+        }
+
+
         public static bool HandleValvePickup()
         {
             Client.SendLocation("CH2 Valve");

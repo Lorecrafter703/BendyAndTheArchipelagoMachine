@@ -63,6 +63,14 @@ namespace BendyAndTheArchipelagoMachine.Patches
         }
 
 
+        [HarmonyPostfix]
+        [HarmonyPatch("OnDisposed")]
+        public static void ClearChapterControllerRef()
+        {
+            currentChapter = null;
+        }
+
+
         public static int GetChapterNumber()
         {
             switch (currentChapterNumber)

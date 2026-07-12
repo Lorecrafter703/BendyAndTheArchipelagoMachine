@@ -1,15 +1,19 @@
 ﻿using BendyAndTheArchipelagoMachine.Archipelago;
 using BendyAndTheArchipelagoMachine.Utils;
+using DG.Tweening;
 using HarmonyLib;
 using I2.Loc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using TMG.Data;
+using TMG.UI;
 using TMG.UI.Controls;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace BendyAndTheArchipelagoMachine.Patches
@@ -67,6 +71,14 @@ namespace BendyAndTheArchipelagoMachine.Patches
         }
 
 
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(TitleScreenController), "OnDisposed")]
+        public static void ClearTitleScreenRef()
+        {
+            titleScreenController = null;
+        }
+
+
         [HarmonyPrefix]
         [HarmonyPatch(typeof(TitleScreenController), "ShowBeginMenu")]
         public static void ModifyButtons(TitleScreenController __instance, ref List<MenuItemButton> ___m_BeginMenuItemButtons)
@@ -95,5 +107,26 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(TitleScreenController), "LaunchChapter")]
         public static void LoadChapterFromTitle(TitleScreenController instance, string chapterName) => throw (new NotImplementedException());
 
+
+        /*
+            Attemtping to load the archives when hitting the quit button 
+        */
+        //[HarmonyReversePatch(HarmonyReversePatchType.Original)]
+        //[HarmonyPatch(typeof(BaseUIController), "Kill")]
+        //public static void QuitBaseKill(BaseUIController instance) => throw (new NotImplementedException());
+
+
+        //[HarmonyPrefix]
+        //[HarmonyPatch(typeof(GameMenuController), "Quit")]
+        //public static bool QuitToArchivesHub(GameMenuController __instance, CanvasGroup ___m_BlackoutCanvas)
+        //{
+        //    GameManager.Instance.GameCamera.Camera.enabled = false;
+        //    ___m_BlackoutCanvas.alpha = 1f;
+        //    GameManager.Instance.ShowScreenBlocker(0f, 0f, null);
+        //    GameManager.Instance.UIManager.Camera.enabled = false;
+        //    MyChapterController.MyLoadChapter(MyChapterController.currentChapter, "Archives");
+        //    QuitBaseKill(__instance);
+        //    return false;
+        //}
     }
 }

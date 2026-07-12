@@ -4,6 +4,7 @@ using BendyAndTheArchipelagoMachine.Utils;
 using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
+using InControl;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +12,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using TMG.GamepadControl;
 using UnityEngine;
+using UnityEngine.Windows;
+using XInputDotNetPure;
 
 namespace BendyAndTheArchipelagoMachine
 {
@@ -38,6 +42,7 @@ namespace BendyAndTheArchipelagoMachine
 
             ArchipelagoConsole.LogMessage($"{ModDisplayInfo} loaded!");
         }
+
 
         private void OnGUI()
         {

@@ -78,6 +78,12 @@
     <Reference Include="UnityEngine.IMGUIModule">
       <HintPath>..\Libraries\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>..\Libraries\UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>..\Libraries\UnityEngine.InputModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.PhysicsModule">
       <HintPath>..\Libraries\UnityEngine.PhysicsModule.dll</HintPath>
     </Reference>

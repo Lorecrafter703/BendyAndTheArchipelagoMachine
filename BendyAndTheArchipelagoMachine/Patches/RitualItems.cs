@@ -25,6 +25,15 @@ namespace BendyAndTheArchipelagoMachine.Patches
         }
 
 
+        [HarmonyPostfix]
+        [HarmonyPatch("OnDisposed")]
+        public static void ClearReferences(CH1Pedestal __instance, CH1Pedestal.CollectableType ___m_CollectableType, Interactable ___m_Collectable)
+        {
+            CH1RitualItemsTypeToPedestal.Remove(___m_CollectableType);
+            CH1RitualItemInteractablesToType.Remove(___m_Collectable);
+        }
+
+
         public static bool HandleRitualItemPickup(Interactable item)
         {
             switch (CH1RitualItemInteractablesToType[item])

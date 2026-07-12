@@ -21,6 +21,14 @@ namespace BendyAndTheArchipelagoMachine.Patches
         }
 
 
+        [HarmonyPostfix]
+        [HarmonyPatch("OnDisposed")]
+        public static void ClearKeysRef()
+        {
+            keysReference = null;
+        }
+
+
         public static bool HandleKeysPickup()
         {
             Client.SendLocation("CH2 Keys");
