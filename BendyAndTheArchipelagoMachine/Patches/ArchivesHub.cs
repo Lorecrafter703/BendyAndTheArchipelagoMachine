@@ -22,7 +22,10 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
             //GameObject go = MakeTriggerBall(new Vector3(-24, 2, 29));
             GameObject go1 = MakeInteractableBall(new Vector3(-24, 2, 29), 1);
-            GameObject go2 = MakeInteractableBall(new Vector3(0, 2, 29), 2);
+            GameObject go2 = MakeInteractableBall(new Vector3(-14, 2, 29), 2);
+            GameObject go3 = MakeInteractableBall(new Vector3(-4, 2, 29), 3);
+            GameObject go4 = MakeInteractableBall(new Vector3(6, 2, 29), 4);
+            GameObject go5 = MakeInteractableBall(new Vector3(16, 2, 29), 5);
         }
 
         

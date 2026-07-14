@@ -46,6 +46,9 @@ namespace BendyAndTheArchipelagoMachine.Patches
             if (RitualItems.CH1RitualItemInteractablesToType.ContainsKey(__instance)) return RitualItems.HandleRitualItemPickup(__instance);
             if (LostKeys.keysReference != null && LostKeys.keysReference == __instance) return LostKeys.HandleKeysPickup();
             if (ValvePickup.valveReference != null && ValvePickup.valveReference == __instance) return ValvePickup.HandleValvePickup();
+            if (ToyBlockages.ToysRef.Contains(__instance)) return ToyBlockages.HandleToyPickup();
+            if (BertrumFight.BertrumFightAudioLog != null && BertrumFight.BertrumFightAudioLog == __instance) return BertrumFight.HandleAudioLogInteract();
+            if (BookPuzzleDoor.Books.Contains(__instance)) return BookPuzzleDoor.HandleBookOnInteract();
             return true;
         }
     }

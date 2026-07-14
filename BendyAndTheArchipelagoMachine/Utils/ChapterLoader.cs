@@ -34,7 +34,7 @@ namespace BendyAndTheArchipelagoMachine.Utils
             if (!Client.HasItem($"Unlock CH{targetChapter}"))
             {
                 BendyAndTheArchipelagoMachine.Logger.LogWarning($"Chapter not yet unlocked: {targetChapter}");
-                return;
+                //return;
             }
             MyChapterController.MyLoadChapter(MyChapterController.currentChapter, $"CH{targetChapter}");
             base.OnInteract();
