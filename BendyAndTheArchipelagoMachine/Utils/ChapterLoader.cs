@@ -31,10 +31,18 @@ namespace BendyAndTheArchipelagoMachine.Utils
                 BendyAndTheArchipelagoMachine.Logger.LogError($"Invalid chapter: {targetChapter}");
                 return;
             }
-            if (!Client.HasItem($"Unlock CH{targetChapter}"))
+            if (targetChapter == 5)
             {
-                BendyAndTheArchipelagoMachine.Logger.LogWarning($"Chapter not yet unlocked: {targetChapter}");
-                //return;
+                var BaconSoupsRequiredOption = (long)Client.serverData.GetSlotDataOption("bacon_soups_required");
+                var TotalBaconSoupsOption = (long)Client.serverData.GetSlotDataOption("total_bacon_soups");
+                long BaconSoupsRequired = TotalBaconSoupsOption * BaconSoupsRequiredOption / 100;
+                BendyAndTheArchipelagoMachine.Logger.LogWarning($"Chapter 5 not yet unlocked: {Client.BaconSoupCount()} / {BaconSoupsRequired} Bacon Soups");
+                return;
+            }
+            else if (!Client.HasItem($"Unlock CH{targetChapter}"))
+            {
+                BendyAndTheArchipelagoMachine.Logger.LogWarning($"Chapter {targetChapter} not yet unlocked");
+                return;
             }
             MyChapterController.MyLoadChapter(MyChapterController.currentChapter, $"CH{targetChapter}");
             base.OnInteract();

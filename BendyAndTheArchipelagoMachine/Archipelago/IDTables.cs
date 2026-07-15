@@ -4,29 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BendyAndTheArchipelagoMachine.Data
+namespace BendyAndTheArchipelagoMachine.Archipelago
 {
     internal struct IDTables
     {
-        private static readonly Dictionary<long, string> itemIDtoName = new Dictionary<long, string>
+        private static readonly Dictionary<string, long> itemNametoID = new Dictionary<string, long>
         {
-            { 1, "Bacon Soup" },
-            { 100, "Unlock CH1" },
-            { 101, "CH1 Book" },
-            { 102, "CH1 Doll" },
-            { 103, "CH1 Gear" },
-            { 104, "CH1 Inkwell" },
-            { 105, "CH1 Record" },
-            { 106, "CH1 Wrench" },
-            { 200, "Unlock CH2" },
-            { 201, "CH2 Keys" },
-            { 202, "CH2 Valve" },
-            { 300, "Unlock CH3" },
-            { 301, "CH3 Toys" },
-            { 400, "Unlock CH4" },
-            { 401, "CH4 Books" },
-            { 402, "CH4 Bossfight Bertrum" },
-            { 500, "Unlock CH5" },
+            { "Bacon Soup", 1 },
+            { "Trap", 2 },
+            { "Filler", 3 },
+            { "Unlock CH1", 100 },
+            { "CH1 Book", 101 },
+            { "CH1 Doll", 102 },
+            { "CH1 Gear" , 103 },
+            { "CH1 Inkwell", 104 },
+            { "CH1 Record", 105 },
+            { "CH1 Wrench", 106 },
+            { "Unlock CH2", 200 },
+            { "CH2 Keys", 201 },
+            { "CH2 Valve", 202 },
+            { "Unlock CH3", 300 },
+            { "CH3 Toys", 301 },
+            { "Unlock CH4", 400 },
+            { "CH4 Books", 401 },
+            { "CH4 Bossfight Bertrum", 402 },
+            //{ "Unlock CH5", 500 },
         };
 
         private static readonly Dictionary<string, long> locationNametoID = new Dictionary<string, long>
@@ -59,8 +61,9 @@ namespace BendyAndTheArchipelagoMachine.Data
             { "CH1 Inkwell", 124 },
             { "CH1 Record", 125 },
             { "CH1 Wrench", 126 },
-            { "CH1 Audio Log Thomas 1", 127 },
-            { "CH1 Audio Log Wally 1", 128 },
+            { "CH1 Audio Log Dark and Cold", 127 },
+            { "CH1 Audio Log This Machine", 128 },
+            { "CH1 Radio", 129 },
             { "CH1 Complete", 199 },
             { "CH2 Bacon Soup 0", 200 },
             { "CH2 Bacon Soup 1", 201 },
@@ -95,13 +98,14 @@ namespace BendyAndTheArchipelagoMachine.Data
             { "CH2 Bacon Soup 30", 230 },
             { "CH2 Keys", 231 },
             { "CH2 Valve", 232 },
-            { "CH2 Audio Log The Prayer", 233 },
-            { "CH2 Audio Log Distractions", 234 },
-            { "CH2 Audio Log The New Voice Actress", 235 },
-            { "CH2 Audio Log The Projectionist", 236 },
-            { "CH2 Audio Log Lost Key", 237 },
-            { "CH2 Audio Log Favorite Song", 238 },
-            { "CH2 Audio Log Jack Fain", 239 },
+            { "CH2 Audio Log Can I Get an Amen?", 233 },
+            { "CH2 Audio Log The Pump Switch", 234 },
+            { "CH2 Audio Log New Actress", 235 },
+            { "CH2 Audio Log Crazy Sammy", 236 },
+            { "CH2 Audio Log Stupid Keys", 237 },
+            { "CH2 Audio Log Sanctuary Puzzle", 238 },
+            { "CH2 Audio Log Quiet and Smelly Sewers", 239 },
+            { "CH2 Radio", 240 },
             { "CH2 Complete", 299 },
             { "CH3 Bacon Soup 0", 300 },
             { "CH3 Bacon Soup 1", 301 },
@@ -142,16 +146,17 @@ namespace BendyAndTheArchipelagoMachine.Data
             { "CH3 Bacon Soup 36", 336 },
             { "CH3 Bacon Soup 37", 337 },
             { "CH3 Bacon Soup 38", 338 },
-            { "CH3 Audio Log Shawn Crooked", 350 },
-            { "CH3 Audio Log Joey Drew Belief", 351 },
-            { "CH3 Audio Log Susie Apart", 352 },
-            { "CH3 Audio Log Wally Thomas", 353 },
-            { "CH3 Audio Log Thomas", 354 },
-            { "CH3 Audio Log Susie Lunch", 355 },
-            { "CH3 Audio Log Wally Smile", 356 },
-            { "CH3 Audio Log Grant Genius", 357 },
-            { "CH3 Audio Log Norman Trouble", 358 },
-            { "CH3 Audio Log Henry", 359 },
+            { "CH3 Audio Log Crooked Smile", 350 },
+            { "CH3 Audio Log Time to Believe", 351 },
+            { "CH3 Audio Log Everything is Coming Apart", 352 },
+            { "CH3 Audio Log Ink Pressure", 353 },
+            { "CH3 Audio Log Cutting Corners", 354 },
+            { "CH3 Audio Log Lunch with Joey", 355 },
+            { "CH3 Audio Log Crack a Smile", 356 },
+            { "CH3 Audio Log The Genius Upstairs", 357 },
+            { "CH3 Audio Log Looking for Trouble", 358 },
+            { "CH3 Audio Log Man of Ideas", 359 },
+            { "CH3 Radio", 360 },
             { "CH3 Complete", 399 },
             { "CH4 Bacon Soup 0", 400 },
             { "CH4 Bacon Soup 1", 401 },
@@ -177,26 +182,42 @@ namespace BendyAndTheArchipelagoMachine.Data
             { "CH4 Wasting Time", 421 },
             { "CH4 Bertrum Boss", 422 },
             { "CH4 Brute Boris Boss", 423 },
-            { "CH4 Audio Log Grant Transform", 430 },
-            { "CH4 Audio Log Susie Transform", 431 },
-            { "CH4 Audio Log Bert Transform", 432 },
-            { "CH4 Audio Log Wally Transform", 433 },
-            { "CH4 Audio Log Lacie Transform", 434 },
-            { "CH4 Audio Log Bert Boss", 435 },
-            { "CH4 Audio Log Joey Transform", 436 },
+            { "CH4 Audio Log Indiscernible", 430 },
+            { "CH4 Audio Log Behind Closed Doors", 431 },
+            { "CH4 Audio Log Colossal Wonders", 432 },
+            { "CH4 Audio Log Playing Games", 433 },
+            { "CH4 Audio Log Mechanical Demon", 434 },
+            { "CH4 Audio Log Bertrum's Reveal", 435 },
+            { "CH4 Audio Log Turn it Off", 436 },
+            { "CH4 Radio", 437 },
             { "CH4 Complete", 499 },
+            { "CH5 Bacon Soup 0", 500 },
+            { "CH5 Bacon Soup 1", 501 },
+            { "CH5 Bacon Soup 2", 502 },
+            { "CH5 Bacon Soup 3", 503 },
+            { "CH5 Bacon Soup 4", 504 },
+            { "CH5 Bacon Soup 5", 505 },
+            { "CH5 Bacon Soup 6", 506 },
+            { "CH5 Sammy Lawrence Boss", 507 },
+            { "CH5 Audio Log Office Report", 520 },
+            { "CH5 Audio Log Chocolate Cake", 521 },
+            { "CH5 Audio Log The Big Picture", 522 },
+            { "CH5 Audio Log Thousands of Souls", 523 },
+            { "CH5 Audio Log Bringing Alice to Life", 524 },
+            { "CH5 Audio Log Bendy's End", 525 },
+            { "CH5 Radio", 526 },
         };
 
-        public static string GetItemName(long id)
+        public static long GetItemID(string name)
         {
             try
             {
-                return itemIDtoName[id];
+                return itemNametoID[name];
             }
             catch (Exception e)
             {
-                BendyAndTheArchipelagoMachine.Logger.LogError($"No item found at id {id}.\n    {e.Message}");
-                return null;
+                BendyAndTheArchipelagoMachine.Logger.LogError($"No item with the name {name} was found.\n    {e.Message}");
+                return -1;
             }
         }
 

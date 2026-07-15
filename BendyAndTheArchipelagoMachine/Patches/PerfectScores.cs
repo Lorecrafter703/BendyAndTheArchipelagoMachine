@@ -15,6 +15,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch("SetAchievement")]
         public static void BullsEyeAcheivement(AchievementName key, AchievementManager __instance)
         {
+            if (!(bool)Client.serverData.GetSlotDataOption("minigame_sanity")) return;
             switch (key)
             {
                 case AchievementName.BULLS_EYE:

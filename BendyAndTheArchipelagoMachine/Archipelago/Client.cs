@@ -5,7 +5,6 @@ using Archipelago.MultiClient.Net.Helpers;
 using Archipelago.MultiClient.Net.MessageLog.Messages;
 using Archipelago.MultiClient.Net.Models;
 using Archipelago.MultiClient.Net.Packets;
-using BendyAndTheArchipelagoMachine.Data;
 using BendyAndTheArchipelagoMachine.Utils;
 using BepInEx;
 using System;
@@ -140,17 +139,14 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         {
             var receivedItem = helper.DequeueItem();
 
-            // Add Item to List
-            if (receivedItem.ItemName != null) ReceivedItems.AddItem(receivedItem.ItemName);
-            else ReceivedItems.AddItem(receivedItem.ItemId);
-
             // If Item has been received before return
             if (helper.Index <= serverData.Index) return;
 
-            // Otherwise increment the "received index" and notify the player
+            // Add Item to List
+            serverData.ReceivedItems.Add(receivedItem.ItemId);
+            serverData.Index++;
             string message = $"Received {receivedItem.ItemName} from {receivedItem.Player} ({receivedItem.LocationName}).";
             ArchipelagoConsole.LogMessage(message);
-            serverData.Index++;
         }
 
 
@@ -173,13 +169,28 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             long itemID = IDTables.GetLocationID(itemName);
 
             if (itemID != -1)
+            {
                 session.Locations.CompleteLocationChecks(itemID);
+                serverData.CheckedLocations.Add(itemID);
+            }
         }
 
 
         public static bool HasItem(string itemName)
         {
-            return ReceivedItems.HasItem(itemName);
+            long itemID = IDTables.GetItemID(itemName);
+            return serverData.ReceivedItems.Contains(itemID);
+        }
+
+
+        public static int BaconSoupCount()
+        {
+            int count = 0;
+            foreach (long _ in serverData.ReceivedItems)
+            {
+                if (_ == IDTables.GetItemID("Bacon Soup")) count++;
+            }
+            return count;
         }
 
 

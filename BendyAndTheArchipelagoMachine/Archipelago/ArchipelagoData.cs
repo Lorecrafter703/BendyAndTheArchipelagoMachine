@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace BendyAndTheArchipelagoMachine.Archipelago
@@ -11,6 +12,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         public int Index; // TODO Remember this value between sessions
 
         public List<long> CheckedLocations;
+        public List<long> ReceivedItems;
 
         /// <summary>
         /// seed for this archipelago data. Can be used when loading a file to verify the session the player is trying to
@@ -27,6 +29,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             Uri = "localhost:38281";
             SlotName = "BendyTest";
             CheckedLocations = new List<long>();
+            ReceivedItems = new List<long>();
         }
 
         public ArchipelagoData(string uri, string slotName, string password)
@@ -35,6 +38,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             SlotName = slotName;
             Password = password;
             CheckedLocations = new List<long>();
+            ReceivedItems = new List<long>();
         }
 
         /// <summary>
@@ -55,6 +59,20 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);
+        }
+
+
+        public object GetSlotDataOption(string key)
+        {
+            try
+            {
+                return slotData[key];
+            }
+            catch (Exception e)
+            {
+                BendyAndTheArchipelagoMachine.Logger.LogError(e);
+                return null;
+            }
         }
     }
 }

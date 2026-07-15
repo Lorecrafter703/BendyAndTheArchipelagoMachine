@@ -113,8 +113,7 @@
     <Compile Include="Archipelago\ArchipelagoData.cs" />
     <Compile Include="Archipelago\DeathLinkHandler.cs" />
     <Compile Include="BendyAndTheArchipelagoMachine.cs" />
-    <Compile Include="Data\IDTables.cs" />
-    <Compile Include="Data\ReceivedItems.cs" />
+    <Compile Include="Archipelago\IDTables.cs" />
     <Compile Include="Patches\ArchivesHub.cs" />
     <Compile Include="Patches\AudioLogs.cs" />
     <Compile Include="Patches\BertrumFight.cs" />
@@ -128,7 +127,10 @@
     <Compile Include="Patches\BaconSoup.cs" />
     <Compile Include="Patches\MyChapterController.cs" />
     <Compile Include="Patches\PerfectScores.cs" />
+    <Compile Include="Patches\Radios.cs" />
     <Compile Include="Patches\RitualItems.cs" />
+    <Compile Include="Patches\SammyLawrenceBoss.cs" />
+    <Compile Include="Patches\theMeatly.cs" />
     <Compile Include="Patches\ToyBlockages.cs" />
     <Compile Include="Patches\ValvePickup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

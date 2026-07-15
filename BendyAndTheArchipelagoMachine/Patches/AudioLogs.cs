@@ -219,5 +219,53 @@ namespace BendyAndTheArchipelagoMachine.Patches
         {
             Client.SendLocation("CH4 Audio Log Bertrum's Reveal");
         }
+
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(CH5AudioLogController), "HandleAudioLogThomasTransformOnInteracted")]
+        public static void OfficeReportLog()
+        {
+            Client.SendLocation("CH5 Audio Log Office Report");
+        }
+
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(CH5AudioLogController), "HandleAudioLogWallyTransformOnInteracted")]
+        public static void ChocolateCakeLog()
+        {
+            Client.SendLocation("CH5 Audio Log Chocolate Cake");
+        }
+
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(CH5AudioLogController), "HandleAudioLogJoeyMemoTransformOnInteracted")]
+        public static void TheBigPictureLog()
+        {
+            Client.SendLocation("CH5 Audio Log The Big Picture");
+        }
+
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(CH5AudioLogController), "HandleAudioLogJoeyTommyTransformOnInteracted")]
+        public static void ThousandsOfSoulsLog()
+        {
+            Client.SendLocation("CH5 Audio Log Thousands of Souls");
+        }
+
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(CH5AudioLogController), "HandleAudioLogJoeySusieTransformOnInteracted")]
+        public static void BringingAliceToLifeLog()
+        {
+            Client.SendLocation("CH5 Audio Log Bringing Alice to Life");
+        }
+
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(CH5ThroneRoom), "HandleAudioLogOnInteracted")]
+        public static void BendysEndLog()
+        {
+            Client.SendLocation("CH5 Audio Log Bendy's End");
+        }
     }
 }
