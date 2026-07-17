@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using TMG.Controls;
 using TMG.GamepadControl;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.Windows;
 using XInputDotNetPure;
 
@@ -32,7 +33,7 @@ namespace BendyAndTheArchipelagoMachine
     {
         public const string pluginGuid = "lorecrafter.bendyandtheinkmachine.archipelago";
         public const string pluginName = "Bendy and the Archipelago Machine";
-        public const string pluginVersion = "0.1.0";
+        public const string pluginVersion = "1.0.0";
 
         public const string ModDisplayInfo = pluginName + " v" + pluginVersion;
         private const string APDisplayInfo = "Archipelago v" + Client.AP_VERSION;
@@ -50,6 +51,12 @@ namespace BendyAndTheArchipelagoMachine
             harmony.PatchAll();
 
             ArchipelagoConsole.LogMessage($"{ModDisplayInfo} loaded!");
+        }
+
+
+        void Update()
+        {
+            ArchipelagoClient.ProcessItems();
         }
 
 

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BepInEx;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using Newtonsoft.Json;
 
 namespace BendyAndTheArchipelagoMachine.Archipelago
@@ -9,13 +11,13 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         public string Uri;
         public string SlotName;
         public string Password;
-        public int Index; // TODO Remember this value between sessions
+        public int Index { get; private set; } // TODO Remember this value between sessions
 
-        public List<long> CheckedLocations;
-        public List<long> ReceivedItems;
+        public List<long> CheckedLocations { get; private set; }
+        public List<long> ReceivedItems { get; private set; }
 
         private int SaveSlot = -1;
-        private string seed;
+        public string seed { get; private set; }
 
         private Dictionary<string, object> slotData;
 
@@ -40,16 +42,26 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         }
 
 
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
+
+
+        private void SaveData()
+        {
+            BendyAndTheArchipelagoMachine.Logger.LogWarning($"Seed: {seed}");
+            string path = Path.Combine(Paths.PluginPath, "BendyAndTheArchipelagoMachine", $"{seed}.json");
+            string data = this.ToString();
+            File.WriteAllText(path, data);
+        }
+
+
         public void SetupSession(Dictionary<string, object> roomSlotData, string roomSeed)
         {
             slotData = roomSlotData;
             seed = roomSeed;
-        }
-
-
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this);
+            SaveData();
         }
 
 
@@ -78,6 +90,20 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         public int GetSlot()
         {
             return SaveSlot;
+        }
+
+
+        public void AddItem(long itemID)
+        {
+            ReceivedItems.Add(itemID);
+            Index++;
+            SaveData();
+        }
+
+        public void CheckLocation(long itemID)
+        {
+            CheckedLocations.Add(itemID);
+            SaveData();
         }
     }
 }
