@@ -14,31 +14,6 @@ namespace BendyAndTheArchipelagoMachine.Patches
     [HarmonyPatch(typeof(Interactable))]
     internal class MyInteractible
     {
-        [HarmonyPostfix]
-        [HarmonyPatch("Init")]
-        public static void InteractableInit(Interactable __instance)
-        {
-            //if (__instance is CannedSoupEdible)
-            //{
-            //    CannedSoupEdible soup = (CannedSoupEdible)__instance;
-            //    BendyAndTheArchipelagoMachine.Logger.LogMessage("Initialized Bacon Soup # " + soup.GetID());
-            //}
-        }
-
-
-        [HarmonyPrefix]
-        [HarmonyPatch("Init")]
-        public static void FixMyInteractable(Interactable __instance, ref List<MeshRenderer> ___m_HighlightMeshRenderers, List<MaterialData> ___m_MaterialDatas)
-        {
-            if (__instance is ChapterLoader)
-            {
-                BendyAndTheArchipelagoMachine.Logger.LogWarning("Chapter Loader Init");
-                ___m_HighlightMeshRenderers = new List<MeshRenderer>();
-                __instance.ResetInteraction();
-            }
-        }
-
-
         [HarmonyPrefix]
         [HarmonyPatch("Interact")]
         public static bool InteractPatch(Interactable __instance)

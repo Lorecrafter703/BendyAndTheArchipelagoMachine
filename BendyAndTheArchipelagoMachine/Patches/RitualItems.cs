@@ -16,6 +16,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         public static Dictionary<CH1Pedestal.CollectableType, CH1Pedestal> CH1RitualItemsTypeToPedestal = new Dictionary<CH1Pedestal.CollectableType, CH1Pedestal>();
         public static Dictionary<Interactable, CH1Pedestal.CollectableType> CH1RitualItemInteractablesToType = new Dictionary<Interactable, CH1Pedestal.CollectableType>();
 
+
         [HarmonyPostfix]
         [HarmonyPatch("Initialize")]
         public static void OnInit(Transform collectableLocation, CH1Pedestal __instance, CH1Pedestal.CollectableType ___m_CollectableType, Interactable ___m_Collectable)

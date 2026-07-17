@@ -14,6 +14,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
     {
         public static List<Interactable> ToysRef = new List<Interactable>();
 
+
         [HarmonyPostfix]
         [HarmonyPatch("InitOnComplete")]
         public static void RegisterToys(CH3ToyMachine __instance, List<CH3ToyMachine.Spinners> ___m_SpinnersLeft, List<CH3ToyMachine.Spinners> ___m_SpinnersRight)

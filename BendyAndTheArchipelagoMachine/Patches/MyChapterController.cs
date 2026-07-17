@@ -29,27 +29,28 @@ namespace BendyAndTheArchipelagoMachine.Patches
             {
                 case Chapters.ONE:
                     Client.SendLocation("CH1 Complete");
-                    break;
+                    SceneManager.LoadScene("Reset");
+                    return false;
                 case Chapters.TWO:
                     Client.SendLocation("CH2 Complete");
-                    break;
+                    SceneManager.LoadScene("Reset");
+                    return false;
                 case Chapters.THREE:
                     Client.SendLocation("CH3 Complete");
-                    break;
+                    SceneManager.LoadScene("Reset");
+                    return false;
                 case Chapters.FOUR:
                     Client.SendLocation("CH4 Complete");
-                    break;
+                    SceneManager.LoadScene("Reset");
+                    return false;
                 case Chapters.FIVE:
                     Client.SendLocation("CH5 Complete");
-                    break;
+                    return true;
                 default:
-                    BendyAndTheArchipelagoMachine.Logger.LogWarning($"Unknown Chapter: {___m_Chapter}");
-                    break;
+                    BendyAndTheArchipelagoMachine.Logger.LogError($"Unknown Chapter: {___m_Chapter}");
+                    SceneManager.LoadScene("Reset");
+                    return false;
             }
-            // Return to hub
-            MyLoadChapter(currentChapter, "Archives");
-
-            return false;
         }
 
 
@@ -59,7 +60,6 @@ namespace BendyAndTheArchipelagoMachine.Patches
         {
             currentChapter = __instance;
             currentChapterNumber = ___m_Chapter;
-            BendyAndTheArchipelagoMachine.Logger.LogWarning("Tracking Chapter Controller Instance");
         }
 
 

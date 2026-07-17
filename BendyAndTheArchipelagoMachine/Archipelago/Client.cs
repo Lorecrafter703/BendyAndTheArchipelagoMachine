@@ -36,7 +36,6 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         static ArchipelagoSession session = ArchipelagoSessionFactory.CreateSession(SERVER, PORT);
 
 
-        // Call Connect after setting up SERVER, PORT and SLOT_NAME in serverData
         public void Connect()
         {
             if (authenticated || attemptingConnection) return;
