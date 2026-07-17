@@ -1,0 +1,237 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BendyAndTheArchipelagoMachine.Archipelago
+{
+    internal struct IDTables
+    {
+        private static readonly Dictionary<string, long> itemNametoID = new Dictionary<string, long>
+        {
+            { "Bacon Soup", 1 },
+            { "Trap", 2 },
+            { "Filler", 3 },
+            { "Unlock CH1", 100 },
+            { "CH1 Book", 101 },
+            { "CH1 Doll", 102 },
+            { "CH1 Gear" , 103 },
+            { "CH1 Inkwell", 104 },
+            { "CH1 Record", 105 },
+            { "CH1 Wrench", 106 },
+            { "Unlock CH2", 200 },
+            { "CH2 Keys", 201 },
+            { "CH2 Valve", 202 },
+            { "Unlock CH3", 300 },
+            { "CH3 Toys", 301 },
+            { "Unlock CH4", 400 },
+            { "CH4 Books", 401 },
+            { "CH4 Bossfight Bertrum", 402 },
+            //{ "Unlock CH5", 500 },
+        };
+
+        private static readonly Dictionary<string, long> locationNametoID = new Dictionary<string, long>
+        {
+
+            { "CH1 Bacon Soup 0", 100 },
+            { "CH1 Bacon Soup 1", 101 },
+            { "CH1 Bacon Soup 2", 102  },
+            { "CH1 Bacon Soup 3", 103 },
+            { "CH1 Bacon Soup 4", 104 },
+            { "CH1 Bacon Soup 5", 105 },
+            { "CH1 Bacon Soup 6", 106 },
+            { "CH1 Bacon Soup 7", 107 },
+            { "CH1 Bacon Soup 8", 108 },
+            { "CH1 Bacon Soup 9", 109 },
+            { "CH1 Bacon Soup 10", 110 },
+            { "CH1 Bacon Soup 11", 111 },
+            { "CH1 Bacon Soup 12", 112 },
+            { "CH1 Bacon Soup 13", 113 },
+            { "CH1 Bacon Soup 14", 114 },
+            { "CH1 Bacon Soup 15", 115 },
+            { "CH1 Bacon Soup 16", 116 },
+            { "CH1 Bacon Soup 17", 117  },
+            { "CH1 Bacon Soup 18", 118 },
+            { "CH1 Bacon Soup 19", 119 },
+            { "CH1 Bacon Soup 20", 120 },
+            { "CH1 Book", 121 },
+            { "CH1 Doll", 122 },
+            { "CH1 Gear", 123 },
+            { "CH1 Inkwell", 124 },
+            { "CH1 Record", 125 },
+            { "CH1 Wrench", 126 },
+            { "CH1 Audio Log Dark and Cold", 127 },
+            { "CH1 Audio Log This Machine", 128 },
+            { "CH1 Radio", 129 },
+            { "CH1 Complete", 199 },
+            { "CH2 Bacon Soup 0", 200 },
+            { "CH2 Bacon Soup 1", 201 },
+            { "CH2 Bacon Soup 2", 202 },
+            { "CH2 Bacon Soup 3", 203 },
+            { "CH2 Bacon Soup 4", 204 },
+            { "CH2 Bacon Soup 5", 205 },
+            { "CH2 Bacon Soup 6", 206 },
+            { "CH2 Bacon Soup 7", 207 },
+            { "CH2 Bacon Soup 8", 208 },
+            { "CH2 Bacon Soup 9", 209 },
+            { "CH2 Bacon Soup 10", 210 },
+            { "CH2 Bacon Soup 11", 211 },
+            { "CH2 Bacon Soup 12", 212 },
+            { "CH2 Bacon Soup 13", 213 },
+            { "CH2 Bacon Soup 14", 214 },
+            { "CH2 Bacon Soup 15", 215 },
+            { "CH2 Bacon Soup 16", 216 },
+            { "CH2 Bacon Soup 17", 217 },
+            { "CH2 Bacon Soup 18", 218 },
+            { "CH2 Bacon Soup 19", 219 },
+            { "CH2 Bacon Soup 20", 220 },
+            { "CH2 Bacon Soup 21", 221 },
+            { "CH2 Bacon Soup 22", 222 },
+            { "CH2 Bacon Soup 23", 223 },
+            { "CH2 Bacon Soup 24", 224 },
+            { "CH2 Bacon Soup 25", 225 },
+            { "CH2 Bacon Soup 26", 226 },
+            { "CH2 Bacon Soup 27", 227 },
+            { "CH2 Bacon Soup 28", 228 },
+            { "CH2 Bacon Soup 29", 229 },
+            { "CH2 Bacon Soup 30", 230 },
+            { "CH2 Keys", 231 },
+            { "CH2 Valve", 232 },
+            { "CH2 Audio Log Can I Get an Amen?", 233 },
+            { "CH2 Audio Log The Pump Switch", 234 },
+            { "CH2 Audio Log New Actress", 235 },
+            { "CH2 Audio Log Crazy Sammy", 236 },
+            { "CH2 Audio Log Stupid Keys", 237 },
+            { "CH2 Audio Log Sanctuary Puzzle", 238 },
+            { "CH2 Audio Log Quiet and Smelly Sewers", 239 },
+            { "CH2 Radio", 240 },
+            { "CH2 Complete", 299 },
+            { "CH3 Bacon Soup 0", 300 },
+            { "CH3 Bacon Soup 1", 301 },
+            { "CH3 Bacon Soup 2", 302 },
+            { "CH3 Bacon Soup 3", 303 },
+            { "CH3 Bacon Soup 4", 304 },
+            { "CH3 Bacon Soup 5", 305 },
+            { "CH3 Bacon Soup 6", 306 },
+            { "CH3 Bacon Soup 7", 307 },
+            { "CH3 Bacon Soup 8", 308 },
+            { "CH3 Bacon Soup 9", 309 },
+            { "CH3 Bacon Soup 10", 310 },
+            { "CH3 Bacon Soup 11", 311 },
+            { "CH3 Bacon Soup 12", 312 },
+            { "CH3 Bacon Soup 13", 313 },
+            { "CH3 Bacon Soup 14", 314 },
+            { "CH3 Bacon Soup 15", 315 },
+            { "CH3 Bacon Soup 16", 316 },
+            { "CH3 Bacon Soup 17", 317 },
+            { "CH3 Bacon Soup 18", 318 },
+            { "CH3 Bacon Soup 19", 319 },
+            { "CH3 Bacon Soup 20", 320 },
+            { "CH3 Bacon Soup 21", 321 },
+            { "CH3 Bacon Soup 22", 322 },
+            { "CH3 Bacon Soup 23", 323 },
+            { "CH3 Bacon Soup 24", 324 },
+            { "CH3 Bacon Soup 25", 325 },
+            { "CH3 Bacon Soup 26", 326 },
+            { "CH3 Bacon Soup 27", 327 },
+            { "CH3 Bacon Soup 28", 328 },
+            { "CH3 Bacon Soup 29", 329 },
+            { "CH3 Bacon Soup 30", 330 },
+            { "CH3 Bacon Soup 31", 331 },
+            { "CH3 Bacon Soup 32", 332 },
+            { "CH3 Bacon Soup 33", 333 },
+            { "CH3 Bacon Soup 34", 334 },
+            { "CH3 Bacon Soup 35", 335 },
+            { "CH3 Bacon Soup 36", 336 },
+            { "CH3 Bacon Soup 37", 337 },
+            { "CH3 Bacon Soup 38", 338 },
+            { "CH3 Audio Log Crooked Smile", 350 },
+            { "CH3 Audio Log Time to Believe", 351 },
+            { "CH3 Audio Log Everything is Coming Apart", 352 },
+            { "CH3 Audio Log Ink Pressure", 353 },
+            { "CH3 Audio Log Cutting Corners", 354 },
+            { "CH3 Audio Log Lunch with Joey", 355 },
+            { "CH3 Audio Log Crack a Smile", 356 },
+            { "CH3 Audio Log The Genius Upstairs", 357 },
+            { "CH3 Audio Log Looking for Trouble", 358 },
+            { "CH3 Audio Log Man of Ideas", 359 },
+            { "CH3 Radio", 360 },
+            { "CH3 Complete", 399 },
+            { "CH4 Bacon Soup 0", 400 },
+            { "CH4 Bacon Soup 1", 401 },
+            { "CH4 Bacon Soup 2", 402 },
+            { "CH4 Bacon Soup 3", 403 },
+            { "CH4 Bacon Soup 4", 404 },
+            { "CH4 Bacon Soup 5", 405 },
+            { "CH4 Bacon Soup 6", 406 },
+            { "CH4 Bacon Soup 7", 407 },
+            { "CH4 Bacon Soup 8", 408 },
+            { "CH4 Bacon Soup 9", 409 },
+            { "CH4 Bacon Soup 10", 410 },
+            { "CH4 Bacon Soup 11", 411 },
+            { "CH4 Bacon Soup 12", 412 },
+            { "CH4 Bacon Soup 13", 413 },
+            { "CH4 Bacon Soup 14", 414 },
+            { "CH4 Bacon Soup 15", 415 },
+            { "CH4 Bacon Soup 16", 416 },
+            { "CH4 Bacon Soup 17", 417 },
+            { "CH4 Bacon Soup 18", 418 },
+            { "CH4 Bulls Eye", 419 },
+            { "CH4 Call the Milk Man", 420 },
+            { "CH4 Wasting Time", 421 },
+            { "CH4 Bertrum Boss", 422 },
+            { "CH4 Brute Boris Boss", 423 },
+            { "CH4 Audio Log Indiscernible", 430 },
+            { "CH4 Audio Log Behind Closed Doors", 431 },
+            { "CH4 Audio Log Colossal Wonders", 432 },
+            { "CH4 Audio Log Playing Games", 433 },
+            { "CH4 Audio Log Mechanical Demon", 434 },
+            { "CH4 Audio Log Bertrum's Reveal", 435 },
+            { "CH4 Audio Log Turn it Off", 436 },
+            { "CH4 Radio", 437 },
+            { "CH4 Complete", 499 },
+            { "CH5 Bacon Soup 0", 500 },
+            { "CH5 Bacon Soup 1", 501 },
+            { "CH5 Bacon Soup 2", 502 },
+            { "CH5 Bacon Soup 3", 503 },
+            { "CH5 Bacon Soup 4", 504 },
+            { "CH5 Bacon Soup 5", 505 },
+            { "CH5 Bacon Soup 6", 506 },
+            { "CH5 Sammy Lawrence Boss", 507 },
+            { "CH5 Audio Log Office Report", 520 },
+            { "CH5 Audio Log Chocolate Cake", 521 },
+            { "CH5 Audio Log The Big Picture", 522 },
+            { "CH5 Audio Log Thousands of Souls", 523 },
+            { "CH5 Audio Log Bringing Alice to Life", 524 },
+            { "CH5 Audio Log Bendy's End", 525 },
+            { "CH5 Radio", 526 },
+        };
+
+        public static long GetItemID(string name)
+        {
+            try
+            {
+                return itemNametoID[name];
+            }
+            catch (Exception e)
+            {
+                BendyAndTheArchipelagoMachine.Logger.LogError($"No item with the name {name} was found.\n    {e.Message}");
+                return -1;
+            }
+        }
+
+        public static long GetLocationID(string name)
+        {
+            try
+            {
+                return locationNametoID[name];
+            }
+            catch (Exception e)
+            {
+                BendyAndTheArchipelagoMachine.Logger.LogError($"No location found with name {name}.\n    {e.Message}");
+                return -1;
+            }
+        }
+    }
+}

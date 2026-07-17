@@ -18,8 +18,9 @@ namespace BendyAndTheArchipelagoMachine.Patches
         {
             CannedSoupEdible cannedSoupEdible = (CannedSoupEdible)sender;
             int id = cannedSoupEdible.GetID();
-            BendyAndTheArchipelagoMachine.Logger.LogMessage("Interacted with BaconSoup #" + id);
-            Client.SendCheck("CH1 Bacon Soup " + id);
+            int chapter = MyChapterController.GetChapterNumber();
+            BendyAndTheArchipelagoMachine.Logger.LogMessage($"Interacted with CH{chapter} Bacon Soup {id}");
+            Client.SendLocation($"CH{chapter} Bacon Soup {id}");
         }
 
         [HarmonyPostfix]

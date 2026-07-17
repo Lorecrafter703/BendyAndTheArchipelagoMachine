@@ -5,14 +5,16 @@ using Archipelago.MultiClient.Net.Helpers;
 using Archipelago.MultiClient.Net.MessageLog.Messages;
 using Archipelago.MultiClient.Net.Models;
 using Archipelago.MultiClient.Net.Packets;
-using BendyAndTheArchipelagoMachine.Data;
 using BendyAndTheArchipelagoMachine.Utils;
 using BepInEx;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -36,8 +38,10 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         private DeathLinkHandler deathLinkHandler;
         static ArchipelagoSession session = ArchipelagoSessionFactory.CreateSession(SERVER, PORT);
 
+        private Queue<ItemInfo> ItemQueue = new Queue<ItemInfo>();
+        ReceivedItemsHelper Helper;
 
-        // Call Connect after setting up SERVER, PORT and SLOT_NAME in serverData
+
         public void Connect()
         {
             if (authenticated || attemptingConnection) return;
@@ -46,6 +50,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             {
                 session = ArchipelagoSessionFactory.CreateSession(serverData.Uri);
                 SetupSession();
+                attemptingConnection = true;
             }
             catch (Exception e)
             {
@@ -59,7 +64,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         private void SetupSession()
         {
             session.MessageLog.OnMessageReceived += (message) => ArchipelagoConsole.LogMessage(message.ToString());
-            session.Items.ItemReceived += OnItemReceived;
+            session.Items.ItemReceived += (receivedItemsHelper) => OnItemReceived(receivedItemsHelper);
             session.Socket.ErrorReceived += OnSessionErrorReceived;
             session.Socket.SocketClosed += OnSessionSocketClosed;
         }
@@ -74,7 +79,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
                         session.TryConnectAndLogin(
                             GAME_NAME,
                             serverData.SlotName,
-                            ItemsHandlingFlags.NoItems,
+                            ItemsHandlingFlags.AllItems,
                             new Version(AP_VERSION),
                             password: serverData.Password,
                             requestSlotData: serverData.NeedSlotData
@@ -96,7 +101,16 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             {
                 var success = (LoginSuccessful)result;
 
-                serverData.SetupSession(success.SlotData, session.RoomState.Seed);
+                string path = Path.Combine(Paths.PluginPath, "BendyAndTheArchipelagoMachine", $"{session.RoomState.Seed}.json");
+                if (File.Exists(path))
+                {
+                    serverData = JsonConvert.DeserializeObject<ArchipelagoData>(File.ReadAllText(path));
+                }
+                else
+                {
+                    serverData.SetupSession(success.SlotData, session.RoomState.Seed);
+                }
+
                 authenticated = true;
 
                 deathLinkHandler = new DeathLinkHandler(session.CreateDeathLinkService(), serverData.SlotName);
@@ -139,18 +153,28 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         private void OnItemReceived(ReceivedItemsHelper helper)
         {
             var receivedItem = helper.DequeueItem();
+            Helper = helper;
+            ItemQueue.Enqueue(receivedItem);
+        }
 
-            // Add Item to List
-            if (receivedItem.ItemName != null) ReceivedItems.AddItem(receivedItem.ItemName);
-            else ReceivedItems.AddItem(receivedItem.ItemId);
 
-            // If Item has been received before return
-            if (helper.Index <= serverData.Index) return;
+        public void ProcessItems()
+        {
+            if (!authenticated || attemptingConnection) return;
+            if (Helper == null) return;
+            if (serverData.seed.IsNullOrWhiteSpace()) return;
+            if (ItemQueue.Count > 0)
+            {
+                var receivedItem = ItemQueue.Dequeue();
 
-            // Otherwise increment the "received index" and notify the player
-            string message = $"Received {receivedItem.ItemName} from {receivedItem.Player} ({receivedItem.LocationName}).";
-            ArchipelagoConsole.LogMessage(message);
-            serverData.Index++;
+                // If Item has been received before return
+                if (Helper.Index <= serverData.Index) return;
+
+                // Add Item to List
+                serverData.AddItem(receivedItem.ItemId);
+                string message = $"Received {receivedItem.ItemName} from {receivedItem.Player} ({receivedItem.LocationName}).";
+                ArchipelagoConsole.LogMessage(message);
+            }
         }
 
 
@@ -168,18 +192,39 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         }
 
 
-        public static void SendCheck(string itemName)
+        public static void SendLocation(string itemName)
         {
             long itemID = IDTables.GetLocationID(itemName);
 
             if (itemID != -1)
+            {
                 session.Locations.CompleteLocationChecks(itemID);
+                serverData.CheckLocation(itemID);
+            }
         }
 
 
         public static bool HasItem(string itemName)
         {
-            return ReceivedItems.HasItem(itemName);
+            long itemID = IDTables.GetItemID(itemName);
+            return serverData.ReceivedItems.Contains(itemID);
+        }
+
+
+        public static int BaconSoupCount()
+        {
+            int count = 0;
+            foreach (long _ in serverData.ReceivedItems)
+            {
+                if (_ == IDTables.GetItemID("Bacon Soup")) count++;
+            }
+            return count;
+        }
+
+
+        public static void CompleteGoal()
+        {
+            session.SetGoalAchieved();
         }
     }
 }

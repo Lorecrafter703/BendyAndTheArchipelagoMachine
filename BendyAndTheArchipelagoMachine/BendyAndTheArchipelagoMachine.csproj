@@ -78,6 +78,15 @@
     <Reference Include="UnityEngine.IMGUIModule">
       <HintPath>..\Libraries\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>..\Libraries\UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>..\Libraries\UnityEngine.InputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>..\Libraries\UnityEngine.ParticleSystemModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.PhysicsModule">
       <HintPath>..\Libraries\UnityEngine.PhysicsModule.dll</HintPath>
     </Reference>
@@ -90,18 +99,39 @@
     <Reference Include="UnityEngine.TextRenderingModule">
       <HintPath>..\Libraries\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\Libraries\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIElementsModule">
+      <HintPath>..\Libraries\UnityEngine.UIElementsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>..\Libraries\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Archipelago\ArchipelagoData.cs" />
     <Compile Include="Archipelago\DeathLinkHandler.cs" />
     <Compile Include="BendyAndTheArchipelagoMachine.cs" />
-    <Compile Include="Data\IDTables.cs" />
-    <Compile Include="Data\ReceivedItems.cs" />
+    <Compile Include="Archipelago\IDTables.cs" />
+    <Compile Include="Patches\AudioLogs.cs" />
+    <Compile Include="Patches\BertrumFight.cs" />
+    <Compile Include="Patches\BookPuzzleDoor.cs" />
+    <Compile Include="Patches\BruteBorisFight.cs" />
+    <Compile Include="Patches\LostKeys.cs" />
+    <Compile Include="Patches\LostOneSpecialErrors.cs" />
+    <Compile Include="Patches\Menu.cs" />
     <Compile Include="Patches\MyInteractible.cs" />
     <Compile Include="Archipelago\Client.cs" />
     <Compile Include="Patches\BaconSoup.cs" />
     <Compile Include="Patches\MyChapterController.cs" />
+    <Compile Include="Patches\PerfectScores.cs" />
+    <Compile Include="Patches\Radios.cs" />
     <Compile Include="Patches\RitualItems.cs" />
+    <Compile Include="Patches\SammyLawrenceBoss.cs" />
+    <Compile Include="Patches\theMeatly.cs" />
+    <Compile Include="Patches\ToyBlockages.cs" />
+    <Compile Include="Patches\ValvePickup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ArchipelagoConsole.cs" />
   </ItemGroup>
