@@ -45,6 +45,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
                     return false;
                 case Chapters.FIVE:
                     Client.SendLocation("CH5 Complete");
+                    Client.CompleteGoal();
                     return true;
                 default:
                     BendyAndTheArchipelagoMachine.Logger.LogError($"Unknown Chapter: {___m_Chapter}");
