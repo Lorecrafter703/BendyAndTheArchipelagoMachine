@@ -2,7 +2,7 @@
 
 ## Required Software
 
-- [Bendy and the Ink Machine]()
+- [Bendy and the Ink Machine](https://store.steampowered.com/app/622650/Bendy_and_the_Ink_Machine/)
 - The [BATIM apworld](https://github.com/Lorecrafter703/Archipelago/releases), 
   if not bundled with your version of Archipelago
 - [Bendy and the Archipelago Machine](https://github.com/Lorecrafter703/BendyAndTheArchipelagoMachine/releases) mod
