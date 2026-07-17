@@ -1,5 +1,6 @@
 ﻿using BendyAndTheArchipelagoMachine.Archipelago;
 using BendyAndTheArchipelagoMachine.Utils;
+using BepInEx;
 using DG.Tweening;
 using HarmonyLib;
 using I2.Loc;
@@ -24,58 +25,49 @@ namespace BendyAndTheArchipelagoMachine.Patches
         public static TitleScreenController titleScreenController;
 
 
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(BaseUIButton), "OnPointerClick")]
-        public static bool HandleConnect(BaseUIButton __instance)
-        {
-            if (__instance.name != "NewGameBtn") return true;
-            if (!Client.authenticated)
-            {
-                BendyAndTheArchipelagoMachine.Logger.LogError("Please connect to a server before entering the game");
-                ArchipelagoConsole.LogMessage("Please connect to a server before entering the game");
-            }
-            else
-            {
-                LoadChapterFromTitle(titleScreenController, "Archives");
-            }
-            return false;
-        }
-
-
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(TitleScreenController), "SelectSlot")]
-        public static void OnSlotSelect(int index)
-        {
-            BendyAndTheArchipelagoMachine.Logger.LogMessage($"Selected slot {index}");
-            SaveFileData data = new SaveFileData(index);
-            data.IsNewGamePlus = true;
-            data.CH1Data = new CH1DataVO();
-            data.CH2Data = new CH2DataVO();
-            data.CH3Data = new CH3DataVO();
-            data.CH4Data = new CH4DataVO();
-            data.CH5Data = new CH5DataVO();
-            GameManager.Instance.GameData.SaveFiles[index] = data;
-        }
-
-
         [HarmonyPostfix]
         [HarmonyPatch(typeof(TitleScreenController), "InitController")]
         public static void GetTitleScreenController(TitleScreenController __instance, List<MenuItemButton> ___m_BeginMenuItemButtons)
         {
             titleScreenController = __instance;
-            BendyAndTheArchipelagoMachine.Logger.LogMessage("Begin Menu Item Buttons:");
-            foreach (var button in ___m_BeginMenuItemButtons)
-            {
-                BendyAndTheArchipelagoMachine.Logger.LogMessage(button.name);
-            }
         }
 
 
-        [HarmonyPostfix]
-        [HarmonyPatch(typeof(TitleScreenController), "OnDisposed")]
-        public static void ClearTitleScreenRef()
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(BaseUIButton), "OnPointerClick")]
+        public static bool HandleConnect(BaseUIButton __instance)
         {
-            titleScreenController = null;
+            if (!Client.authenticated && !Client.serverData.SlotName.IsNullOrWhiteSpace())
+            {
+                BendyAndTheArchipelagoMachine.ArchipelagoClient.Connect();
+            }
+            return Client.authenticated;
+        }
+
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(TitleScreenController), "SelectSlot")]
+        public static bool OnSlotSelect(int index)
+        {
+            if (!Client.serverData.VerifySlot(index))
+            {
+                ArchipelagoConsole.LogMessage($"Please Connect to Slot {Client.serverData.GetSlot()}");
+                return false;
+            }
+            int slot = Client.serverData.GetSlot();
+            SaveFileData data = new SaveFileData(slot);
+            data.IsNewGamePlus = true;
+            data.HasDied = false;
+            data.PlayTime = 0f;
+            data.CH1Data = new CH1DataVO();
+            data.CH2Data = new CH2DataVO();
+            data.CH3Data = new CH3DataVO();
+            data.CH4Data = new CH4DataVO();
+            data.CH5Data = new CH5DataVO();
+
+            GameManager.Instance.GameData.SaveFiles[slot] = data;
+
+            return true;
         }
 
 
@@ -86,7 +78,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
             List<MenuItemButton> removeQueue = new List<MenuItemButton>();
             foreach (var button in ___m_BeginMenuItemButtons)
             {
-                if (button.name != "NewGameBtn")
+                if (button.name != "ChaptersBtn")
                 {
                     button.gameObject.SetActive(false);
                     removeQueue.Add(button);
@@ -103,30 +95,108 @@ namespace BendyAndTheArchipelagoMachine.Patches
         }
 
 
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(TitleScreenController), "CheckSelectedBeginMenu")]
+        public static void GoToChapterSelect(TitleScreenController __instance, ref int ___m_SelectedIndex)
+        {
+            ___m_SelectedIndex = 2;
+        }
+
+
+        public static void ResetChapterData()
+        {
+            int slot = Client.serverData.GetSlot();
+            SaveFileData data = new SaveFileData(slot);
+            data.IsNewGamePlus = true;
+            data.HasDied = false;
+            data.PlayTime = 0f;
+            data.CH1Data = new CH1DataVO();
+            data.CH2Data = new CH2DataVO();
+            data.CH3Data = new CH3DataVO();
+            data.CH4Data = new CH4DataVO();
+            data.CH5Data = new CH5DataVO();
+
+            GameManager.Instance.GameData.SaveFiles[slot] = data;
+            GameManager.Instance.GameData.CurrentSaveFile = data;
+        }
+
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(TitleScreenController), "CheckSelectedChapter")]
+        public static bool HandleChapterSelect(TitleScreenController __instance, int ___m_SelectedChapter)
+        {
+            switch (___m_SelectedChapter)
+            {
+                case 0:
+                    if (!Client.HasItem("Unlock CH1"))
+                    {
+                        ArchipelagoConsole.LogMessage($"Chapter 1 not yet unlocked");
+                        break;
+                    }
+                    ResetChapterData();
+                    LoadChapterFromTitle(titleScreenController, "CH1");
+                    break;
+                case 1:
+                    if (!Client.HasItem("Unlock CH2"))
+                    {
+                        ArchipelagoConsole.LogMessage($"Chapter 2 not yet unlocked");
+                        break;
+                    }
+                    ResetChapterData();
+                    LoadChapterFromTitle(titleScreenController, "CH2");
+                    break;
+                case 2:
+                    if (!Client.HasItem("Unlock CH3"))
+                    {
+                        ArchipelagoConsole.LogMessage($"Chapter 3 not yet unlocked");
+                        break;
+                    }
+                    ResetChapterData();
+                    LoadChapterFromTitle(titleScreenController, "CH3");
+                    break;
+                case 3:
+                    if (!Client.HasItem("Unlock CH4"))
+                    {
+                        ArchipelagoConsole.LogMessage($"Chapter 4 not yet unlocked");
+                        break;
+                    }
+                    ResetChapterData();
+                    LoadChapterFromTitle(titleScreenController, "CH4");
+                    break;
+                case 4:
+                    var BaconSoupsRequiredOption = (long)Client.serverData.GetSlotDataOption("bacon_soups_required");
+                    var TotalBaconSoupsOption = (long)Client.serverData.GetSlotDataOption("total_bacon_soups");
+                    long BaconSoupsRequired = TotalBaconSoupsOption * BaconSoupsRequiredOption / 100;
+                    if (Client.BaconSoupCount() < BaconSoupsRequired)
+                    {
+                        ArchipelagoConsole.LogMessage($"Chapter 5 not yet unlocked: {Client.BaconSoupCount()} / {BaconSoupsRequired} Bacon Soups");
+                        break;
+                    }
+                    ResetChapterData();
+                    LoadChapterFromTitle(titleScreenController, "CH5");
+                    break;
+                case 5:
+                    ResetChapterData();
+                    LoadChapterFromTitle(titleScreenController, "Archives");
+                    break;
+                default:
+                    BendyAndTheArchipelagoMachine.Logger.LogError($"Unrecognized chapter: {___m_SelectedChapter}");
+                    break;
+            }
+            return false;
+        }
+
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(TitleScreenController), "OnDisposed")]
+        public static void ClearTitleScreenRef()
+        {
+            titleScreenController = null;
+        }
+
+
         [HarmonyReversePatch(HarmonyReversePatchType.Original)]
         [HarmonyPatch(typeof(TitleScreenController), "LaunchChapter")]
         public static void LoadChapterFromTitle(TitleScreenController instance, string chapterName) => throw (new NotImplementedException());
-
-
-        /*
-            Attemtping to load the archives when hitting the quit button 
-        */
-        //[HarmonyReversePatch(HarmonyReversePatchType.Original)]
-        //[HarmonyPatch(typeof(BaseUIController), "Kill")]
-        //public static void QuitBaseKill(BaseUIController instance) => throw (new NotImplementedException());
-
-
-        //[HarmonyPrefix]
-        //[HarmonyPatch(typeof(GameMenuController), "Quit")]
-        //public static bool QuitToArchivesHub(GameMenuController __instance, CanvasGroup ___m_BlackoutCanvas)
-        //{
-        //    GameManager.Instance.GameCamera.Camera.enabled = false;
-        //    ___m_BlackoutCanvas.alpha = 1f;
-        //    GameManager.Instance.ShowScreenBlocker(0f, 0f, null);
-        //    GameManager.Instance.UIManager.Camera.enabled = false;
-        //    MyChapterController.MyLoadChapter(MyChapterController.currentChapter, "Archives");
-        //    QuitBaseKill(__instance);
-        //    return false;
-        //}
     }
 }

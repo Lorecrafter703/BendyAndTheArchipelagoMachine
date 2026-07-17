@@ -76,13 +76,6 @@ namespace BendyAndTheArchipelagoMachine
                     Client.serverData.SlotName);
                 Client.serverData.Password = GUI.TextField(new Rect(150, 110, 150, 20),
                     Client.serverData.Password);
-
-                // requires that the player at least puts *something* in the slot name
-                if (GUI.Button(new Rect(16, 130, 100, 20), "Connect") &&
-                    !Client.serverData.SlotName.IsNullOrWhiteSpace())
-                {
-                    ArchipelagoClient.Connect();
-                }
             }
             // this is a good place to create and add a bunch of debug buttons
         }
