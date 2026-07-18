@@ -28,7 +28,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         public const int PORT = 38281;
         public const string SLOT_NAME = "BendyTest";
 
-        public const string AP_VERSION = "0.6.8";
+        public const string AP_VERSION = "0.6.7";
         public const string GAME_NAME = "Bendy and the Ink Machine";
 
         public static bool authenticated;
