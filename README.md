@@ -27,7 +27,7 @@ If installing manually:
 3. Navigate to the config folder, and open up the BepInEx.cfg file
 4. Locate the following options and set them to true
 	- HideManagerGameObject in [Chainloader]
-	- Enabled is [Logging.Console]
+	- Enabled in [Logging.Console]
 5. Extract the mod folder into the plugins folder of the BepInEx install
 6. Opening the game should now also bring up a BepInEx console
 
