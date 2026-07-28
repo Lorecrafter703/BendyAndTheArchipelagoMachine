@@ -11,22 +11,22 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         public string Uri;
         public string SlotName;
         public string Password;
-        public int Index { get; private set; } // TODO Remember this value between sessions
+        public int Index;
 
         public List<long> CheckedLocations { get; private set; }
         public List<long> ReceivedItems { get; private set; }
 
         private int SaveSlot = -1;
-        public string seed { get; private set; }
+        public string seed;
 
-        private Dictionary<string, object> slotData;
+        public Dictionary<string, object> slotData;
 
         public bool NeedSlotData => slotData == null;
 
         public ArchipelagoData()
         {
-            Uri = "localhost:38281";
-            SlotName = "BendyTest";
+            Uri = "archipelago.gg:38281";
+            SlotName = "Bendy";
             CheckedLocations = new List<long>();
             ReceivedItems = new List<long>();
         }
@@ -50,8 +50,8 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
 
         private void SaveData()
         {
-            BendyAndTheArchipelagoMachine.Logger.LogWarning($"Seed: {seed}");
-            string path = Path.Combine(Paths.PluginPath, "BendyAndTheArchipelagoMachine", $"{seed}.json");
+            BendyAndTheArchipelagoMachine.Logger.LogDebug($"Seed: {seed}");
+            string path = Path.Combine(Paths.PluginPath, "BendyAndTheArchipelagoMachine", "savedata", $"{seed}.json");
             string data = this.ToString();
             File.WriteAllText(path, data);
         }

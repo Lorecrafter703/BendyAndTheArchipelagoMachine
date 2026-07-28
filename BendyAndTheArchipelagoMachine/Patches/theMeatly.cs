@@ -15,7 +15,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch("HandleMeatlyAchievementTrigger")]
         public static void HandleMeatlySighting(MeatlyController __instance, Chapters ___m_Chapter)
         {
-            if (!(bool)Client.serverData.GetSlotDataOption("the_meatly_sanity")) return;
+            if ((long)Client.serverData.GetSlotDataOption("the_meatly_sanity") == 0) return;
             switch (___m_Chapter)
             {
                 case Chapters.ONE:

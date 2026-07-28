@@ -177,7 +177,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH4AudioLogController), "HandleAudioLogGrantTransformOnInteracted")]
         public static void IndiscernableLog()
         {
-            Client.SendLocation("CH4 Audio Log Indiscernable");
+            Client.SendLocation("CH4 Audio Log Indiscernible");
         }
 
 
@@ -185,7 +185,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH4AudioLogController), "HandleAudioLogJoeyTransformOnInteracted")]
         public static void TurnItOffLog()
         {
-            Client.SendLocation("CH4 Audio Log Turn It Off");
+            Client.SendLocation("CH4 Audio Log Turn it Off");
         }
 
 

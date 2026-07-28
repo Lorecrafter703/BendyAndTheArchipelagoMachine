@@ -78,6 +78,15 @@ namespace BendyAndTheArchipelagoMachine.Utils
             }
         }
 
+
+        public static void ToggleHidden()
+        {
+            BendyAndTheArchipelagoMachine.Logger.LogDebug("Toggle Hidden");
+            Hidden = !Hidden;
+            UpdateWindow();
+        }
+
+
         public static void UpdateWindow()
         {
             scrollText = "";
