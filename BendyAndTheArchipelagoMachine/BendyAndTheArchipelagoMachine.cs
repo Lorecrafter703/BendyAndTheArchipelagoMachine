@@ -57,6 +57,19 @@ namespace BendyAndTheArchipelagoMachine
         void Update()
         {
             ArchipelagoClient.ProcessItems();
+            if (GetInputArchipelagoConsole())
+            {
+                ArchipelagoConsole.ToggleHidden();
+            }
+        }
+
+
+        static bool GetInputArchipelagoConsole()
+        {
+            bool gamepad = GamepadInput.GetButtonDown(InputControlType.Menu);
+            bool keyboard = UnityEngine.Input.GetKeyDown(KeyCode.BackQuote);
+            if (gamepad) return gamepad;
+            return keyboard && keyboard;
         }
 
 
