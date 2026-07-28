@@ -26,7 +26,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         // FIXME : Hardcoded server values
         public const string SERVER = "localhost";
         public const int PORT = 38281;
-        public const string SLOT_NAME = "BendyTest";
+        public const string SLOT_NAME = "Bendy";
 
         public const string AP_VERSION = "0.6.7";
         public const string GAME_NAME = "Bendy and the Ink Machine";
@@ -101,7 +101,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             {
                 var success = (LoginSuccessful)result;
 
-                string path = Path.Combine(Paths.PluginPath, "BendyAndTheArchipelagoMachine", $"{session.RoomState.Seed}.json");
+                string path = Path.Combine(Paths.PluginPath, "BendyAndTheArchipelagoMachine", "savedata", $"{session.RoomState.Seed}.json");
                 BendyAndTheArchipelagoMachine.Logger.LogDebug(path);
                 if (File.Exists(path))
                 {
