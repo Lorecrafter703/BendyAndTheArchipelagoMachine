@@ -14,6 +14,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.WebSockets;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading;
@@ -101,7 +102,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             {
                 var success = (LoginSuccessful)result;
 
-                string path = Path.Combine(Paths.PluginPath, "BendyAndTheArchipelagoMachine", "savedata", $"{session.RoomState.Seed}.json");
+                string path = Path.Combine(Paths.PluginPath, "Lorecrafter703-Bendy_and_the_Archipelago_Machine", "BendyAndTheArchipelagoMachine", "savedata", $"{session.RoomState.Seed}.json");
                 BendyAndTheArchipelagoMachine.Logger.LogDebug(path);
                 if (File.Exists(path))
                 {
@@ -147,7 +148,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
 
         public void SendMessage(string message)
         {
-            session.Socket.SendPacketAsync(new SayPacket { Text = message });
+            if (authenticated) session.Socket.SendPacketAsync(new SayPacket { Text = message });
         }
 
 
@@ -183,6 +184,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         {
             BendyAndTheArchipelagoMachine.Logger.LogError(e);
             ArchipelagoConsole.LogMessage(message);
+            if (message.Contains("closed the WebSocket connection")) Disconnect();
         }
 
 
@@ -199,7 +201,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
 
             if (itemID != -1)
             {
-                session.Locations.CompleteLocationChecks(itemID);
+                if (authenticated) session.Locations.CompleteLocationChecks(itemID);
                 serverData.CheckLocation(itemID);
             }
         }
@@ -225,7 +227,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
 
         public static void CompleteGoal()
         {
-            session.SetGoalAchieved();
+            if (authenticated) session.SetGoalAchieved();
         }
     }
 }
