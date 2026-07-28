@@ -102,6 +102,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
                 var success = (LoginSuccessful)result;
 
                 string path = Path.Combine(Paths.PluginPath, "BendyAndTheArchipelagoMachine", $"{session.RoomState.Seed}.json");
+                BendyAndTheArchipelagoMachine.Logger.LogDebug(path);
                 if (File.Exists(path))
                 {
                     serverData = JsonConvert.DeserializeObject<ArchipelagoData>(File.ReadAllText(path));
