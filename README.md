@@ -6,15 +6,31 @@
 - The [BATIM apworld](https://github.com/Lorecrafter703/Archipelago/releases), 
   if not bundled with your version of Archipelago
 - [Bendy and the Archipelago Machine](https://github.com/Lorecrafter703/BendyAndTheArchipelagoMachine/releases) mod
+- Thunderstore Mod Manager
+		or
+- [BepInEx](https://github.com/BepInEx/BepInEx/releases), if installing manually
 
 ## Installation
 
-1. Back up your save files. The mod is still in development, and currently does not preserve saves.
-   1. The saves will be in a file called **batim.game**, located in whichever directory steam stores
-   save files on your operating system.
-2. Download the latest release of the [Bendy and the Archipelago Machine](https://github.com/Lorecrafter703/BendyAndTheArchipelagoMachine/releases) mod
-3. Extract the zip file into the game's root directory where the exe file is located.
-4. Open the game, if all is well you should see a BepInEx console open up.
+### Thunderstore
+
+1. Install the BepInExPack for Bendy and the Ink Machine from the Thunderstore modmanager
+2. Navigate to the edit config menu and make sure the HideGameManagerObject field is set to true
+3. Navigate to the settings menu and find the Browse Data Folder option
+4. Extract the mod folder into the plugins folder of the BepInEx install
+5. You should be able to launch Bendy Modded through Thunderstore, if all is well a BepInEx console should open up as well
+
+### Manual Install
+
+1. Extract the BepInEx zip file into your game's root directory
+2. Run the game once to complete the installation
+3. Navigate to the config folder, and open up the BepInEx.cfg file
+4. Locate the following options and set them to true
+	- HideManagerGameObject in [Chainloader]
+	- Enabled in [Logging.Console]
+5. Extract the mod folder into the plugins folder of the BepInEx install
+6. Opening the game should now also bring up a BepInEx console
+
 
 ## Joining a new MultiWorld
 
@@ -24,16 +40,6 @@
    - NOTE: Whichever save file you connect to first will be the save you must use every time you connect in the future.
 4. After choosing a save file, you will be able to continue to chapter select, and begin playing.
 
-## Uninstalling
-
-To uninstall, first locate the game's home directory.
-
-To remove all mods:
- - Delete or move the BepInEx folder out of the game directory.
-
-To remove only this mod:
- - Navigate to BepInEx/plugins/
- - Delete or move the BendyAndTheArchipelagoMachine folder out of the directory
 
 ## What does randomization do to this game?
 
