@@ -140,7 +140,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>set gameDirectory="C:\Users\Daniel\AppData\Roaming\Thunderstore Mod Manager\DataFolder\BendyAndTheInkMachine\profiles\ModMaker\BepInEx\plugins\BendyAndTheArchipelagoMachine"
+    <PostBuildEvent>set gameDirectory="C:\Users\Daniel\AppData\Roaming\Thunderstore Mod Manager\DataFolder\BendyAndTheInkMachine\profiles\ModMaker\BepInEx\plugins\Lorecrafter703-Bendy_and_the_Archipelago_Machine\BendyAndTheArchipelagoMachine"
 set dll="BendyAndTheArchipelagoMachine.dll"
 if exist %25gameDirectory%25 (ECHO "Destination directory found") ELSE (ECHO "Destination directory not found")
 if exist %25dll%25 (ECHO "Mod DLL found") ELSE (ECHO "Mod DLL not found")

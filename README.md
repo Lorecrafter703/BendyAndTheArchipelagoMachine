@@ -5,20 +5,20 @@
 - [Bendy and the Ink Machine](https://store.steampowered.com/app/622650/Bendy_and_the_Ink_Machine/)
 - The [BATIM apworld](https://github.com/Lorecrafter703/Archipelago/releases), 
   if not bundled with your version of Archipelago
-- [Bendy and the Archipelago Machine](https://github.com/Lorecrafter703/BendyAndTheArchipelagoMachine/releases) mod
 - Thunderstore Mod Manager
-		or
-- [BepInEx](https://github.com/BepInEx/BepInEx/releases), if installing manually
+
+If installing manually:
+- [Bendy and the Archipelago Machine](https://github.com/Lorecrafter703/BendyAndTheArchipelagoMachine/releases) mod
+- [BepInEx](https://github.com/BepInEx/BepInEx/releases)
 
 ## Installation
 
 ### Thunderstore
 
-1. Install the BepInExPack for Bendy and the Ink Machine from the Thunderstore modmanager
-2. Navigate to the edit config menu and make sure the HideGameManagerObject field is set to true
-3. Navigate to the settings menu and find the Browse Data Folder option
-4. Extract the mod folder into the plugins folder of the BepInEx install
-5. You should be able to launch Bendy Modded through Thunderstore, if all is well a BepInEx console should open up as well
+1. In the Thunderstore Mod Manager, create a profile and select Bendy and the Ink Machine as the game
+2. Go to "Get Mods" section and search for "Bendy and the Archipelago Machine"
+3. Click on it to expand the listing, and click the Download button that appears
+4. Click on "Start Modded" to open the mod
 
 ### Manual Install
 
