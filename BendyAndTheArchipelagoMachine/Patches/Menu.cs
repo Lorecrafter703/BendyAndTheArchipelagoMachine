@@ -104,7 +104,80 @@ namespace BendyAndTheArchipelagoMachine.Patches
         }
 
 
-        public static void ResetChapterData()
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(TitleScreenController), "CheckSelectedBeginMenu")]
+        public static void ShowCheckpointButtons()
+        {
+            CheckpointMenu.selectedChapter = 0;
+            CheckpointMenu.hidden = false;
+        }
+
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(TitleScreenController), "HandleChapterArrowOnLeft")]
+        public static void LeftArrowClick(TitleScreenController __instance, int ___m_SelectedChapter)
+        {
+            CheckpointMenu.selectedChapter = ___m_SelectedChapter;
+            CheckpointMenu.selectedCheckpoint = 0;
+        }
+
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(TitleScreenController), "HandleChapterArrowOnRight")]
+        public static void RightArrowClick(TitleScreenController __instance, int ___m_SelectedChapter)
+        {
+            CheckpointMenu.selectedChapter = ___m_SelectedChapter;
+            CheckpointMenu.selectedCheckpoint = 0;
+        }
+
+
+        public static bool HasCheckpoint(int checkpoint)
+        {
+            switch (checkpoint)
+            {
+                case 0:
+                    return Client.HasItem("Unlock CH1");
+                case 1:
+                    return Client.HasItem("CH1 Checkpoint Basement");
+                case 5:
+                    return Client.HasItem("Unlock CH2");
+                case 6:
+                    return Client.HasItem("CH2 Checkpoint Lost Keys");
+                case 7:
+                    return Client.HasItem("CH2 Checkpoint Sammy's Sanctuary");
+                case 10:
+                    return Client.HasItem("Unlock CH3");
+                case 11:
+                    return Client.HasItem("CH3 Checkpoint Decisions");
+                case 12:
+                    return Client.HasItem("CH3 Checkpoint Angel's Bidding");
+                case 13:
+                    return Client.HasItem("CH3 Checkpoint Ink Hearts");
+                case 15:
+                    return Client.HasItem("Unlock CH4");
+                case 16:
+                    return Client.HasItem("CH4 Checkpoint Warehouse");
+                case 17:
+                    return Client.HasItem("CH4 Checkpoint Haunted House");
+                case 20:
+                    var BaconSoupsRequiredOption = (long)Client.serverData.GetSlotDataOption("bacon_soups_required");
+                    var TotalBaconSoupsOption = (long)Client.serverData.GetSlotDataOption("total_bacon_soups");
+                    long BaconSoupsRequired = TotalBaconSoupsOption * BaconSoupsRequiredOption / 100;
+                    return Client.BaconSoupCount() >= BaconSoupsRequired;
+                case 21:
+                    return Client.HasItem("CH5 Checkpoint Administration");
+                case 22:
+                    return Client.HasItem("CH5 Checkpoint The Ink Machine");
+                case 25:
+                    return true;
+                default:
+                    BendyAndTheArchipelagoMachine.Logger.LogError($"Unknown Checkpoint: {checkpoint}");
+                    return false;
+            }
+        }
+
+
+        public static void ResetChapterData(int checkpoint)
         {
             int slot = Client.serverData.GetSlot();
             SaveFileData data = new SaveFileData(slot);
@@ -117,6 +190,8 @@ namespace BendyAndTheArchipelagoMachine.Patches
             data.CH4Data = new CH4DataVO();
             data.CH5Data = new CH5DataVO();
 
+            
+
             GameManager.Instance.GameData.SaveFiles[slot] = data;
             GameManager.Instance.GameData.CurrentSaveFile = data;
         }
@@ -126,58 +201,71 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(TitleScreenController), "CheckSelectedChapter")]
         public static bool HandleChapterSelect(TitleScreenController __instance, int ___m_SelectedChapter)
         {
+            BendyAndTheArchipelagoMachine.Logger.LogDebug($"Selected button: {CheckpointMenu.selectedCheckpoint}");
+            int checkpoint = (___m_SelectedChapter * 5) + CheckpointMenu.selectedCheckpoint;
             switch (___m_SelectedChapter)
             {
                 case 0:
-                    if (!Client.HasItem("Unlock CH1"))
+                    if (!HasCheckpoint(checkpoint))
                     {
-                        ArchipelagoConsole.LogMessage($"Chapter 1 not yet unlocked");
+                        ArchipelagoConsole.LogMessage($"Locked");
                         break;
                     }
-                    ResetChapterData();
+                    ResetChapterData(checkpoint);
+                    CheckpointMenu.hidden = true;
                     LoadChapterFromTitle(titleScreenController, "CH1");
                     break;
                 case 1:
-                    if (!Client.HasItem("Unlock CH2"))
+                    if (!HasCheckpoint(checkpoint))
                     {
-                        ArchipelagoConsole.LogMessage($"Chapter 2 not yet unlocked");
+                        ArchipelagoConsole.LogMessage($"Locked");
                         break;
                     }
-                    ResetChapterData();
+                    ResetChapterData(checkpoint);
+                    CheckpointMenu.hidden = true;
                     LoadChapterFromTitle(titleScreenController, "CH2");
                     break;
                 case 2:
-                    if (!Client.HasItem("Unlock CH3"))
+                    if (!HasCheckpoint(checkpoint))
                     {
-                        ArchipelagoConsole.LogMessage($"Chapter 3 not yet unlocked");
+                        ArchipelagoConsole.LogMessage($"Locked");
                         break;
                     }
-                    ResetChapterData();
+                    ResetChapterData(checkpoint);
+                    CheckpointMenu.hidden = true;
                     LoadChapterFromTitle(titleScreenController, "CH3");
                     break;
                 case 3:
-                    if (!Client.HasItem("Unlock CH4"))
+                    if (!HasCheckpoint(checkpoint))
                     {
-                        ArchipelagoConsole.LogMessage($"Chapter 4 not yet unlocked");
+                        ArchipelagoConsole.LogMessage($"Locked");
                         break;
                     }
-                    ResetChapterData();
+                    ResetChapterData(checkpoint);
+                    CheckpointMenu.hidden = true;
                     LoadChapterFromTitle(titleScreenController, "CH4");
                     break;
                 case 4:
                     var BaconSoupsRequiredOption = (long)Client.serverData.GetSlotDataOption("bacon_soups_required");
                     var TotalBaconSoupsOption = (long)Client.serverData.GetSlotDataOption("total_bacon_soups");
                     long BaconSoupsRequired = TotalBaconSoupsOption * BaconSoupsRequiredOption / 100;
-                    if (Client.BaconSoupCount() < BaconSoupsRequired)
+                    if (!HasCheckpoint(checkpoint))
                     {
-                        ArchipelagoConsole.LogMessage($"Chapter 5 not yet unlocked: {Client.BaconSoupCount()} / {BaconSoupsRequired} Bacon Soups");
+                        ArchipelagoConsole.LogMessage($"Locked: {Client.BaconSoupCount()} / {BaconSoupsRequired}");
                         break;
                     }
-                    ResetChapterData();
+                    ResetChapterData(checkpoint);
+                    CheckpointMenu.hidden = true;
                     LoadChapterFromTitle(titleScreenController, "CH5");
                     break;
                 case 5:
-                    ResetChapterData();
+                    if (!HasCheckpoint(checkpoint))
+                    {
+                        ArchipelagoConsole.LogMessage($"Locked");
+                        break;
+                    }
+                    ResetChapterData(checkpoint);
+                    CheckpointMenu.hidden = true;
                     LoadChapterFromTitle(titleScreenController, "Archives");
                     break;
                 default:

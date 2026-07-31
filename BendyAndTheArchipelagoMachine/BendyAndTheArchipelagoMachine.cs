@@ -46,6 +46,7 @@ namespace BendyAndTheArchipelagoMachine
             Logger = base.Logger;
             ArchipelagoClient = new Client();
             ArchipelagoConsole.Awake();
+            CheckpointMenu.Awake();
 
             Harmony harmony = new Harmony(pluginGuid);
             harmony.PatchAll();
@@ -78,6 +79,7 @@ namespace BendyAndTheArchipelagoMachine
             // show the mod is currently loaded in the corner
             GUI.Label(new Rect(16, 16, 300, 20), ModDisplayInfo);
             ArchipelagoConsole.OnGUI();
+            CheckpointMenu.OnGUI();
 
             string statusMessage;
             // show the Archipelago Version and whether we're connected or not
