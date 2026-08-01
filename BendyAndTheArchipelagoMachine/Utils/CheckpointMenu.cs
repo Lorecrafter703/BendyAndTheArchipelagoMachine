@@ -69,13 +69,13 @@ namespace BendyAndTheArchipelagoMachine.Utils
                 case 1:
                     output[0] = Client.HasItem("Unlock CH2") ? "Start" : "Locked";
                     output[1] = Client.HasItem("CH2 Checkpoint Lost Keys") ? "Lost Keys" : "Locked";
-                    output[2] = Client.HasItem("CH2 Checkpoint Sammy's Sanctuary") ? "Sammy's Sanctuary" : "Locked";
+                    output[2] = Client.HasItem("CH2 Checkpoint Sammy's Office") ? "Sammy's Office" : "Locked";
                     break;
                 case 2:
                     output[0] = Client.HasItem("Unlock CH3") ? "Start" : "Locked";
                     output[1] = Client.HasItem("CH3 Checkpoint Decisions") ? "Decisions" : "Locked";
                     output[2] = Client.HasItem("CH3 Checkpoint Angel's Bidding") ? "Angel's Bidding" : "Locked";
-                    output[3] = Client.HasItem("CH3 Checkpoint Ink Hearts") ? "Ink Hearts" : "Locked";
+                    output[3] = Client.HasItem("CH3 Checkpoint Butcher Gang") ? "Butcher Gang" : "Locked";
                     break;
                 case 3:
                     output[0] = Client.HasItem("Unlock CH4") ? "Start" : "Locked";

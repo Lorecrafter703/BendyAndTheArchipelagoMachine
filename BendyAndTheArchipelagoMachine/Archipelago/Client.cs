@@ -214,14 +214,19 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         }
 
 
-        public static int BaconSoupCount()
+        public static string BaconSoupCount()
         {
             int count = 0;
             foreach (long _ in serverData.ReceivedItems)
             {
                 if (_ == IDTables.GetItemID("Bacon Soup")) count++;
             }
-            return count;
+
+            var BaconSoupsRequiredOption = (long)Client.serverData.GetSlotDataOption("bacon_soups_required");
+            var TotalBaconSoupsOption = (long)Client.serverData.GetSlotDataOption("total_bacon_soups");
+            long BaconSoupsRequired = TotalBaconSoupsOption * BaconSoupsRequiredOption / 100;
+
+            return $"{count} / {BaconSoupsRequired} Bacon Soups";
         }
 
 

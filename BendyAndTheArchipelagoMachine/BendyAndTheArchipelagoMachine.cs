@@ -87,6 +87,7 @@ namespace BendyAndTheArchipelagoMachine
             {
                 statusMessage = " Status: Connected";
                 GUI.Label(new Rect(16, 50, 300, 20), APDisplayInfo + statusMessage);
+                GUI.Label(new Rect(16, 70, 300, 20), Client.BaconSoupCount());
             }
             else
             {

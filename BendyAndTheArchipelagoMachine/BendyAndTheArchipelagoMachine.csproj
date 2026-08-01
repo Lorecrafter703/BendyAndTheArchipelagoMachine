@@ -118,6 +118,7 @@
     <Compile Include="Patches\BertrumFight.cs" />
     <Compile Include="Patches\BookPuzzleDoor.cs" />
     <Compile Include="Patches\BruteBorisFight.cs" />
+    <Compile Include="Patches\Checkpoints.cs" />
     <Compile Include="Patches\LostKeys.cs" />
     <Compile Include="Patches\LostOneSpecialErrors.cs" />
     <Compile Include="Patches\Menu.cs" />
