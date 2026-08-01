@@ -252,7 +252,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
             // CH3 Decisions
             data.CH3Data.SafehouseObjective = SetObjectiveSaveData(true, true);
             data.CH3Data.DarkHallwayObjective = SetObjectiveSaveData(true, true);
-            data.CH3Data.HeavenlyToysObjective = SetObjectiveSaveData(true, true);
+            data.CH3Data.HeavenlyToysObjective = SetObjectiveSaveData(true, true); // Cutoff Here
             data.CH3Data.AliceRevealObjective = SetObjectiveSaveData(true, true);
             data.CH3Data.DecisionObjective = SetObjectiveSaveData(true, false);
             data.CH3Data.IsChapterComplete = false;

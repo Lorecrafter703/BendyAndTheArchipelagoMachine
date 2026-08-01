@@ -54,6 +54,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
             string checkpoint = "CH3 Checkpoint Decisions";
             AddCheckpointItem(checkpoint);
         }
+        //[HarmonyPatch(typeof(CH3HeavenlyToysController), "HandleBlockingTheWayOnComplete")]
 
 
         [HarmonyPostfix]
