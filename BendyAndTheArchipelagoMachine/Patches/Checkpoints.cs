@@ -15,8 +15,13 @@ namespace BendyAndTheArchipelagoMachine.Patches
         public static void AddCheckpointItem(string checkpoint)
         {
             if (Client.HasItem(checkpoint)) return;
-            Client.serverData.AddItem(IDTables.GetItemID(checkpoint));
-            ArchipelagoConsole.LogMessage($"Received {checkpoint}");
+            if ((long)Client.serverData.GetSlotDataOption("checkpoint_sanity") == 0)
+            {
+                Client.serverData.AddItem(IDTables.GetItemID(checkpoint));
+                ArchipelagoConsole.LogMessage($"Received {checkpoint}");
+                return;
+            }
+            Client.SendLocation(checkpoint);
         }
 
 
