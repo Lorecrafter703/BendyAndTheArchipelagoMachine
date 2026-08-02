@@ -115,6 +115,7 @@
     <Compile Include="BendyAndTheArchipelagoMachine.cs" />
     <Compile Include="Archipelago\IDTables.cs" />
     <Compile Include="Patches\AudioLogs.cs" />
+    <Compile Include="Patches\BendyBoss.cs" />
     <Compile Include="Patches\BertrumFight.cs" />
     <Compile Include="Patches\BookPuzzleDoor.cs" />
     <Compile Include="Patches\BruteBorisFight.cs" />

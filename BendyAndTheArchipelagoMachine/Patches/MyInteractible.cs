@@ -24,6 +24,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
             if (ToyBlockages.ToysRef.Contains(__instance)) return ToyBlockages.HandleToyPickup();
             if (BertrumFight.BertrumFightAudioLog != null && BertrumFight.BertrumFightAudioLog == __instance) return BertrumFight.HandleAudioLogInteract();
             if (BookPuzzleDoor.Books.Contains(__instance)) return BookPuzzleDoor.HandleBookOnInteract();
+            if (BendyBoss.BendyAudioLog != null && BendyBoss.BendyAudioLog == __instance) return BendyBoss.CheckBaconSoupRequirement();
             return true;
         }
     }

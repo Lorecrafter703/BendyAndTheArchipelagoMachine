@@ -48,13 +48,12 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
 
         [HarmonyPostfix]
-        [HarmonyPatch(typeof(CH3AliceRevealController), "HandleRevealDialogueOnComplete")]
+        [HarmonyPatch(typeof(CH3HeavenlyToysController), "HandleBlockingTheWayOnComplete")]
         public static void DecisionsCheckpoint()
         {
             string checkpoint = "CH3 Checkpoint Decisions";
             AddCheckpointItem(checkpoint);
         }
-        //[HarmonyPatch(typeof(CH3HeavenlyToysController), "HandleBlockingTheWayOnComplete")]
 
 
         [HarmonyPostfix]

@@ -114,6 +114,14 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
 
         [HarmonyPostfix]
+        [HarmonyPatch(typeof(TitleScreenController), "HandleKBBackBtnOnClick")]
+        public static void HideCheckpointButtons()
+        {
+            CheckpointMenu.hidden = true;
+        }
+
+
+        [HarmonyPostfix]
         [HarmonyPatch(typeof(TitleScreenController), "HandleChapterArrowOnLeft")]
         public static void LeftArrowClick(TitleScreenController __instance, int ___m_SelectedChapter)
         {
@@ -160,10 +168,6 @@ namespace BendyAndTheArchipelagoMachine.Patches
                 case 17:
                     return Client.HasItem("CH4 Checkpoint Haunted House");
                 case 20:
-                    //var BaconSoupsRequiredOption = (long)Client.serverData.GetSlotDataOption("bacon_soups_required");
-                    //var TotalBaconSoupsOption = (long)Client.serverData.GetSlotDataOption("total_bacon_soups");
-                    //long BaconSoupsRequired = TotalBaconSoupsOption * BaconSoupsRequiredOption / 100;
-                    //return Client.BaconSoupCount() >= BaconSoupsRequired;
                     return Client.HasItem("Unlock CH5");
                 case 21:
                     return Client.HasItem("CH5 Checkpoint Administration");
@@ -252,17 +256,17 @@ namespace BendyAndTheArchipelagoMachine.Patches
             // CH3 Decisions
             data.CH3Data.SafehouseObjective = SetObjectiveSaveData(true, true);
             data.CH3Data.DarkHallwayObjective = SetObjectiveSaveData(true, true);
-            data.CH3Data.HeavenlyToysObjective = SetObjectiveSaveData(true, true); // Cutoff Here
-            data.CH3Data.AliceRevealObjective = SetObjectiveSaveData(true, true);
-            data.CH3Data.DecisionObjective = SetObjectiveSaveData(true, false);
+            data.CH3Data.HeavenlyToysObjective = SetObjectiveSaveData(true, false);
             data.CH3Data.IsChapterComplete = false;
-            data.CH3Data.PlayerPosition = new Vector3DataVO(new Vector3(244, 12.955f, -126));
-            data.CH3Data.PlayerRotation = new Vector3DataVO(new Vector3(0, 360, 0));
+            data.CH3Data.PlayerPosition = new Vector3DataVO(new Vector3(188, 12.955f, -128));
+            data.CH3Data.PlayerRotation = new Vector3DataVO(new Vector3(0, 180, 0));
             data.CH3Data.HasSaveData = true;
             if (checkpoint < 12) return data;
             // CH3 Angel's Bidding
-            data.CH3Data.DecisionObjective.IsComplete = true;
-            data.CH3Data.ChoseDevilsPath = false;
+            data.CH3Data.HeavenlyToysObjective.IsComplete = true;
+            data.CH3Data.AliceRevealObjective = SetObjectiveSaveData(true, true);
+            data.CH3Data.DecisionObjective = SetObjectiveSaveData(true, true);
+            data.CH3Data.ChoseDevilsPath = true;
             data.CH3Data.BorisJumpscareObjective = SetObjectiveSaveData(true, true);
             data.CH3Data.PosterPiperObjective = SetObjectiveSaveData(true, true);
             data.CH3Data.EnterLiftObjective = SetObjectiveSaveData(true, true);
