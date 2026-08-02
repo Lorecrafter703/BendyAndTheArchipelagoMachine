@@ -12,7 +12,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         {
             { "Bacon Soup", 1 },
             { "Trap", 2 },
-            { "Filler", 3 },
+            { "Bacon Soup (Used)", 3 },
             { "Unlock CH1", 100 },
             { "CH1 Book", 101 },
             { "CH1 Doll", 102 },
