@@ -120,6 +120,7 @@
     <Compile Include="Patches\BookPuzzleDoor.cs" />
     <Compile Include="Patches\BruteBorisFight.cs" />
     <Compile Include="Patches\Checkpoints.cs" />
+    <Compile Include="Patches\LeverChallenge.cs" />
     <Compile Include="Patches\LostKeys.cs" />
     <Compile Include="Patches\LostOneSpecialErrors.cs" />
     <Compile Include="Patches\Menu.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Patches\RitualItems.cs" />
     <Compile Include="Patches\SammyLawrenceBoss.cs" />
     <Compile Include="Patches\theMeatly.cs" />
+    <Compile Include="Patches\TommyGun.cs" />
     <Compile Include="Patches\ToyBlockages.cs" />
     <Compile Include="Patches\ValvePickup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

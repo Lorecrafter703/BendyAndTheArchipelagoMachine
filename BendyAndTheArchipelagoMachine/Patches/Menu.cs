@@ -266,7 +266,8 @@ namespace BendyAndTheArchipelagoMachine.Patches
             data.CH3Data.HeavenlyToysObjective.IsComplete = true;
             data.CH3Data.AliceRevealObjective = SetObjectiveSaveData(true, true);
             data.CH3Data.DecisionObjective = SetObjectiveSaveData(true, true);
-            data.CH3Data.ChoseDevilsPath = true;
+            data.CH3Data.ChoseDevilsPath = false;
+            data.CH3Data.Toy = 1;
             data.CH3Data.BorisJumpscareObjective = SetObjectiveSaveData(true, true);
             data.CH3Data.PosterPiperObjective = SetObjectiveSaveData(true, true);
             data.CH3Data.EnterLiftObjective = SetObjectiveSaveData(true, true);
@@ -276,7 +277,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
             if (checkpoint < 13) return data;
             // CH3 Butcher Gang
             data.CH3Data.AliceLairObjective.IsComplete = true;
-            data.CH3Data.AliceTasksObjective = SetObjectiveSaveData(true, false);
+            data.CH3Data.AliceTasksObjective = SetObjectiveSaveData(false, false);
             foreach (var gear in data.CH3Data.GearTask.Object) gear.IsComplete = true;
             data.CH3Data.GearTask.Status = SetObjectiveSaveData(true, true);
             foreach (var ink in data.CH3Data.ThickInkTask.Object) ink.IsComplete = true;
