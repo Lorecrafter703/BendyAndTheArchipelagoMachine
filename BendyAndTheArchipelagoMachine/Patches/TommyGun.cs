@@ -25,7 +25,9 @@ namespace BendyAndTheArchipelagoMachine.Patches
             {
                 GameManager.Instance.GameData.CurrentSaveFile.CH3Data.HasTommyGun = true;
                 __result = true;
+                return;
             }
+            __result = false;
         }
 
 
