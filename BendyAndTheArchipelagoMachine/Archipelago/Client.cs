@@ -42,6 +42,8 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         private Queue<ItemInfo> ItemQueue = new Queue<ItemInfo>();
         ReceivedItemsHelper Helper;
 
+        public static bool NeedBaconSoup;
+
 
         public void Connect()
         {
@@ -114,6 +116,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
                 }
 
                 authenticated = true;
+                NeedBaconSoup = (long)serverData.GetSlotDataOption("include_later_chapters") == 1 || (long)serverData.GetSlotDataOption("goal_chapter") == 4;
 
                 deathLinkHandler = new DeathLinkHandler(session.CreateDeathLinkService(), serverData.SlotName);
                 session.Locations.CompleteLocationChecksAsync(serverData.CheckedLocations.ToArray());
@@ -214,14 +217,19 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         }
 
 
-        public static int BaconSoupCount()
+        public static string BaconSoupCount()
         {
             int count = 0;
             foreach (long _ in serverData.ReceivedItems)
             {
                 if (_ == IDTables.GetItemID("Bacon Soup")) count++;
             }
-            return count;
+
+            var BaconSoupsRequiredOption = (long)Client.serverData.GetSlotDataOption("bacon_soups_required");
+            var TotalBaconSoupsOption = (long)Client.serverData.GetSlotDataOption("total_bacon_soups");
+            long BaconSoupsRequired = TotalBaconSoupsOption * BaconSoupsRequiredOption / 100;
+
+            return $"{count} / {BaconSoupsRequired} Bacon Soups";
         }
 
 

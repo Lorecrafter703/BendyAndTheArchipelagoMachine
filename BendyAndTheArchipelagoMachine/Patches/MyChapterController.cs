@@ -24,29 +24,38 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch("CompleteChapter")]
         public static bool OnChapterComplete(ChapterController __instance, Chapters ___m_Chapter)
         {
-            // send check
+            long goal = (long)Client.serverData.GetSlotDataOption("goal_chapter");
             switch (___m_Chapter)
             {
                 case Chapters.ONE:
                     Client.SendLocation("CH1 Complete");
                     SceneManager.LoadScene("Reset");
+                    if (goal == 0) Client.CompleteGoal();
                     return false;
                 case Chapters.TWO:
                     Client.SendLocation("CH2 Complete");
                     SceneManager.LoadScene("Reset");
+                    if (goal == 1) Client.CompleteGoal();
                     return false;
                 case Chapters.THREE:
                     Client.SendLocation("CH3 Complete");
                     SceneManager.LoadScene("Reset");
+                    if (goal == 2) Client.CompleteGoal();
                     return false;
                 case Chapters.FOUR:
                     Client.SendLocation("CH4 Complete");
                     SceneManager.LoadScene("Reset");
+                    if (goal == 3) Client.CompleteGoal();
                     return false;
                 case Chapters.FIVE:
                     Client.SendLocation("CH5 Complete");
-                    Client.CompleteGoal();
-                    return true;
+                    if (goal == 4)
+                    {
+                        Client.CompleteGoal();
+                        return true;
+                    }
+                    SceneManager.LoadScene("Reset");
+                    return false;
                 default:
                     BendyAndTheArchipelagoMachine.Logger.LogError($"Unknown Chapter: {___m_Chapter}");
                     SceneManager.LoadScene("Reset");

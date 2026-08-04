@@ -33,7 +33,7 @@ namespace BendyAndTheArchipelagoMachine
     {
         public const string pluginGuid = "lorecrafter.bendyandtheinkmachine.archipelago";
         public const string pluginName = "Bendy and the Archipelago Machine";
-        public const string pluginVersion = "1.1.2";
+        public const string pluginVersion = "1.2.0";
 
         public const string ModDisplayInfo = pluginName + " v" + pluginVersion;
         private const string APDisplayInfo = "Archipelago v" + Client.AP_VERSION;
@@ -46,6 +46,7 @@ namespace BendyAndTheArchipelagoMachine
             Logger = base.Logger;
             ArchipelagoClient = new Client();
             ArchipelagoConsole.Awake();
+            CheckpointMenu.Awake();
 
             Harmony harmony = new Harmony(pluginGuid);
             harmony.PatchAll();
@@ -78,6 +79,7 @@ namespace BendyAndTheArchipelagoMachine
             // show the mod is currently loaded in the corner
             GUI.Label(new Rect(16, 16, 300, 20), ModDisplayInfo);
             ArchipelagoConsole.OnGUI();
+            CheckpointMenu.OnGUI();
 
             string statusMessage;
             // show the Archipelago Version and whether we're connected or not
@@ -85,6 +87,7 @@ namespace BendyAndTheArchipelagoMachine
             {
                 statusMessage = " Status: Connected";
                 GUI.Label(new Rect(16, 50, 300, 20), APDisplayInfo + statusMessage);
+                if (Client.NeedBaconSoup) GUI.Label(new Rect(16, 70, 300, 20), Client.BaconSoupCount());
             }
             else
             {
@@ -100,6 +103,12 @@ namespace BendyAndTheArchipelagoMachine
                     Client.serverData.SlotName);
                 Client.serverData.Password = GUI.TextField(new Rect(150, 110, 150, 20),
                     Client.serverData.Password);
+
+                if (GUI.Button(new Rect(16, 130, 100, 20), "Connect") &&
+                !Client.serverData.SlotName.IsNullOrWhiteSpace())
+                {
+                    ArchipelagoClient.Connect();
+                }
             }
         }
     }
