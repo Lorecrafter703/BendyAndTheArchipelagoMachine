@@ -42,6 +42,8 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         private Queue<ItemInfo> ItemQueue = new Queue<ItemInfo>();
         ReceivedItemsHelper Helper;
 
+        public static bool NeedBaconSoup;
+
 
         public void Connect()
         {
@@ -114,6 +116,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
                 }
 
                 authenticated = true;
+                NeedBaconSoup = (long)serverData.GetSlotDataOption("include_later_chapters") == 1 || (long)serverData.GetSlotDataOption("goal_chapter") == 4;
 
                 deathLinkHandler = new DeathLinkHandler(session.CreateDeathLinkService(), serverData.SlotName);
                 session.Locations.CompleteLocationChecksAsync(serverData.CheckedLocations.ToArray());
