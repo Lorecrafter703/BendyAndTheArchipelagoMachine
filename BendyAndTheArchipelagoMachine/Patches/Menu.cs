@@ -38,10 +38,6 @@ namespace BendyAndTheArchipelagoMachine.Patches
         public static bool HandleConnect(BaseUIButton __instance)
         {
             if (__instance.name != "BeginBtn") return true;
-            if (!Client.authenticated && !Client.serverData.SlotName.IsNullOrWhiteSpace())
-            {
-                BendyAndTheArchipelagoMachine.ArchipelagoClient.Connect();
-            }
             return Client.authenticated;
         }
 

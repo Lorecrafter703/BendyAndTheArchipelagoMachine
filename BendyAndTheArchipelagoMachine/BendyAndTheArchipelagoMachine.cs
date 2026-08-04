@@ -103,6 +103,12 @@ namespace BendyAndTheArchipelagoMachine
                     Client.serverData.SlotName);
                 Client.serverData.Password = GUI.TextField(new Rect(150, 110, 150, 20),
                     Client.serverData.Password);
+
+                if (GUI.Button(new Rect(16, 130, 100, 20), "Connect") &&
+                !Client.serverData.SlotName.IsNullOrWhiteSpace())
+                {
+                    ArchipelagoClient.Connect();
+                }
             }
         }
     }
