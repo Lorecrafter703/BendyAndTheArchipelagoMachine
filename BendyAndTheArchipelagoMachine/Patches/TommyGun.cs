@@ -17,8 +17,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH3ProjectionistTaskController), "CheckTommyGun")]
         public static void GuaranteeTommyGun(ref bool __result)
         {
-            long option = (long)Client.serverData.GetSlotDataOption("deathless_challenges");
-            if (option == 0 || option == 2) return;
+            if ((long)Client.serverData.GetSlotDataOption("include_tommy_gun") == 0) return;
             BendyAndTheArchipelagoMachine.Logger.LogDebug($"TommyGunCheck: {__result}");
             LocationEligable = __result;
             if (!__result && Client.HasItem("CH3 Tommy Gun"))
@@ -36,8 +35,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         public static void HandleTommyGunInteract()
         {
             if (!LocationEligable) return;
-            long option = (long)Client.serverData.GetSlotDataOption("deathless_challenges");
-            if (option == 0 || option == 2) return;
+            if ((long)Client.serverData.GetSlotDataOption("include_tommy_gun") == 0) return;
             Client.SendLocation("CH3 Tommy Gun");
         }
     }
