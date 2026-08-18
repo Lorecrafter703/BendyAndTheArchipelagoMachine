@@ -116,7 +116,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
 
         public void CheckLocation(long itemID)
         {
-            CheckedLocations.Add(itemID);
+            if (!CheckedLocations.Contains(itemID)) CheckedLocations.Add(itemID);
             SaveData();
         }
 

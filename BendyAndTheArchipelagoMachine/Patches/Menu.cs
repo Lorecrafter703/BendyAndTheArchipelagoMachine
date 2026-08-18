@@ -203,6 +203,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
             data.CH5Data = new CH5DataVO();
 
             // CH1 Intro
+            SetCollectedBaconSoups(0);
             if (checkpoint < 1) return data;
             // CH1 Basement
             data.CH1Data.Book = SetObjectiveSaveData(true, true);
@@ -223,6 +224,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
             data.CH1Data.HasSaveData = true;
             if (checkpoint < 5) return data;
             // CH2 Intro
+            SetCollectedBaconSoups(1);
             data.CH1Data.BasementObjective.IsComplete = true;
             data.CH1Data.IsChapterComplete = true;
             if (checkpoint < 6) return data;
@@ -247,6 +249,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
             data.CH2Data.PlayerRotation = new Vector3DataVO(new Vector3(0, 90, 0));
             if (checkpoint < 10) return data;
             // CH3 Intro
+            SetCollectedBaconSoups(2);
             data.CH2Data.IsChapterComplete = true;
             if (checkpoint < 11) return data;
             // CH3 Decisions
@@ -286,6 +289,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
             data.CH3Data.PlayerRotation = new Vector3DataVO(new Vector3(0, 215, 0));
             if (checkpoint < 15) return data;
             // CH4 Intro
+            SetCollectedBaconSoups(3);
             data.CH3Data.AliceTasksObjective.IsComplete = true;
             data.CH3Data.IsChapterComplete = true;
             if (checkpoint < 16) return data;
@@ -312,6 +316,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
             data.CH4Data.PlayerRotation = new Vector3DataVO(new Vector3(0, 130, 0));
             if (checkpoint < 20) return data;
             // CH5 Intro
+            SetCollectedBaconSoups(4);
             data.CH4Data.IsChapterComplete = true;
             if (checkpoint < 21) return data;
             // CH5 Administration
@@ -341,6 +346,88 @@ namespace BendyAndTheArchipelagoMachine.Patches
             data.IsStarted = isStarted;
             data.IsComplete = isComplete;
             return data;
+        }
+
+
+        public static void SetCollectedBaconSoups(int chapter)
+        {
+            AchievementSaveData data = new AchievementSaveData();
+            data.AudioLogs = new List<int>();
+            data.BaconSoup = new List<int>();
+
+            int FirstSoup;
+            int LastSoup;
+            switch (chapter)
+            {
+                case 0:
+                    FirstSoup = 100;
+                    LastSoup = 120;
+                    break;
+                case 1:
+                    FirstSoup = 200;
+                    LastSoup = 230;
+                    break;
+                case 2:
+                    FirstSoup = 300;
+                    LastSoup = 338;
+                    break;
+                case 3:
+                    FirstSoup = 400;
+                    LastSoup = 418;
+                    break;
+                case 4:
+                    FirstSoup = 500;
+                    LastSoup = 506;
+                    break;
+                default:
+                    FirstSoup = 0;
+                    LastSoup = 0;
+                    break;
+            }
+            for (int i = FirstSoup; i <= LastSoup; i++)
+            {
+                if (Client.serverData.CheckedLocations.Contains(i))
+                {
+                    data.BaconSoup.Add(i - FirstSoup);
+                }
+            }
+
+            switch (chapter)
+            {
+                case 0:
+                    GameManager.Instance.GameData.CH1AchievementData = data;
+                    return;
+                case 1:
+                    GameManager.Instance.GameData.CH2AchievementData = data;
+                    return;
+                case 2:
+                    GameManager.Instance.GameData.CH3AchievementData = data;
+                    return;
+                case 3:
+                    GameManager.Instance.GameData.CH4AchievementData = data;
+                    return;
+                case 4:
+                    GameManager.Instance.GameData.CH5AchievementData = data;
+                    return;
+                default:
+                    return;
+            }
+        }
+
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(BaconSoupController), "LoadBaconSoupCollected")]
+        public static void HandleBaconSoupSpawns(BaconSoupController __instance, ref List<CannedSoupEdible> ___m_BaconSoups, List<int> _BaconSoupIDsCollected)
+        {
+            for (int i = ___m_BaconSoups.Count - 1; i > -1; i--)
+            {
+                CannedSoupEdible cannedSoupEdible = ___m_BaconSoups[i];
+                if (_BaconSoupIDsCollected.Contains(cannedSoupEdible.GetID()))
+                {
+                    cannedSoupEdible.Dispose();
+                    ___m_BaconSoups.RemoveAt(i);
+                }
+            }
         }
 
 
