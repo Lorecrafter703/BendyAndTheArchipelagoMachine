@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using BendyAndTheArchipelagoMachine.Utils;
 
 namespace BendyAndTheArchipelagoMachine.Archipelago
 {
@@ -20,13 +21,26 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         public string seed;
 
         public Dictionary<string, object> slotData;
+        private Config cfg;
 
         public bool NeedSlotData => slotData == null;
 
         public ArchipelagoData()
         {
-            Uri = "archipelago.gg:38281";
-            SlotName = "Bendy";
+            string cfgPath = Path.Combine(Paths.PluginPath, "Lorecrafter703-Bendy_and_the_Archipelago_Machine", "BendyAndTheArchipelagoMachine", "config.json");
+            if (!File.Exists(cfgPath))
+            {
+                cfg = new Config("archipelago.gg:38281", "Bendy");
+                string cfgData = JsonConvert.SerializeObject(cfg, Formatting.Indented);
+                File.WriteAllText(cfgPath, cfgData);
+            }
+            else
+            {
+                string cfgData = File.ReadAllText(cfgPath);
+                cfg = JsonConvert.DeserializeObject<Config>(cfgData);
+            }
+            Uri = cfg.LastUri;
+            SlotName = cfg.LastSlotName;
             CheckedLocations = new List<long>();
             ReceivedItems = new List<long>();
         }
@@ -44,7 +58,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
 
         public override string ToString()
         {
-            return JsonConvert.SerializeObject(this);
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
         }
 
 
@@ -104,6 +118,12 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         {
             CheckedLocations.Add(itemID);
             SaveData();
+        }
+
+
+        public void UpdateConnectionInfo(string uri, string slot)
+        {
+            cfg.UpdateConnectionInfo(uri, slot);
         }
     }
 }

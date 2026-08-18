@@ -122,6 +122,8 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
                 session.Locations.CompleteLocationChecksAsync(serverData.CheckedLocations.ToArray());
                 outText = $"Successfully connected to {serverData.Uri} as {serverData.SlotName}!";
 
+                serverData.UpdateConnectionInfo(serverData.Uri, serverData.SlotName);
+
                 ArchipelagoConsole.LogMessage(outText);
             }
             else
