@@ -25,6 +25,11 @@ namespace BendyAndTheArchipelagoMachine.Patches
         public static bool OnChapterComplete(ChapterController __instance, Chapters ___m_Chapter)
         {
             long goal = (long)Client.serverData.GetSlotDataOption("goal_chapter");
+            if ((long)Client.serverData.GetSlotDataOption("require_previous_chapters") == 1)
+            {
+                goal = CheckCompletedChapters(ref goal);
+                if (goal == -1) BendyAndTheArchipelagoMachine.Logger.LogMessage("Goal Not Yet Acheived, Not All Previous Chapters Completed.");
+            }
             switch (___m_Chapter)
             {
                 case Chapters.ONE:
@@ -61,6 +66,16 @@ namespace BendyAndTheArchipelagoMachine.Patches
                     SceneManager.LoadScene("Reset");
                     return false;
             }
+        }
+
+
+        public static long CheckCompletedChapters(ref long goal)
+        {
+            if (goal >= 1) goal = Client.serverData.CheckedLocations.Contains(IDTables.GetLocationID("CH1 Complete")) ? goal : -1;
+            if (goal >= 2) goal = Client.serverData.CheckedLocations.Contains(IDTables.GetLocationID("CH2 Complete")) ? goal : -1;
+            if (goal >= 3) goal = Client.serverData.CheckedLocations.Contains(IDTables.GetLocationID("CH3 Complete")) ? goal : -1;
+            if (goal >= 4) goal = Client.serverData.CheckedLocations.Contains(IDTables.GetLocationID("CH4 Complete")) ? goal : -1;
+            return goal;
         }
 
 
