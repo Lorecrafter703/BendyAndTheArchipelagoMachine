@@ -118,6 +118,7 @@
     <Compile Include="Patches\BendyBoss.cs" />
     <Compile Include="Patches\BertrumFight.cs" />
     <Compile Include="Patches\BookPuzzleDoor.cs" />
+    <Compile Include="Patches\BorisBone.cs" />
     <Compile Include="Patches\BruteBorisFight.cs" />
     <Compile Include="Patches\Checkpoints.cs" />
     <Compile Include="Patches\LeverChallenge.cs" />
