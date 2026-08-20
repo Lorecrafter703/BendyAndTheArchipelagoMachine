@@ -30,7 +30,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             string cfgPath = Path.Combine(Paths.PluginPath, "Lorecrafter703-Bendy_and_the_Archipelago_Machine", "BendyAndTheArchipelagoMachine", "config.json");
             if (!File.Exists(cfgPath))
             {
-                cfg = new Config("archipelago.gg:38281", "Bendy");
+                cfg = new Config("archipelago.gg:38281", "Bendy", false);
                 string cfgData = JsonConvert.SerializeObject(cfg, Formatting.Indented);
                 File.WriteAllText(cfgPath, cfgData);
             }

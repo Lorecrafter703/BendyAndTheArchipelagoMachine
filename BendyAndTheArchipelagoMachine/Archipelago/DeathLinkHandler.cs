@@ -97,5 +97,11 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
                 BendyAndTheArchipelagoMachine.Logger.LogError(e);
             }
         }
+
+
+        public bool GetDeathLinkStatus()
+        {
+            return deathLinkEnabled;
+        }
     }
 }

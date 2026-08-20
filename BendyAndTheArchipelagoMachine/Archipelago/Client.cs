@@ -36,7 +36,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         private bool attemptingConnection;
 
         public static ArchipelagoData serverData = new ArchipelagoData();
-        private DeathLinkHandler deathLinkHandler;
+        public DeathLinkHandler deathLinkHandler;
         static ArchipelagoSession session = ArchipelagoSessionFactory.CreateSession(SERVER, PORT);
 
         private Queue<ItemInfo> ItemQueue = new Queue<ItemInfo>();
@@ -118,7 +118,8 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
                 authenticated = true;
                 NeedBaconSoup = (long)serverData.GetSlotDataOption("include_later_chapters") == 1 || (long)serverData.GetSlotDataOption("goal_chapter") == 4;
 
-                deathLinkHandler = new DeathLinkHandler(session.CreateDeathLinkService(), serverData.SlotName);
+                bool deathLinkEnabled = (long)serverData.GetSlotDataOption("death_link") == 1;
+                deathLinkHandler = new DeathLinkHandler(session.CreateDeathLinkService(), serverData.SlotName, deathLinkEnabled);
                 session.Locations.CompleteLocationChecksAsync(serverData.CheckedLocations.ToArray());
                 outText = $"Successfully connected to {serverData.Uri} as {serverData.SlotName}!";
 

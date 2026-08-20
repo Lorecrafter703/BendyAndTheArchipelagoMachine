@@ -40,7 +40,6 @@ namespace BendyAndTheArchipelagoMachine
         public static new ManualLogSource Logger;
         public static Client ArchipelagoClient;
 
-
         public void Awake()
         {
             Logger = base.Logger;
@@ -88,6 +87,11 @@ namespace BendyAndTheArchipelagoMachine
                 statusMessage = " Status: Connected";
                 GUI.Label(new Rect(16, 50, 300, 20), APDisplayInfo + statusMessage);
                 if (Client.NeedBaconSoup) GUI.Label(new Rect(16, 70, 300, 20), Client.BaconSoupCount());
+                bool deathLinkStatus = ArchipelagoClient.deathLinkHandler.GetDeathLinkStatus();
+                if (GUI.Button(new Rect(16, 95, deathLinkStatus ? 117 : 120, 25), $"Deathlink {(deathLinkStatus ? "enabled" : "disabled")}", new GUIStyle(GUI.skin.button) { alignment = TextAnchor.MiddleLeft }))
+                {
+                    ArchipelagoClient.deathLinkHandler.ToggleDeathLink();
+                }
             }
             else
             {
