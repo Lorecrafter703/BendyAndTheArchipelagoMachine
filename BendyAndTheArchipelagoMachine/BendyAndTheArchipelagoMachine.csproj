@@ -121,6 +121,7 @@
     <Compile Include="Patches\BorisBone.cs" />
     <Compile Include="Patches\BruteBorisFight.cs" />
     <Compile Include="Patches\Checkpoints.cs" />
+    <Compile Include="Patches\DeathLinkController.cs" />
     <Compile Include="Patches\LeverChallenge.cs" />
     <Compile Include="Patches\LostKeys.cs" />
     <Compile Include="Patches\LostOneSpecialErrors.cs" />

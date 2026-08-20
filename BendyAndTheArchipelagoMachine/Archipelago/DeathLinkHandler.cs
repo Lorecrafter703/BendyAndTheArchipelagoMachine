@@ -88,7 +88,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
                 BendyAndTheArchipelagoMachine.Logger.LogMessage("sharing your death...");
 
                 // add the cause as second parameter
-                var linkToSend = new DeathLink(slotName);
+                var linkToSend = new DeathLink(slotName, $"{slotName} succumbed to the ink.");
 
                 service.SendDeathLink(linkToSend);
             }
