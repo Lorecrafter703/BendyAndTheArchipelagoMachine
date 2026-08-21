@@ -216,16 +216,15 @@ namespace BendyAndTheArchipelagoMachine.Patches
             data.CH1Data.CollectablesObjective = SetObjectiveSaveData(true, true);
             data.CH1Data.TheatreObjective = SetObjectiveSaveData(true, true);
             data.CH1Data.InkMachineObjective = SetObjectiveSaveData(true, true);
-            data.CH1Data.BendyChaseObjective = SetObjectiveSaveData(true, true);
-            data.CH1Data.BasementObjective = SetObjectiveSaveData(true, false);
             data.CH1Data.IsChapterComplete = false;
-            data.CH1Data.PlayerPosition = new Vector3DataVO(new Vector3(20, -57.045f, 10));
-            data.CH1Data.PlayerRotation = new Vector3DataVO(new Vector3(0, 180, 0));
+            data.CH1Data.PlayerPosition = new Vector3DataVO(new Vector3(-10, 3.23f, 180)); // pos: (-9.74, 3.23, 179.57) | rot: (0.00000, -0.99525, 0.00000, 0.09737)
+            data.CH1Data.PlayerRotation = new Vector3DataVO(new Vector3(0, 0, 0));
             data.CH1Data.HasSaveData = true;
             if (checkpoint < 5) return data;
             // CH2 Intro
             SetCollectedBaconSoups(1);
-            data.CH1Data.BasementObjective.IsComplete = true;
+            data.CH1Data.BendyChaseObjective = SetObjectiveSaveData(true, true);
+            data.CH1Data.BasementObjective = SetObjectiveSaveData(true, true);
             data.CH1Data.IsChapterComplete = true;
             if (checkpoint < 6) return data;
             // CH2 Lost Keys

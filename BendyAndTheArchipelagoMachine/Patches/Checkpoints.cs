@@ -27,7 +27,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
 
         [HarmonyPostfix]
-        [HarmonyPatch(typeof(CH1BendyFinaleController), "Complete")]
+        [HarmonyPatch(typeof(CH1MainPowerController), "HandleLeverOnComplete")]
         public static void BasementCheckpoint()
         {
             string checkpoint = "CH1 Checkpoint Basement";
