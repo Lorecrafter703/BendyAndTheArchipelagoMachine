@@ -1,5 +1,7 @@
 ﻿using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
+using BendyAndTheArchipelagoMachine.Patches;
 using BepInEx;
+using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,9 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         private string slotName;
         private readonly DeathLinkService service;
         private readonly Queue<DeathLink> deathLinks = new Queue<DeathLink>();
+
+        public bool isDead = false;
+
 
         public DeathLinkHandler(DeathLinkService deathLinkService, string name, bool enableDeathLink = false)
         {
@@ -41,6 +46,8 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             {
                 service.DisableDeathLink();
             }
+
+            Client.serverData.SetConfigDeathlink(deathLinkEnabled);
         }
 
 
@@ -60,16 +67,27 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             {
                 if (deathLinks.Count < 1) return;
 
+                BendyAndTheArchipelagoMachine.Logger.LogDebug("Killing Player");
                 var deathLink = deathLinks.Dequeue();
+                if (!deathLinkEnabled) return;
+
                 var cause = deathLink.Cause.IsNullOrWhiteSpace() ? GetDeathLinkCause(deathLink) : deathLink.Cause;
 
-                // TODO Call the Kill Player code
+                DeathLinkController.KillPlayer(DeathLinkController.playerController);
                 BendyAndTheArchipelagoMachine.Logger.LogMessage(cause);
             }
             catch (Exception e)
             {
                 BendyAndTheArchipelagoMachine.Logger.LogError(e);
             }
+        }
+
+
+        public void ProcessDeaths()
+        {
+            DeathLinkController.Revive();
+            if (DeathLinkController.isDead) return;
+            KillPlayer();
         }
 
 
@@ -87,8 +105,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
 
                 BendyAndTheArchipelagoMachine.Logger.LogMessage("sharing your death...");
 
-                // add the cause as second parameter
-                var linkToSend = new DeathLink(slotName);
+                var linkToSend = new DeathLink(slotName, $"{slotName} succumbed to the ink.");
 
                 service.SendDeathLink(linkToSend);
             }
@@ -96,6 +113,12 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             {
                 BendyAndTheArchipelagoMachine.Logger.LogError(e);
             }
+        }
+
+
+        public bool GetDeathLinkStatus()
+        {
+            return deathLinkEnabled;
         }
     }
 }

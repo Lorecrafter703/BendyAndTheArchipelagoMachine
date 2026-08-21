@@ -27,7 +27,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
 
         [HarmonyPostfix]
-        [HarmonyPatch(typeof(CH1BendyFinaleController), "Complete")]
+        [HarmonyPatch(typeof(CH1MainPowerController), "HandleLeverOnComplete")]
         public static void BasementCheckpoint()
         {
             string checkpoint = "CH1 Checkpoint Basement";
@@ -59,6 +59,22 @@ namespace BendyAndTheArchipelagoMachine.Patches
         {
             string checkpoint = "CH3 Checkpoint Decisions";
             AddCheckpointItem(checkpoint);
+        }
+
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(CH3DecisionController), "HandleAliceTriggerOnEnter")]
+        public static void SetDecisionAngel()
+        {
+            CheckpointMenu.demonPath = true;
+        }
+
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(CH3DecisionController), "HandleBendyTriggerOnEnter")]
+        public static void SetDecisionDemon()
+        {
+            CheckpointMenu.demonPath = false;
         }
 
 

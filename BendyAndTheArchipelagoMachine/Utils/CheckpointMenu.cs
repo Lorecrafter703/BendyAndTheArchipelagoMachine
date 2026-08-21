@@ -30,6 +30,8 @@ namespace BendyAndTheArchipelagoMachine.Utils
         public static int selectedChapter;
         public static int selectedCheckpoint;
 
+        public static bool demonPath = false;
+
 
         public static void Awake()
         {
@@ -53,6 +55,12 @@ namespace BendyAndTheArchipelagoMachine.Utils
             position = new Rect(xPos, yPos, checkpointsWidth, checkpointsHeight);
 
             selectedCheckpoint = GUI.SelectionGrid(position, selectedCheckpoint, checkpointOptions, 1);
+            if (selectedChapter != 2) return;
+            if (!Client.HasItem("CH3 Checkpoint Angel's Bidding") && !Client.HasItem("CH3 Checkpoint Butcher Gang")) return;
+            if (GUI.Button(new Rect(xPos + checkpointsWidth, yPos + Screen.height * 0.06f, checkpointsWidth * 0.45f, Screen.height * 0.06f), demonPath ? "Demon Path" : "Angel Path"))
+            {
+                demonPath = !demonPath;
+            }
         }
 
 

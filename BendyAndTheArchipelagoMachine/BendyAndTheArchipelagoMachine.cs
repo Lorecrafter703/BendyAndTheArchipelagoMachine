@@ -1,4 +1,5 @@
 ﻿using BendyAndTheArchipelagoMachine.Archipelago;
+using BendyAndTheArchipelagoMachine.Patches;
 using BendyAndTheArchipelagoMachine.Utils;
 using BepInEx;
 using BepInEx.Configuration;
@@ -33,13 +34,12 @@ namespace BendyAndTheArchipelagoMachine
     {
         public const string pluginGuid = "lorecrafter.bendyandtheinkmachine.archipelago";
         public const string pluginName = "Bendy and the Archipelago Machine";
-        public const string pluginVersion = "1.2.1";
+        public const string pluginVersion = "1.3.0-Prerelease";
 
         public const string ModDisplayInfo = pluginName + " v" + pluginVersion;
         private const string APDisplayInfo = "Archipelago v" + Client.AP_VERSION;
         public static new ManualLogSource Logger;
         public static Client ArchipelagoClient;
-
 
         public void Awake()
         {
@@ -62,6 +62,7 @@ namespace BendyAndTheArchipelagoMachine
             {
                 ArchipelagoConsole.ToggleHidden();
             }
+            ArchipelagoClient.deathLinkHandler?.ProcessDeaths();
         }
 
 
@@ -88,6 +89,11 @@ namespace BendyAndTheArchipelagoMachine
                 statusMessage = " Status: Connected";
                 GUI.Label(new Rect(16, 50, 300, 20), APDisplayInfo + statusMessage);
                 if (Client.NeedBaconSoup) GUI.Label(new Rect(16, 70, 300, 20), Client.BaconSoupCount());
+                bool deathLinkStatus = ArchipelagoClient.deathLinkHandler.GetDeathLinkStatus();
+                if (GUI.Button(new Rect(16, 95, deathLinkStatus ? 117 : 120, 25), $"Deathlink {(deathLinkStatus ? "enabled" : "disabled")}", new GUIStyle(GUI.skin.button) { alignment = TextAnchor.MiddleLeft }))
+                {
+                    ArchipelagoClient.deathLinkHandler.ToggleDeathLink();
+                }
             }
             else
             {
