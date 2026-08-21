@@ -63,6 +63,22 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
 
         [HarmonyPostfix]
+        [HarmonyPatch(typeof(CH3DecisionController), "HandleAliceTriggerOnEnter")]
+        public static void SetDecisionAngel()
+        {
+            CheckpointMenu.demonPath = true;
+        }
+
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(CH3DecisionController), "HandleBendyTriggerOnEnter")]
+        public static void SetDecisionDemon()
+        {
+            CheckpointMenu.demonPath = false;
+        }
+
+
+        [HarmonyPostfix]
         [HarmonyPatch(typeof(CH3AliceLairController), "HandleBodyRoomTriggerOnEnter")]
         public static void AngelsBiddingCheckpoint()
         {

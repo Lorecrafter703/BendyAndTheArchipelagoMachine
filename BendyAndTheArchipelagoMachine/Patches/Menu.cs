@@ -265,8 +265,8 @@ namespace BendyAndTheArchipelagoMachine.Patches
             data.CH3Data.HeavenlyToysObjective.IsComplete = true;
             data.CH3Data.AliceRevealObjective = SetObjectiveSaveData(true, true);
             data.CH3Data.DecisionObjective = SetObjectiveSaveData(true, true);
-            data.CH3Data.ChoseDevilsPath = false;
-            data.CH3Data.Toy = 1;
+            data.CH3Data.ChoseDevilsPath = CheckpointMenu.demonPath;
+            data.CH3Data.Toy = CheckpointMenu.demonPath ? 3 : 1;
             data.CH3Data.BorisJumpscareObjective = SetObjectiveSaveData(true, true);
             data.CH3Data.PosterPiperObjective = SetObjectiveSaveData(true, true);
             data.CH3Data.EnterLiftObjective = SetObjectiveSaveData(true, true);
