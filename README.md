@@ -35,10 +35,12 @@ If installing manually:
 ## Joining a new MultiWorld
 
 1. When the game opens up, you should see a new section in the top left to input connection information.
-2. After filling in the required fields, you may click **Begin**.
-3. On a successful connection, you will be able to choose a save file. (You may need to click Begin a second time)
-   - NOTE: Whichever save file you connect to first will be the save you must use every time you connect in the future.
-4. After choosing a save file, you will be able to continue to chapter select, and begin playing.
+2. After filling in the required fields, you may click **Connect**.
+3. On a successful connection, you should see the connection menu replaced with a count for received Bacon Soups,
+and a toggle for deathlink. You should now be able to select **Begin**, and continue as normal.
+
+**NOTE:** It is recommended to back up your save files before playing, as selecting a slot will
+automatically override any data that was previously there.
 
 
 ## What does randomization do to this game?
@@ -52,9 +54,13 @@ The following can be obtained as items:
  - Bertrum's Bossfight
  - Chapter Unlocks
  - Cans of Bacon Soup
- - (optionally) Checkpoints
  - Filler items
-	- Bacon Soup (Used)
+	- Empty Soup Can
+	- Empty Ink Well
+	- Broken Banjo String
+ - (optionally) Checkpoints
+ - (optionally) The Tommy Gun
+ - (optionally) Boris's Bone
 
 By default, the following can be sent as location checks:
  - Ritual items from chapter 1 (Book, Doll, Gear, Inkwell, Record, and Wrench)
@@ -70,11 +76,16 @@ By default, the following can be sent as location checks:
  - (optionally) Finding theMeatly cutouts
  - (optionally) Getting perfect scores in the chapter 4 warehouse minigames.
  - (optionally) Checkpoints
+ - (optionally) The Tommy Gun
+ - (optionally) Completing the CH3 Lever Challenge (1 check per wave)
+ - (optionally) Boris's Bone
 
 ## What is the goal?
 
-Currently, the only available goal is to beat Beast Bendy at the end of Chapter 5. Starting the fight will require a
-configurable number of bacon soup cans to be received.
+The default goal is to beat Beast Bendy at the end of Chapter 5. Starting the fight will require a
+configurable number of bacon soup cans to be received. The goal can be changed to completion of any chapter,
+with later chapters being discluded from randomization unless specifically included. Chapters preceding the
+goal chapter can also be set to be required for completion.
 
 ## I received an item, but I can't place it where it needs to go?
 
@@ -85,5 +96,12 @@ with the object again after receiving the item to be able to use it fully.
 ## I can't unclog the toy machine in chapter 3 or interact with the books in chapter 4?
 
 Both the toys that clog the chapter 3 toy machine and the books needed to open the door in chapter 4 require an item to
-interact with them (CH3 Toys and CH4 Books respectively).
+interact with them (CH3 Toys and CH4 Books respectively). Generally, if there is something that won't let you interact
+with it, it is probably an item you are missing, which can be found in the list above.
 
+## How does Deathlink work?
+
+Deathlink works mostly how you would expect, with a few caveats. If you are in chapter 1, death links you recieve will
+still "trigger", but nothing will actually happen. Also, deathlinks cannot happen while you are in the death tunnel
+(though they can still be queued), as well as any time the game considers you to be in a "hidden" state. This includes
+the Miracle Stations and riding the cart at the end of chapter 4 for example.
