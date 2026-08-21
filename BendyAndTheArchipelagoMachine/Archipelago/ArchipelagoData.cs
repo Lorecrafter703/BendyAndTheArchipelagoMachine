@@ -125,5 +125,17 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         {
             cfg.UpdateConnectionInfo(uri, slot);
         }
+
+
+        public void SetConfigDeathlink(bool deathLinkEnabled)
+        {
+            cfg?.UpdateDeathlink(deathLinkEnabled);
+        }
+
+
+        public bool GetConfigDeathLink()
+        {
+            return cfg.DeathlinkEnabled;
+        }
     }
 }

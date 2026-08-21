@@ -46,6 +46,8 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             {
                 service.DisableDeathLink();
             }
+
+            Client.serverData.SetConfigDeathlink(deathLinkEnabled);
         }
 
 
