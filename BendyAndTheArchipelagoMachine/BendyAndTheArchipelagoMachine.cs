@@ -1,4 +1,5 @@
 ﻿using BendyAndTheArchipelagoMachine.Archipelago;
+using BendyAndTheArchipelagoMachine.Patches;
 using BendyAndTheArchipelagoMachine.Utils;
 using BepInEx;
 using BepInEx.Configuration;
@@ -61,6 +62,7 @@ namespace BendyAndTheArchipelagoMachine
             {
                 ArchipelagoConsole.ToggleHidden();
             }
+            ArchipelagoClient.deathLinkHandler?.ProcessDeaths();
         }
 
 
