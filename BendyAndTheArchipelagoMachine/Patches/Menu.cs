@@ -48,7 +48,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         {
             if (!Client.serverData.VerifySlot(index))
             {
-                ArchipelagoConsole.LogMessage($"Please Connect to Slot {Client.serverData.GetSlot()}");
+                ArchipelagoConsole.LogMessage($"Please Connect to Slot {Client.serverData.GetSlot() + 1}");
                 return false;
             }
             int slot = Client.serverData.GetSlot();
