@@ -1,5 +1,10 @@
 # BendyAndTheArchipelagoMachine Setup Guide
 
+## NOTICE
+
+In the recent update to the game, Beany and the Ink Machine had it's unity version updated, and as such, BepInEx 5 no longer is compatible. To use this
+mod, you will need to downpatch your game to a previous version.
+
 ## Required Software
 
 - [Bendy and the Ink Machine](https://store.steampowered.com/app/622650/Bendy_and_the_Ink_Machine/)
@@ -9,7 +14,7 @@
 
 If installing manually:
 - [Bendy and the Archipelago Machine](https://github.com/Lorecrafter703/BendyAndTheArchipelagoMachine/releases) mod
-- [BepInEx](https://github.com/BepInEx/BepInEx/releases)
+- [BepInEx 5](https://github.com/BepInEx/BepInEx/releases)
 
 ## Installation
 
