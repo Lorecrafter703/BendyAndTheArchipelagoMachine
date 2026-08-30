@@ -14,9 +14,9 @@ namespace BendyAndTheArchipelagoMachine.Patches
     {
         [HarmonyPrefix]
         [HarmonyPatch("Splash")]
-        public static bool SplashFix(CH4LostOneSpecial __instance, S13ObjectComplex ___m_S13Object)
+        public static bool SplashFix(CH4LostOneSpecial __instance)
         {
-            return ___m_S13Object != null;
+            return __instance.m_S13Object != null;
         }
     }
 }

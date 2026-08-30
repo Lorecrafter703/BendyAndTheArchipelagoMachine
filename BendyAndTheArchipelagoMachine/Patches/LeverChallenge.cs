@@ -14,10 +14,10 @@ namespace BendyAndTheArchipelagoMachine.Patches
     {
         [HarmonyPostfix]
         [HarmonyPatch(typeof(CH3ServiceController), "HandleSearcherOnDeath")]
-        public static void LeverChallenge1(CH3ServiceController __instance, List<SearcherBossAi> ___m_Searchers)
+        public static void LeverChallenge1(CH3ServiceController __instance)
         {
             if ((long)Client.serverData.GetSlotDataOption("include_lever_challenges") == 0) return;
-            if (___m_Searchers.Count <= 0)
+            if (__instance.m_Searchers.Count <= 0)
             {
                 Client.SendLocation("CH3 Lever Challenge 1");
             }
@@ -26,10 +26,10 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(CH3ServiceController), "HandleButcherGangOnDeath")]
-        public static void LeverChallenge2(CH3ServiceController __instance, List<ButcherGangAi> ___m_ButcherGang)
+        public static void LeverChallenge2(CH3ServiceController __instance)
         {
             if ((long)Client.serverData.GetSlotDataOption("include_lever_challenges") == 0) return;
-            if (___m_ButcherGang.Count <= 0)
+            if (__instance.m_ButcherGang.Count <= 0)
             {
                 Client.SendLocation("CH3 Lever Challenge 2");
             }

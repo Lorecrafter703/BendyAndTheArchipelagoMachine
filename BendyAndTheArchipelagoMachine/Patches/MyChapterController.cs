@@ -22,7 +22,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPrefix]
         [HarmonyPatch("CompleteChapter")]
-        public static bool OnChapterComplete(ChapterController __instance, Chapters ___m_Chapter)
+        public static bool OnChapterComplete(ChapterController __instance)
         {
             long goal = (long)Client.serverData.GetSlotDataOption("goal_chapter");
             if ((long)Client.serverData.GetSlotDataOption("require_previous_chapters") == 1)
@@ -30,7 +30,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
                 goal = CheckCompletedChapters(ref goal);
                 if (goal == -1) BendyAndTheArchipelagoMachine.Logger.LogMessage("Goal Not Yet Acheived, Not All Previous Chapters Completed.");
             }
-            switch (___m_Chapter)
+            switch (__instance.m_Chapter)
             {
                 case Chapters.ONE:
                     Client.SendLocation("CH1 Complete");
@@ -62,7 +62,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
                     SceneManager.LoadScene("Reset");
                     return false;
                 default:
-                    BendyAndTheArchipelagoMachine.Logger.LogError($"Unknown Chapter: {___m_Chapter}");
+                    BendyAndTheArchipelagoMachine.Logger.LogError($"Unknown Chapter: {__instance.m_Chapter}");
                     SceneManager.LoadScene("Reset");
                     return false;
             }
@@ -81,10 +81,10 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPostfix]
         [HarmonyPatch("Init")]
-        public static void ChapterControllerInit(ChapterController __instance, Chapters ___m_Chapter)
+        public static void ChapterControllerInit(ChapterController __instance)
         {
             currentChapter = __instance;
-            currentChapterNumber = ___m_Chapter;
+            currentChapterNumber = __instance.m_Chapter;
         }
 
 

@@ -15,9 +15,9 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPostfix]
         [HarmonyPatch("InitOnComplete")]
-        public static void RegisterKeys(CH2LostKeysController __instance, Interactable ___m_Keys)
+        public static void RegisterKeys(CH2LostKeysController __instance)
         {
-            keysReference = ___m_Keys;
+            keysReference = __instance.m_Keys;
         }
 
 

@@ -25,9 +25,11 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPostfix]
         [HarmonyPatch("Init")]
-        private static void OnInit(BaconSoupController __instance, List<CannedSoupEdible> ___m_BaconSoups)
+        private static void OnInit(BaconSoupController __instance)
         {
-            BendyAndTheArchipelagoMachine.Logger.LogMessage("Total BaconSoups: " + ___m_BaconSoups.Count);
+            BendyAndTheArchipelagoMachine.Logger.LogMessage($"Total BaconSoups: {__instance.m_BaconSoups.Count}");
+            BendyAndTheArchipelagoMachine.Logger.LogMessage($"Chapter: {__instance.m_Chapter}");
+            BendyAndTheArchipelagoMachine.Logger.LogMessage($"instance: {__instance}");
         }
     }
 }

@@ -23,9 +23,9 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPostfix]
         [HarmonyPatch("Init")]
-        public static void GetAudioLogReference(CH4BertrumController __instance, AudioLog ___m_AudioLog)
+        public static void GetAudioLogReference(CH4BertrumController __instance)
         {
-            BertrumFightAudioLog = ___m_AudioLog;
+            BertrumFightAudioLog = __instance.m_AudioLog;
         }
 
 

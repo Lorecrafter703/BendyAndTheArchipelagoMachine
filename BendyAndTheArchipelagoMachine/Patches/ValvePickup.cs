@@ -16,9 +16,9 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPostfix]
         [HarmonyPatch("InitOnComplete")]
-        public static void RegisterValve(CH2SewerController __instance, Interactable ___m_ValvePickup)
+        public static void RegisterValve(CH2SewerController __instance)
         {
-            valveReference = ___m_ValvePickup;
+            valveReference = __instance.m_ValvePickup;
         }
 
 
