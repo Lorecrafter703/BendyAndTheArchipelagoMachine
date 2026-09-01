@@ -30,11 +30,11 @@ namespace BendyAndTheArchipelagoMachine.Patches
             return true;
         }
 
-        [HarmonyPatch("InteractEnter")]
-        [HarmonyPostfix]
-        public static void Test(Interactable __instance)
-        {
-            BendyAndTheArchipelagoMachine.Logger.LogWarning($"InteractEnter: {__instance.name}");
-        }
+        //[HarmonyPatch("InteractEnter")]
+        //[HarmonyPostfix]
+        //public static void Test(Interactable __instance)
+        //{
+        //    BendyAndTheArchipelagoMachine.Logger.LogWarning($"InteractEnter: {__instance.name}");
+        //}
     }
 }

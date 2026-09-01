@@ -14,6 +14,8 @@ namespace BendyAndTheArchipelagoMachine.Utils
         public string LastUri;
         public string LastSlotName;
         public bool DeathlinkEnabled;
+        public float ArchipelagoConsoleWidth;
+        public float ArchipelagoConsoleHeight;
 
 
         public Config(string uri, string slot, bool deathlink)
@@ -21,6 +23,8 @@ namespace BendyAndTheArchipelagoMachine.Utils
             LastUri = uri;
             LastSlotName = slot;
             DeathlinkEnabled = deathlink;
+            ArchipelagoConsoleWidth = 0.4f;
+            ArchipelagoConsoleHeight = 0.6f;
         }
 
 

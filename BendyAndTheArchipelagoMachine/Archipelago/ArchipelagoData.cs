@@ -137,5 +137,17 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         {
             return cfg.DeathlinkEnabled;
         }
+
+
+        public float GetConsoleWindowWidth()
+        {
+            return cfg.ArchipelagoConsoleWidth;
+        }
+
+
+        public float GetConsoleWindowHeight()
+        {
+            return cfg.ArchipelagoConsoleHeight;
+        }
     }
 }

@@ -78,6 +78,7 @@ namespace BendyAndTheArchipelagoMachine
         void Update()
         {
             ArchipelagoClient.ProcessItems();
+            ArchipelagoConsole.ProcessMessages();
             if (GetInputArchipelagoConsole())
             {
                 ArchipelagoConsole.ToggleHidden();
@@ -99,6 +100,7 @@ namespace BendyAndTheArchipelagoMachine
         {
             // show the mod is currently loaded in the corner
             GUI.Label(new Rect(16, 16, 300, 20), Plugin.ModDisplayInfo);
+            GUI.Label(new Rect(16, 36, 300, 20), "Press ` or 'Menu' to Show/Hide Console");
             ArchipelagoConsole.OnGUI();
             CheckpointMenu.OnGUI();
 
@@ -107,13 +109,13 @@ namespace BendyAndTheArchipelagoMachine
             if (Client.authenticated)
             {
                 statusMessage = " Status: Connected";
-                GUI.Label(new Rect(16, 50, 300, 20), APDisplayInfo + statusMessage);
-                if (Client.NeedBaconSoup) GUI.Label(new Rect(16, 70, 300, 20), Client.BaconSoupCount());
+                GUI.Label(new Rect(16, 56, 300, 20), APDisplayInfo + statusMessage);
+                if (Client.NeedBaconSoup) GUI.Label(new Rect(16, 76, 300, 20), Client.BaconSoupCount());
                 bool deathLinkStatus = ArchipelagoClient.deathLinkHandler.GetDeathLinkStatus();
 
                 GUIStyle btnStyle = GUI.skin.button;
                 btnStyle.alignment = TextAnchor.MiddleCenter;
-                if (GUI.Button(new Rect(16, 95, deathLinkStatus ? 117 : 120, 25), $"Deathlink {(deathLinkStatus ? "enabled" : "disabled")}", btnStyle))
+                if (GUI.Button(new Rect(16, 101, deathLinkStatus ? 117 : 120, 25), $"Deathlink {(deathLinkStatus ? "enabled" : "disabled")}", btnStyle))
                 {
                     ArchipelagoClient.deathLinkHandler.ToggleDeathLink();
                 }
@@ -121,19 +123,19 @@ namespace BendyAndTheArchipelagoMachine
             else
             {
                 statusMessage = " Status: Disconnected";
-                GUI.Label(new Rect(16, 50, 300, 20), APDisplayInfo + statusMessage);
-                GUI.Label(new Rect(16, 70, 150, 20), "Host: ");
-                GUI.Label(new Rect(16, 90, 150, 20), "Player Name: ");
-                GUI.Label(new Rect(16, 110, 150, 20), "Password: ");
+                GUI.Label(new Rect(16, 56, 300, 20), APDisplayInfo + statusMessage);
+                GUI.Label(new Rect(16, 76, 150, 20), "Host: ");
+                GUI.Label(new Rect(16, 96, 150, 20), "Player Name: ");
+                GUI.Label(new Rect(16, 116, 150, 20), "Password: ");
 
-                Client.serverData.Uri = GUI.TextField(new Rect(150, 70, 150, 20),
+                Client.serverData.Uri = GUI.TextField(new Rect(150, 76, 150, 20),
                     Client.serverData.Uri);
-                Client.serverData.SlotName = GUI.TextField(new Rect(150, 90, 150, 20),
+                Client.serverData.SlotName = GUI.TextField(new Rect(150, 96, 150, 20),
                     Client.serverData.SlotName);
-                Client.serverData.Password = GUI.TextField(new Rect(150, 110, 150, 20),
+                Client.serverData.Password = GUI.TextField(new Rect(150, 116, 150, 20),
                     Client.serverData.Password);
 
-                if (GUI.Button(new Rect(16, 130, 100, 20), "Connect") &&
+                if (GUI.Button(new Rect(16, 136, 100, 20), "Connect") &&
                 !Client.serverData.SlotName.IsNullOrWhiteSpace())
                 {
                     ArchipelagoClient.Connect();

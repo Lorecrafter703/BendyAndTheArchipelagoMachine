@@ -204,7 +204,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
             data.CH5Data = new CH5DataVO();
 
             // CH1 Intro
-            //SetCollectedBaconSoups(0);
+            SetCollectedBaconSoups(0);
             if (checkpoint < 1) return data;
             // CH1 Basement
             data.CH1Data.Book = SetObjectiveSaveData(true, true);
