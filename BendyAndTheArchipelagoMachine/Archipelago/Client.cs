@@ -180,8 +180,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
 
                 // Add Item to List
                 serverData.AddItem(receivedItem.ItemId);
-                string message = $"Received {receivedItem.ItemName} from {receivedItem.Player} ({receivedItem.LocationName}).";
-                ArchipelagoConsole.LogMessage(message);
+                ArchipelagoConsole.LogMessage($"Received {receivedItem.ItemName} from {receivedItem.Player} ({receivedItem.LocationName}).");
             }
         }
 
@@ -196,7 +195,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
 
         private void OnSessionSocketClosed(string reason)
         {
-            BendyAndTheArchipelagoMachine.Logger.LogError($"Connection to Archipelago lost: {reason}");
+            BendyAndTheArchipelagoMachine.Logger.LogError("Connection to Archipelago lost: " + reason);
             Disconnect();
         }
 

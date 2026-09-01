@@ -16,9 +16,9 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPostfix]
         [HarmonyPatch("InitOnComplete")]
-        public static void GetAudioLogReference(CH5ThroneRoom __instance, AudioLog ___m_AudioLog)
+        public static void GetAudioLogReference(CH5ThroneRoom __instance)
         {
-            BendyAudioLog = ___m_AudioLog;
+            BendyAudioLog = __instance.m_AudioLog;
         }
 
 

@@ -15,9 +15,9 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPostfix]
         [HarmonyPatch("InitOnComplete")]
-        public static void AddBookRefs(CH4AccountingController __instance, List<CH4AccountingController.BookPuzzle> ___m_BookPuzzle)
+        public static void AddBookRefs(CH4AccountingController __instance)
         {
-            foreach (var bookPuzzle in ___m_BookPuzzle)
+            foreach (var bookPuzzle in __instance.m_BookPuzzle)
             {
                 Books.Add(bookPuzzle.Book);
             }

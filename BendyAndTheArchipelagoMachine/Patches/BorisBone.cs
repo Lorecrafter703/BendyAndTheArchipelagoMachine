@@ -15,9 +15,9 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPostfix]
         [HarmonyPatch("InitOnComplete")]
-        public static void RegisterBone(CH3BoneController __instance, Interactable ___m_Bone)
+        public static void RegisterBone(CH3BoneController __instance)
         {
-            boneReference = ___m_Bone;
+            boneReference = __instance.m_Bone;
         }
 
 

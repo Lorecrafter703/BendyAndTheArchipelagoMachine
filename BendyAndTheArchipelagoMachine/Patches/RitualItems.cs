@@ -19,19 +19,20 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPostfix]
         [HarmonyPatch("Initialize")]
-        public static void OnInit(Transform collectableLocation, CH1Pedestal __instance, CH1Pedestal.CollectableType ___m_CollectableType, Interactable ___m_Collectable)
+        public static void OnInit(Transform collectableLocation, CH1Pedestal __instance)
         {
-            CH1RitualItemsTypeToPedestal.Add(___m_CollectableType, __instance);
-            CH1RitualItemInteractablesToType.Add(___m_Collectable, ___m_CollectableType);
+            CH1RitualItemsTypeToPedestal.Add(__instance.m_CollectableType, __instance);
+            CH1RitualItemInteractablesToType.Add(__instance.m_Collectable, __instance.m_CollectableType);
+            BendyAndTheArchipelagoMachine.Logger.LogMessage($"Ritual item: {__instance.m_CollectableType}");
         }
 
 
         [HarmonyPostfix]
         [HarmonyPatch("OnDisposed")]
-        public static void ClearReferences(CH1Pedestal __instance, CH1Pedestal.CollectableType ___m_CollectableType, Interactable ___m_Collectable)
+        public static void ClearReferences(CH1Pedestal __instance)
         {
-            CH1RitualItemsTypeToPedestal.Remove(___m_CollectableType);
-            CH1RitualItemInteractablesToType.Remove(___m_Collectable);
+            CH1RitualItemsTypeToPedestal.Remove(__instance.m_CollectableType);
+            CH1RitualItemInteractablesToType.Remove(__instance.m_Collectable);
         }
 
 

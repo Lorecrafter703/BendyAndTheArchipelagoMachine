@@ -17,16 +17,16 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPostfix]
         [HarmonyPatch("InitOnComplete")]
-        public static void RegisterToys(CH3ToyMachine __instance, List<CH3ToyMachine.Spinners> ___m_SpinnersLeft, List<CH3ToyMachine.Spinners> ___m_SpinnersRight)
+        public static void RegisterToys(CH3ToyMachine __instance)
         {
-            foreach (CH3ToyMachine.Spinners spinner in ___m_SpinnersLeft)
+            foreach (CH3ToyMachine.Spinners spinner in __instance.m_SpinnersLeft)
             {
                 foreach (Interactable toy in spinner.Toys)
                 {
                     ToysRef.Add(toy);
                 }
             }
-            foreach (CH3ToyMachine.Spinners spinner in ___m_SpinnersRight)
+            foreach (CH3ToyMachine.Spinners spinner in __instance.m_SpinnersRight)
             {
                 foreach (Interactable toy in spinner.Toys)
                 {

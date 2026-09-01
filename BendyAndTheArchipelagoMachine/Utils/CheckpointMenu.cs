@@ -50,16 +50,33 @@ namespace BendyAndTheArchipelagoMachine.Utils
             xPos = Screen.width * 0.70f;
             yPos = Screen.height * 0.2f;
             checkpointsWidth = Screen.width * 0.15f;
-            checkpointsHeight = Screen.height * 0.03f * checkpointOptions.Length;
+            checkpointsHeight = Screen.height * 0.03f;
 
-            position = new Rect(xPos, yPos, checkpointsWidth, checkpointsHeight);
+            GetCheckpoint();
 
-            selectedCheckpoint = GUI.SelectionGrid(position, selectedCheckpoint, checkpointOptions, 1);
+            //BendyAndTheArchipelagoMachine.Logger.LogMessage($"Selected Checkpoint: {selectedCheckpoint}");
+            
             if (selectedChapter != 2) return;
             if (!Client.HasItem("CH3 Checkpoint Angel's Bidding") && !Client.HasItem("CH3 Checkpoint Butcher Gang")) return;
             if (GUI.Button(new Rect(xPos + checkpointsWidth, yPos + Screen.height * 0.06f, checkpointsWidth * 0.45f, Screen.height * 0.06f), demonPath ? "Demon Path" : "Angel Path"))
             {
                 demonPath = !demonPath;
+            }
+        }
+
+
+        public static void GetCheckpoint()
+        {
+            string[] checkpointOptions = GetAvailableCheckpoints();
+            int index = 0;
+            foreach (string checkpointName in checkpointOptions)
+            {
+                float offset = checkpointsHeight * index;
+                Rect btnPos = new Rect(xPos, yPos + offset, checkpointsWidth, checkpointsHeight);
+
+                if (GUI.Button(btnPos, checkpointName)) selectedCheckpoint = index;
+
+                index++;
             }
         }
 
