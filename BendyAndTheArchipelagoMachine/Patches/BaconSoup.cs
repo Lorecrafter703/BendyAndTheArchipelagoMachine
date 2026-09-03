@@ -35,10 +35,10 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(BaconSoupController), nameof(BaconSoupController.InitOnComplete))]
         private static void OnInit(BaconSoupController __instance)
         {
-            BendyAndTheArchipelagoMachine.Logger.LogMessage($"instance: {__instance} | name: {__instance.name}");
-            BendyAndTheArchipelagoMachine.Logger.LogMessage($"    type: {__instance.GetType()}");
-            BendyAndTheArchipelagoMachine.Logger.LogMessage($"    Total BaconSoups: {__instance.m_BaconSoups.Count}");
-            BendyAndTheArchipelagoMachine.Logger.LogMessage($"    Chapter: {__instance.m_Chapter}");
+            BendyAndTheArchipelagoMachine.Logger.LogDebug($"instance: {__instance} | name: {__instance.name}");
+            BendyAndTheArchipelagoMachine.Logger.LogDebug($"    type: {__instance.GetType()}");
+            BendyAndTheArchipelagoMachine.Logger.LogDebug($"    Total BaconSoups: {__instance.m_BaconSoups.Count}");
+            BendyAndTheArchipelagoMachine.Logger.LogDebug($"    Chapter: {__instance.m_Chapter}");
         }
     }
 }

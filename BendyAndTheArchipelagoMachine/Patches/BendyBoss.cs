@@ -11,26 +11,9 @@ namespace BendyAndTheArchipelagoMachine.Patches
     [HarmonyPatch(typeof(CH5ThroneRoom))]
     internal class BendyBoss
     {
-        public static Interactable BendyAudioLog;
-
-
-        [HarmonyPostfix]
-        [HarmonyPatch("InitOnComplete")]
-        public static void GetAudioLogReference(CH5ThroneRoom __instance)
-        {
-            BendyAudioLog = __instance.m_AudioLog;
-        }
-
-
-        [HarmonyPostfix]
-        [HarmonyPatch("OnDisposed")]
-        public static void ClearAudioLogRef()
-        {
-            BendyAudioLog = null;
-        }
-
-
-        public static bool CheckBaconSoupRequirement()
+        [HarmonyPrefix]
+        [HarmonyPatch("HandleAudioLogOnInteracted")]
+        public static bool HandleBendyBossStart(CH5ThroneRoom __instance)
         {
             int count = 0;
             foreach (long _ in Client.serverData.ReceivedItems)
@@ -42,7 +25,10 @@ namespace BendyAndTheArchipelagoMachine.Patches
             var TotalBaconSoupsOption = (long)Client.serverData.GetSlotDataOption("total_bacon_soups");
             long BaconSoupsRequired = TotalBaconSoupsOption * BaconSoupsRequiredOption / 100;
 
-            return count >= BaconSoupsRequired;
+            if (count >= BaconSoupsRequired) return true;
+            __instance.m_AudioLog.isInteracted = false;
+            __instance.m_AudioLog.m_HasInteractedOnce = false;
+            return false;
         }
     }
 }
