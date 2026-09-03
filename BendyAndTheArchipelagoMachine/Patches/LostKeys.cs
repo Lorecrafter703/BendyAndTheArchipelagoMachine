@@ -8,31 +8,44 @@ using System.Threading.Tasks;
 
 namespace BendyAndTheArchipelagoMachine.Patches
 {
-    [HarmonyPatch(typeof(CH2LostKeysController))]
+    [HarmonyPatch]
     internal class LostKeys
     {
-        public static Interactable keysReference;
+        public static BaseDoorController closetDoor;
 
         [HarmonyPostfix]
-        [HarmonyPatch("InitOnComplete")]
-        public static void RegisterKeys(CH2LostKeysController __instance)
+        [HarmonyPatch(typeof(CH2LostKeysController), "InitOnComplete")]
+        public static void RegisterDoor(CH2LostKeysController __instance)
         {
-            keysReference = __instance.m_Keys;
+            closetDoor = __instance.m_ClosetDoor;
+            BendyAndTheArchipelagoMachine.Logger.LogDebug($"Registered Door: {closetDoor}");
         }
 
 
         [HarmonyPostfix]
-        [HarmonyPatch("OnDisposed")]
-        public static void ClearKeysRef()
+        [HarmonyPatch(typeof(BaseDoorController), "OnDisposed")]
+        public static void ClearDoorRef(BaseDoorController __instance)
         {
-            keysReference = null;
+            if (__instance != closetDoor) return;
+            BendyAndTheArchipelagoMachine.Logger.LogDebug($"Clearing Door: {closetDoor}");
+            closetDoor = null;
+            BendyAndTheArchipelagoMachine.Logger.LogDebug($"Cleared Door: {closetDoor}");
         }
 
 
-        public static bool HandleKeysPickup()
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(CH2LostKeysController), "HandleKeysOnCollected")]
+        public static void HandleKeysPickup(CH2LostKeysController __instance)
         {
             Client.SendLocation("CH2 Keys");
-            return Client.HasItem("CH2 Keys");
+            if (!Client.HasItem("CH2 Keys")) __instance.m_ClosetDoor.Lock();
+        }
+
+
+        public static void UnlockDoor()
+        {
+            BendyAndTheArchipelagoMachine.Logger.LogDebug($"Calling Unlock Door: {closetDoor}");
+            closetDoor.Unlock();
         }
     }
 }

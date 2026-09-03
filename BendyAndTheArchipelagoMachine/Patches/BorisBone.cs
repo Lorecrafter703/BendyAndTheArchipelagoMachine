@@ -11,29 +11,22 @@ namespace BendyAndTheArchipelagoMachine.Patches
     [HarmonyPatch(typeof(CH3BoneController))]
     internal class BorisBone
     {
-        public static Interactable boneReference;
-
         [HarmonyPostfix]
-        [HarmonyPatch("InitOnComplete")]
-        public static void RegisterBone(CH3BoneController __instance)
+        [HarmonyPatch("HandleBoneOnInteracted")]
+        public static void HandleBonePickup()
         {
-            boneReference = __instance.m_Bone;
-        }
-
-
-        public static bool HandleBonePickup()
-        {
-            if ((long)Client.serverData.GetSlotDataOption("boris_bone") == 0) return true;
             Client.SendLocation("CH3 Boris Bone");
-            return Client.HasItem("CH3 Boris Bone");
         }
 
 
-        [HarmonyPostfix]
-        [HarmonyPatch("OnDisposed")]
-        public static void ClearBoneRef()
+        [HarmonyPrefix]
+        [HarmonyPatch("HandleBorisOnInteracted")]
+        public static bool HandleBorisInteract(CH3BoneController __instance)
         {
-            boneReference = null;
+            if (Client.HasItem("Poor Dog's Bone")) return true;
+            __instance.m_Boris.Interact.isInteracted = false;
+            __instance.m_Boris.Interact.m_HasInteractedOnce = false;
+            return false;
         }
     }
 }

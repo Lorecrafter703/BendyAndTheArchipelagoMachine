@@ -11,30 +11,16 @@ namespace BendyAndTheArchipelagoMachine.Patches
     [HarmonyPatch(typeof(CH4AccountingController))]
     internal class BookPuzzleDoor
     {
-        public static List<Interactable> Books = new List<Interactable>();
-
-        [HarmonyPostfix]
-        [HarmonyPatch("InitOnComplete")]
-        public static void AddBookRefs(CH4AccountingController __instance)
+        [HarmonyPrefix]
+        [HarmonyPatch("HandleInitialBookOnInteracted")]
+        public static bool HandleBookInteract(object sender)
         {
-            foreach (var bookPuzzle in __instance.m_BookPuzzle)
-            {
-                Books.Add(bookPuzzle.Book);
-            }
-        }
-
-
-        [HarmonyPostfix]
-        [HarmonyPatch("OnDisposed")]
-        public static void ClearBookRefs()
-        {
-            Books.Clear();
-        }
-
-
-        public static bool HandleBookOnInteract()
-        {
-            return Client.HasItem("CH4 Books");
+            if (Client.HasItem("CH4 Books")) return true;
+            var il2cppObject = (Il2CppSystem.Object)sender;
+            Interactable book = il2cppObject.Cast<Interactable>();
+            book.isInteracted = false;
+            book.m_HasInteractedOnce = false;
+            return false;
         }
     }
 }
