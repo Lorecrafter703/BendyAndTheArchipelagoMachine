@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BepInEx.Unity.IL2CPP;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             { "CH3 Checkpoint Angel's Bidding", 303 },
             { "CH3 Checkpoint Butcher Gang", 304 },
             { "CH3 Tommy Gun", 305 },
+            { "Poor Dog's Bone", 306 },
             { "Unlock CH4", 400 },
             { "CH4 Books", 401 },
             { "CH4 Bossfight Bertrum", 402 },
@@ -183,6 +185,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             { "CH3 Lever Challenge 1", 355 },
             { "CH3 Lever Challenge 2", 356 },
             { "CH3 Lever Challenge 3", 357 },
+            { "CH3 Boris Bone", 358 },
             { "CH3 Complete", 399 },
             { "CH4 Bacon Soup 0", 400 },
             { "CH4 Bacon Soup 1", 401 },

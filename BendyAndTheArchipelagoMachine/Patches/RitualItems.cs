@@ -13,54 +13,38 @@ namespace BendyAndTheArchipelagoMachine.Patches
     [HarmonyPatch(typeof(CH1Pedestal))]
     internal class RitualItems
     {
-        public static Dictionary<CH1Pedestal.CollectableType, CH1Pedestal> CH1RitualItemsTypeToPedestal = new Dictionary<CH1Pedestal.CollectableType, CH1Pedestal>();
-        public static Dictionary<Interactable, CH1Pedestal.CollectableType> CH1RitualItemInteractablesToType = new Dictionary<Interactable, CH1Pedestal.CollectableType>();
-
-
         [HarmonyPostfix]
-        [HarmonyPatch("Initialize")]
-        public static void OnInit(Transform collectableLocation, CH1Pedestal __instance, CH1Pedestal.CollectableType ___m_CollectableType, Interactable ___m_Collectable)
+        [HarmonyPatch("HandleCollectableOnCollected")]
+        public static void HandleRitualItemPickup(CH1Pedestal __instance)
         {
-            CH1RitualItemsTypeToPedestal.Add(___m_CollectableType, __instance);
-            CH1RitualItemInteractablesToType.Add(___m_Collectable, ___m_CollectableType);
+            BendyAndTheArchipelagoMachine.Logger.LogDebug($"Ritual item picked up: {__instance.m_CollectableType}");
+            Client.SendLocation(GetRitualItemName(__instance.m_CollectableType));
         }
 
 
-        [HarmonyPostfix]
-        [HarmonyPatch("OnDisposed")]
-        public static void ClearReferences(CH1Pedestal __instance, CH1Pedestal.CollectableType ___m_CollectableType, Interactable ___m_Collectable)
+        [HarmonyPrefix]
+        [HarmonyPatch("HandlePedestalOnInteracted")]
+        public static bool HandlePedestalInteract(CH1Pedestal __instance)
         {
-            CH1RitualItemsTypeToPedestal.Remove(___m_CollectableType);
-            CH1RitualItemInteractablesToType.Remove(___m_Collectable);
+            if (Client.HasItem(GetRitualItemName(__instance.m_CollectableType))) return true;
+            __instance.m_Pedestal.isInteracted = false;
+            __instance.m_Pedestal.m_HasInteractedOnce = false;
+            return false;
         }
 
 
-        public static bool HandleRitualItemPickup(Interactable item)
+        private static string GetRitualItemName(CH1Pedestal.CollectableType type)
         {
-            switch (CH1RitualItemInteractablesToType[item])
+            return type switch
             {
-                case CH1Pedestal.CollectableType.BOOK:
-                    Client.SendLocation("CH1 Book");
-                    return Client.HasItem("CH1 Book");
-                case CH1Pedestal.CollectableType.DOLL:
-                    Client.SendLocation("CH1 Doll");
-                    return Client.HasItem("CH1 Doll");
-                case CH1Pedestal.CollectableType.GEAR:
-                    Client.SendLocation("CH1 Gear");
-                    return Client.HasItem("CH1 Gear");
-                case CH1Pedestal.CollectableType.INKWELL:
-                    Client.SendLocation("CH1 Inkwell");
-                    return Client.HasItem("CH1 Inkwell");
-                case CH1Pedestal.CollectableType.RECORD:
-                    Client.SendLocation("CH1 Record");
-                    return Client.HasItem("CH1 Record");
-                case CH1Pedestal.CollectableType.WRENCH:
-                    Client.SendLocation("CH1 Wrench");
-                    return Client.HasItem("CH1 Wrench");
-                default:
-                    BendyAndTheArchipelagoMachine.Logger.LogError($"Unknown Item Type {CH1RitualItemInteractablesToType[item]}");
-                    return false;
-            }
+                CH1Pedestal.CollectableType.BOOK => "CH1 Book",
+                CH1Pedestal.CollectableType.DOLL => "CH1 Doll",
+                CH1Pedestal.CollectableType.GEAR => "CH1 Gear",
+                CH1Pedestal.CollectableType.INKWELL => "CH1 Inkwell",
+                CH1Pedestal.CollectableType.RECORD => "CH1 Record",
+                CH1Pedestal.CollectableType.WRENCH => "CH1 Wrench",
+                _ => throw new ArgumentOutOfRangeException(nameof(type), $"Unknown Item Type {type}"),
+            };
         }
     }
 }

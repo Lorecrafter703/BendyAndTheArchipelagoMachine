@@ -5,7 +5,8 @@ using DG.Tweening;
 using HarmonyLib;
 using I2.Loc;
 using System;
-using System.Collections.Generic;
+//using System.Collections.Generic;
+using Il2CppSystem.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
@@ -27,7 +28,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(TitleScreenController), "InitController")]
-        public static void GetTitleScreenController(TitleScreenController __instance, List<MenuItemButton> ___m_BeginMenuItemButtons)
+        public static void GetTitleScreenController(TitleScreenController __instance)
         {
             titleScreenController = __instance;
         }
@@ -70,10 +71,10 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(TitleScreenController), "ShowBeginMenu")]
-        public static void ModifyButtons(TitleScreenController __instance, ref List<MenuItemButton> ___m_BeginMenuItemButtons)
+        public static void ModifyButtons(TitleScreenController __instance)
         {
             List<MenuItemButton> removeQueue = new List<MenuItemButton>();
-            foreach (var button in ___m_BeginMenuItemButtons)
+            foreach (var button in __instance.m_BeginMenuItemButtons)
             {
                 if (button.name != "ChaptersBtn")
                 {
@@ -83,9 +84,9 @@ namespace BendyAndTheArchipelagoMachine.Patches
             }
             foreach (var button in removeQueue)
             {
-                if (___m_BeginMenuItemButtons.Contains(button))
+                if (__instance.m_BeginMenuItemButtons.Contains(button))
                 {
-                    ___m_BeginMenuItemButtons.Remove(button);
+                    __instance.m_BeginMenuItemButtons.Remove(button);
                 }
             }
 
@@ -94,9 +95,9 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(TitleScreenController), "CheckSelectedBeginMenu")]
-        public static void GoToChapterSelect(TitleScreenController __instance, ref int ___m_SelectedIndex)
+        public static void GoToChapterSelect(TitleScreenController __instance)
         {
-            ___m_SelectedIndex = 2;
+            __instance.m_SelectedIndex = 2;
         }
 
 
@@ -119,18 +120,18 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(TitleScreenController), "HandleChapterArrowOnLeft")]
-        public static void LeftArrowClick(TitleScreenController __instance, int ___m_SelectedChapter)
+        public static void LeftArrowClick(TitleScreenController __instance)
         {
-            CheckpointMenu.selectedChapter = ___m_SelectedChapter;
+            CheckpointMenu.selectedChapter = __instance.m_SelectedChapter;
             CheckpointMenu.selectedCheckpoint = 0;
         }
 
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(TitleScreenController), "HandleChapterArrowOnRight")]
-        public static void RightArrowClick(TitleScreenController __instance, int ___m_SelectedChapter)
+        public static void RightArrowClick(TitleScreenController __instance)
         {
-            CheckpointMenu.selectedChapter = ___m_SelectedChapter;
+            CheckpointMenu.selectedChapter = __instance.m_SelectedChapter;
             CheckpointMenu.selectedCheckpoint = 0;
         }
 
@@ -416,15 +417,15 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(BaconSoupController), "LoadBaconSoupCollected")]
-        public static void HandleBaconSoupSpawns(BaconSoupController __instance, ref List<CannedSoupEdible> ___m_BaconSoups, List<int> _BaconSoupIDsCollected)
+        public static void HandleBaconSoupSpawns(BaconSoupController __instance, List<int> _BaconSoupIDsCollected)
         {
-            for (int i = ___m_BaconSoups.Count - 1; i > -1; i--)
+            for (int i = __instance.m_BaconSoups.Count - 1; i > -1; i--)
             {
-                CannedSoupEdible cannedSoupEdible = ___m_BaconSoups[i];
+                CannedSoupEdible cannedSoupEdible = __instance.m_BaconSoups[i];
                 if (_BaconSoupIDsCollected.Contains(cannedSoupEdible.GetID()))
                 {
                     cannedSoupEdible.Dispose();
-                    ___m_BaconSoups.RemoveAt(i);
+                    __instance.m_BaconSoups.RemoveAt(i);
                 }
             }
         }
@@ -471,11 +472,11 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPrefix]
         [HarmonyPatch(typeof(TitleScreenController), "CheckSelectedChapter")]
-        public static bool HandleChapterSelect(TitleScreenController __instance, int ___m_SelectedChapter)
+        public static bool HandleChapterSelect(TitleScreenController __instance)
         {
             BendyAndTheArchipelagoMachine.Logger.LogDebug($"Selected button: {CheckpointMenu.selectedCheckpoint}");
-            int checkpoint = (___m_SelectedChapter * 5) + CheckpointMenu.selectedCheckpoint;
-            switch (___m_SelectedChapter)
+            int checkpoint = (__instance.m_SelectedChapter * 5) + CheckpointMenu.selectedCheckpoint;
+            switch (__instance.m_SelectedChapter)
             {
                 case 0:
                     if (!HasCheckpoint(checkpoint))
@@ -538,7 +539,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
                     LoadChapterFromTitle(titleScreenController, "Archives");
                     break;
                 default:
-                    BendyAndTheArchipelagoMachine.Logger.LogError($"Unrecognized chapter: {___m_SelectedChapter}");
+                    BendyAndTheArchipelagoMachine.Logger.LogError($"Unrecognized chapter: {__instance.m_SelectedChapter}");
                     break;
             }
             return false;

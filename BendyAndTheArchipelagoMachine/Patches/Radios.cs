@@ -13,9 +13,9 @@ namespace BendyAndTheArchipelagoMachine.Patches
     {
         [HarmonyPostfix]
         [HarmonyPatch("HandleRadioOnInteracted")]
-        public static void OnRadioInteract(RadioEasterEggController __instance, AchievementName ___m_AchievementAssetKey)
+        public static void OnRadioInteract(RadioEasterEggController __instance)
         {
-            switch (___m_AchievementAssetKey)
+            switch (__instance.m_AchievementAssetKey)
             {
                 case AchievementName.CROONER_TUNER:
                     Client.SendLocation("CH1 Radio");
@@ -33,7 +33,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
                     Client.SendLocation("CH5 Radio");
                     return;
                 default:
-                    BendyAndTheArchipelagoMachine.Logger.LogError($"Unrecognized Radio. AchievementName: {___m_AchievementAssetKey}");
+                    BendyAndTheArchipelagoMachine.Logger.LogError($"Unrecognized Radio. AchievementName: {__instance.m_AchievementAssetKey}");
                     return;
             }
         }

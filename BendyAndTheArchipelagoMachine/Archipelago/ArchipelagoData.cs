@@ -64,7 +64,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
 
         private void SaveData()
         {
-            BendyAndTheArchipelagoMachine.Logger.LogDebug($"Seed: {seed}");
+            BendyAndTheArchipelagoMachine.Logger.LogDebug("Seed: " + seed);
             string path = Path.Combine(Paths.PluginPath, "Lorecrafter703-Bendy_and_the_Archipelago_Machine", "BendyAndTheArchipelagoMachine", "savedata", $"{seed}.json");
             string data = this.ToString();
             File.WriteAllText(path, data);
@@ -136,6 +136,18 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         public bool GetConfigDeathLink()
         {
             return cfg.DeathlinkEnabled;
+        }
+
+
+        public float GetConsoleWindowWidth()
+        {
+            return cfg.ArchipelagoConsoleWidth;
+        }
+
+
+        public float GetConsoleWindowHeight()
+        {
+            return cfg.ArchipelagoConsoleHeight;
         }
     }
 }

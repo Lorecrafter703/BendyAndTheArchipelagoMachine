@@ -13,10 +13,10 @@ namespace BendyAndTheArchipelagoMachine.Patches
     {
         [HarmonyPostfix]
         [HarmonyPatch("HandleMeatlyAchievementTrigger")]
-        public static void HandleMeatlySighting(MeatlyController __instance, Chapters ___m_Chapter)
+        public static void HandleMeatlySighting(MeatlyController __instance)
         {
             if ((long)Client.serverData.GetSlotDataOption("the_meatly_sanity") == 0) return;
-            switch (___m_Chapter)
+            switch (__instance.m_Chapter)
             {
                 case Chapters.ONE:
                     Client.SendLocation("CH1 theMeatly");
