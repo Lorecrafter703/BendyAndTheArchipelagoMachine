@@ -12,41 +12,20 @@ namespace BendyAndTheArchipelagoMachine.Patches
     [HarmonyPatch(typeof(CH3ToyMachine))]
     internal class ToyBlockages
     {
-        public static List<Interactable> ToysRef = new List<Interactable>();
-
-
-        [HarmonyPostfix]
-        [HarmonyPatch("InitOnComplete")]
-        public static void RegisterToys(CH3ToyMachine __instance)
-        {
-            foreach (CH3ToyMachine.Spinners spinner in __instance.m_SpinnersLeft)
-            {
-                foreach (Interactable toy in spinner.Toys)
-                {
-                    ToysRef.Add(toy);
-                }
-            }
-            foreach (CH3ToyMachine.Spinners spinner in __instance.m_SpinnersRight)
-            {
-                foreach (Interactable toy in spinner.Toys)
-                {
-                    ToysRef.Add(toy);
-                }
-            }
-        }
-
-
-        [HarmonyPostfix]
-        [HarmonyPatch("OnDisposed")]
-        public static void ClearToysRef()
-        {
-            ToysRef.Clear();
-        }
-
-
-        public static bool HandleToyPickup()
+        [HarmonyPrefix]
+        [HarmonyPatch("HndleConveyerSwitchOnInteracted")]
+        public static bool HandlyToyMachineInteract()
         {
             return Client.HasItem("CH3 Toys");
+        }
+
+
+        [HarmonyPostfix]
+        [HarmonyPatch("HandleToyOnInteracted")]
+        public static void HandleToysPickup()
+        {
+            BendyAndTheArchipelagoMachine.Logger.LogMessage("Toys Picked Up!");
+            //if (this.m_IsLeftSolved && this.m_IsRightSolved) Client.SendLocation("CH3 Toys");
         }
     }
 }

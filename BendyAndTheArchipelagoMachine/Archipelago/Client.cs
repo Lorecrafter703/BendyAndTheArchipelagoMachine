@@ -5,6 +5,7 @@ using Archipelago.MultiClient.Net.Helpers;
 using Archipelago.MultiClient.Net.MessageLog.Messages;
 using Archipelago.MultiClient.Net.Models;
 using Archipelago.MultiClient.Net.Packets;
+using BendyAndTheArchipelagoMachine.Patches;
 using BendyAndTheArchipelagoMachine.Utils;
 using BepInEx;
 using Newtonsoft.Json;
@@ -181,6 +182,8 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
                 // Add Item to List
                 serverData.AddItem(receivedItem.ItemId);
                 ArchipelagoConsole.LogMessage($"Received {receivedItem.ItemName} from {receivedItem.Player} ({receivedItem.LocationName}).");
+
+                if (receivedItem.ItemId == IDTables.GetItemID("CH2 Keys")) LostKeys.UnlockDoor();
             }
         }
 
