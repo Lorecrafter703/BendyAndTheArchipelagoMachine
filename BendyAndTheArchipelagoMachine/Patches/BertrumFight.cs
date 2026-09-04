@@ -11,35 +11,14 @@ namespace BendyAndTheArchipelagoMachine.Patches
     [HarmonyPatch(typeof(CH4BertrumController))]
     internal class BertrumFight
     {
-        public static Interactable BertrumFightAudioLog;
-
-        [HarmonyPostfix]
-        [HarmonyPatch("HandleDeathOnComplete")]
-        public static void OnBertrumDeath()
+        [HarmonyPrefix]
+        [HarmonyPatch("HandleAudioLogOnInteracted")]
+        public static bool HandleAudioLogInteract(CH4BertrumController __instance)
         {
-            Client.SendLocation("CH4 Bertrum Boss");
-        }
-
-
-        [HarmonyPostfix]
-        [HarmonyPatch("Init")]
-        public static void GetAudioLogReference(CH4BertrumController __instance)
-        {
-            BertrumFightAudioLog = __instance.m_AudioLog;
-        }
-
-
-        [HarmonyPostfix]
-        [HarmonyPatch("OnDisposed")]
-        public static void ClearAudioLogRef()
-        {
-            BertrumFightAudioLog = null;
-        }
-
-
-        public static bool HandleAudioLogInteract()
-        {
-            return Client.HasItem("CH4 Bossfight Bertrum");
+            if (Client.HasItem("CH4 Bossfight Bertrum")) return true;
+            __instance.m_AudioLog.isInteracted = false;
+            __instance.m_AudioLog.m_HasInteractedOnce = false;
+            return false;
         }
     }
 }
