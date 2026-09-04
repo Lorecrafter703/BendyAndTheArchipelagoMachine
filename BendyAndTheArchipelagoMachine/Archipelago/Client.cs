@@ -183,7 +183,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
                 serverData.AddItem(receivedItem.ItemId);
                 ArchipelagoConsole.LogMessage($"Received {receivedItem.ItemName} from {receivedItem.Player} ({receivedItem.LocationName}).");
 
-                if (receivedItem.ItemId == IDTables.GetItemID("CH2 Keys")) LostKeys.UnlockDoor();
+                if (receivedItem.ItemId == IDTables.GetItemID("Wally's Keys")) LostKeys.UnlockDoor();
             }
         }
 

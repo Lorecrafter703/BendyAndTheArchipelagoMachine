@@ -37,8 +37,8 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH2LostKeysController), "HandleKeysOnCollected")]
         public static void HandleKeysPickup(CH2LostKeysController __instance)
         {
-            Client.SendLocation("CH2 Keys");
-            if (!Client.HasItem("CH2 Keys")) __instance.m_ClosetDoor.Lock();
+            Client.SendLocation("CH2 Lost Keys");
+            if (!Client.HasItem("Wally's Keys")) __instance.m_ClosetDoor.Lock();
         }
 
 

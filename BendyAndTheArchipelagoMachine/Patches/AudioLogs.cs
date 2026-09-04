@@ -17,7 +17,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch((typeof(CH1AudioLogsController)),"HandleAudioLogThomas01OnInteracted")]
         public static void DarkAndColdLog()
         {
-            Client.SendLocation("CH1 Audio Log Dark and Cold");
+            Client.SendLocation("CH1 Audio Log - Thomas Connor (Flooded Basement)");
         }
 
 
@@ -25,7 +25,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch((typeof(CH1AudioLogsController)), "HandleAudioLogWally01OnInteracted")]
         public static void ThisMachineLog()
         {
-            Client.SendLocation("CH1 Audio Log This Machine");
+            Client.SendLocation("CH1 Audio Log - Wally Franks (Hallway Table)");
         }
 
 
@@ -33,7 +33,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH2AudioLogsController), "HandleAudioLogThePrayerOnInteracted")]
         public static void CanIGetAnAmenLog()
         {
-            Client.SendLocation("CH2 Audio Log Can I Get an Amen?");
+            Client.SendLocation("CH2 Audio Log - Sammy Lawrence (Can I Get An Amen?)");
         }
 
 
@@ -41,7 +41,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH2AudioLogsController), "HandleAudioLogDistractionsOnInteracted")]
         public static void ThePumpSwitchLog()
         {
-            Client.SendLocation("CH2 Audio Log The Pump Switch");
+            Client.SendLocation("CH2 Audio Log - Sammy Lawrence (Music Department Lobby)");
         }
 
 
@@ -49,7 +49,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH2AudioLogsController), "HandleAudioLogTheNewVoiceAcressOnInteracted")]
         public static void NewActressLog()
         {
-            Client.SendLocation("CH2 Audio Log New Actress");
+            Client.SendLocation("CH2 Audio Log - Susie Campbell (Recording Studio)");
         }
 
 
@@ -57,7 +57,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH2AudioLogsController), "HandleAudioLogTheProjectionistOnInteracted")]
         public static void CrazySammyLog()
         {
-            Client.SendLocation("CH2 Audio Log Crazy Sammy");
+            Client.SendLocation("CH2 Audio Log - Norman Polk (Projector)");
         }
 
 
@@ -65,7 +65,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH2AudioLogsController), "HandleAudioLogLostKeyOnInteracted")]
         public static void StupidKeysLog()
         {
-            Client.SendLocation("CH2 Audio Log Stupid Keys");
+            Client.SendLocation("CH2 Audio Log - Wally Franks (Sammy’s Office)");
         }
 
 
@@ -73,7 +73,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH2AudioLogsController), "HandleAudioLogFavoriteSongOnInteracted")]
         public static void SanctuaryPuzzleLog()
         {
-            Client.SendLocation("CH2 Audio Log Sanctuary Puzzle");
+            Client.SendLocation("CH2 Audio Log - Sammy Lawrence (Wally’s Closet)");
         }
 
 
@@ -81,7 +81,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH2AudioLogsController), "HandleAudioLogJackFainOnInteracted")]
         public static void QuietAndSmellySewersLog()
         {
-            Client.SendLocation("CH2 Audio Log Quiet and Smelly Sewers");
+            Client.SendLocation("CH2 Audio Log - Jack Fain (Desk in Sewers)");
         }
 
 
@@ -89,7 +89,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH3AudioLogController), "HandleAudioLogGrantGeniusOnInteracted")]
         public static void TheGeniusUpstairsLog()
         {
-            Client.SendLocation("CH3 Audio Log The Genius Upstairs");
+            Client.SendLocation("CH3 Audio Log - Grant Cohen (Accounting Office on Level 9)");
         }
 
 
@@ -97,7 +97,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH3AudioLogController), "HandleAudioLogHenryOnInteracted")]
         public static void ManOfIdeasLog()
         {
-            Client.SendLocation("CH3 Audio Log Man of Ideas");
+            Client.SendLocation("CH3 Audio Log - Henry (Sunken Room)");
         }
 
 
@@ -105,7 +105,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH3AudioLogController), "HandleAudioLogJoeyDrewBeliefOnInteracted")]
         public static void TimeToBelieveLog()
         {
-            Client.SendLocation("CH3 Audio Log Time to Believe");
+            Client.SendLocation("CH3 Audio Log - Joey Drew (Path of the Demon)");
         }
 
 
@@ -113,7 +113,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH3AudioLogController), "HandleAudioLogNormanTroubleOnInteracted")]
         public static void LookingForTroubleLog()
         {
-            Client.SendLocation("CH3 Audio Log Looking for Trouble");
+            Client.SendLocation("CH3 Audio Log - Norman Polk (Projectionist’s Maze)");
         }
 
 
@@ -121,7 +121,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH3AudioLogController), "HandleAudioLogShawnCrookedOnInteracted")]
         public static void CrookedSmileLog()
         {
-            Client.SendLocation("CH3 Audio Log Crooked Smile");
+            Client.SendLocation("CH3 Audio Log - Shawn Flynn (Toy Machine Room)");
         }
 
 
@@ -129,7 +129,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH3AudioLogController), "HandleAudioLogSusieApartOnInteracted")]
         public static void EverythingIsComingApartLog()
         {
-            Client.SendLocation("CH3 Audio Log Everything is Coming Apart");
+            Client.SendLocation("CH3 Audio Log - Susie Campbell (Path of the Angel)");
         }
 
 
@@ -137,7 +137,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH3AudioLogController), "HandleAudioLogSusieLunchOnInteracted")]
         public static void LunchWithJoeyLog()
         {
-            Client.SendLocation("CH3 Audio Log Lunch with Joey");
+            Client.SendLocation("CH3 Audio Log - Susie Campbell (Flooded Morgue)");
         }
 
 
@@ -145,7 +145,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH3AudioLogController), "HandleAudioLogThomasOnInteracted")]
         public static void CuttingCornersLog()
         {
-            Client.SendLocation("CH3 Audio Log Cutting Corners");
+            Client.SendLocation("CH3 Audio Log - Thomas Connor (Level 9)");
         }
 
 
@@ -153,7 +153,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH3AudioLogController), "HandleAudioLogWallySmileOnInteracted")]
         public static void CrackASmileLog()
         {
-            Client.SendLocation("CH3 Audio Log Crack a Smile");
+            Client.SendLocation("CH3 Audio Log - Wally Franks (Level 11)");
         }
 
 
@@ -161,7 +161,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH3AudioLogController), "HandleAudioLogWallyThomasOnInteracted")]
         public static void InkPressureLog()
         {
-            Client.SendLocation("CH3 Audio Log Ink Pressure");
+            Client.SendLocation("CH3 Audio Log - Wally Franks and Thomas Connor (Level K Power Hallway)");
         }
 
 
@@ -169,7 +169,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH4AudioLogController), "HandleAudioLogBertTransformOnInteracted")]
         public static void ColossalWondersLog()
         {
-            Client.SendLocation("CH4 Audio Log Colossal Wonders");
+            Client.SendLocation("CH4 Audio Log - Bertrum Piedmont (Planning Room)");
         }
 
 
@@ -177,7 +177,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH4AudioLogController), "HandleAudioLogGrantTransformOnInteracted")]
         public static void IndiscernableLog()
         {
-            Client.SendLocation("CH4 Audio Log Indiscernible");
+            Client.SendLocation("CH4 Audio Log - ??? (Management Office)");
         }
 
 
@@ -185,7 +185,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH4AudioLogController), "HandleAudioLogJoeyTransformOnInteracted")]
         public static void TurnItOffLog()
         {
-            Client.SendLocation("CH4 Audio Log Turn it Off");
+            Client.SendLocation("CH4 Audio Log - Joey Drew (Maintenance Room)");
         }
 
 
@@ -193,7 +193,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH4AudioLogController), "HandleAudioLogLacieTransformOnInteracted")]
         public static void MechanicalDemonLog()
         {
-            Client.SendLocation("CH4 Audio Log Mechanical Demon");
+            Client.SendLocation("CH4 Audio Log - Lacie Benton (Research & Design)");
         }
 
 
@@ -201,7 +201,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH4AudioLogController), "HandleAudioLogSusieTransformOnInteracted")]
         public static void BehindClosedDoorsLog()
         {
-            Client.SendLocation("CH4 Audio Log Behind Closed Doors");
+            Client.SendLocation("CH4 Audio Log - Susie Campbell (Library)");
         }
 
 
@@ -209,7 +209,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH4AudioLogController), "HandleAudioLogWallyTransformOnInteracted")]
         public static void PlayingGamesLog()
         {
-            Client.SendLocation("CH4 Audio Log Playing Games");
+            Client.SendLocation("CH4 Audio Log - Wally Franks (Minigame Station)");
         }
 
 
@@ -217,7 +217,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH4BertrumController), "HandleAudioLogOnInteracted")]
         public static void BertrumsRevealLog()
         {
-            Client.SendLocation("CH4 Audio Log Bertrum's Reveal");
+            Client.SendLocation("CH4 Audio Log - Bertrum Piedmont (Attraction Storage)");
         }
 
 
@@ -225,7 +225,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH5AudioLogController), "HandleAudioLogThomasTransformOnInteracted")]
         public static void OfficeReportLog()
         {
-            Client.SendLocation("CH5 Audio Log Office Report");
+            Client.SendLocation("CH5 Audio Log - Thomas Connor (Film Vault)");
         }
 
 
@@ -233,7 +233,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH5AudioLogController), "HandleAudioLogWallyTransformOnInteracted")]
         public static void ChocolateCakeLog()
         {
-            Client.SendLocation("CH5 Audio Log Chocolate Cake");
+            Client.SendLocation("CH5 Audio Log - Wally Franks (Administration Maze)");
         }
 
 
@@ -241,7 +241,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH5AudioLogController), "HandleAudioLogJoeyMemoTransformOnInteracted")]
         public static void TheBigPictureLog()
         {
-            Client.SendLocation("CH5 Audio Log The Big Picture");
+            Client.SendLocation("CH5 Audio Log - Joey Drew (Administration Maze Entrance)");
         }
 
 
@@ -249,7 +249,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH5AudioLogController), "HandleAudioLogJoeyTommyTransformOnInteracted")]
         public static void ThousandsOfSoulsLog()
         {
-            Client.SendLocation("CH5 Audio Log Thousands of Souls");
+            Client.SendLocation("CH5 Audio Log - Joey Drew (Administration Maze Side Room)");
         }
 
 
@@ -257,7 +257,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH5AudioLogController), "HandleAudioLogJoeySusieTransformOnInteracted")]
         public static void BringingAliceToLifeLog()
         {
-            Client.SendLocation("CH5 Audio Log Bringing Alice to Life");
+            Client.SendLocation("CH5 Audio Log - Joey Drew (Joey’s Office)");
         }
 
 
@@ -265,7 +265,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(CH5ThroneRoom), "HandleAudioLogOnInteracted")]
         public static void BendysEndLog()
         {
-            Client.SendLocation("CH5 Audio Log Bendy's End");
+            Client.SendLocation("CH5 Audio Log - Joey Drew (Bendy’s Throne)");
         }
     }
 }

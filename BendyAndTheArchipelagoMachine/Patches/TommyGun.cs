@@ -17,9 +17,9 @@ namespace BendyAndTheArchipelagoMachine.Patches
         {
             if ((long)Client.serverData.GetSlotDataOption("include_tommy_gun") == 0) return;
             BendyAndTheArchipelagoMachine.Logger.LogMessage($"TommyGunCheck: {__instance.m_CanHaveTommyGun}");
-            if (__instance.m_CanHaveTommyGun) Client.SendLocation("CH3 Tommy Gun");
+            if (__instance.m_CanHaveTommyGun) Client.SendLocation("CH3 Tommy Gun Challenge");
 
-            if (Client.HasItem("CH3 Tommy Gun"))
+            if (Client.HasItem("Tommy Gun"))
             {
                 GameManager.Instance.GameData.CurrentSaveFile.CH3Data.HasTommyGun = true;
                 __instance.m_CanHaveTommyGun = true;
