@@ -15,7 +15,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch("HandleValvePickupOnInteracted")]
         public static void HandleValvePickup()
         {
-            Client.SendLocation("CH2 Valve");
+            Client.SendLocation("CH2 Sewer Valve");
         }
 
 
@@ -23,7 +23,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch("HandleValveOnInteracted")]
         public static bool HandleValveInteract(CH2SewerController __instance)
         {
-            if (Client.HasItem("CH2 Valve")) return true;
+            if (Client.HasItem("Sewer Valve")) return true;
             __instance.m_Valve.m_Valve.isInteracted = false;
             __instance.m_Valve.m_Valve.m_HasInteractedOnce = false;
             return false;

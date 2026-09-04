@@ -15,10 +15,18 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch("HandleAudioLogOnInteracted")]
         public static bool HandleAudioLogInteract(CH4BertrumController __instance)
         {
-            if (Client.HasItem("CH4 Bossfight Bertrum")) return true;
+            if (Client.HasItem("Bertrum Bossfight")) return true;
             __instance.m_AudioLog.isInteracted = false;
             __instance.m_AudioLog.m_HasInteractedOnce = false;
             return false;
+        }
+
+
+        [HarmonyPostfix]
+        [HarmonyPatch("HandleDeathOnComplete")]
+        public static void OnBertrumDeath()
+        {
+            Client.SendLocation("CH4 Boss - Bertrum");
         }
     }
 }

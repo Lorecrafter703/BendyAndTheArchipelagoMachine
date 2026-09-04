@@ -15,7 +15,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch("HandleInitialBookOnInteracted")]
         public static bool HandleBookInteract(object sender)
         {
-            if (Client.HasItem("CH4 Books")) return true;
+            if (Client.HasItem("Book Puzzle")) return true;
             var il2cppObject = (Il2CppSystem.Object)sender;
             Interactable book = il2cppObject.Cast<Interactable>();
             book.isInteracted = false;

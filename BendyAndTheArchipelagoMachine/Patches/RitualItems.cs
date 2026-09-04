@@ -18,7 +18,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         public static void HandleRitualItemPickup(CH1Pedestal __instance)
         {
             BendyAndTheArchipelagoMachine.Logger.LogDebug($"Ritual item picked up: {__instance.m_CollectableType}");
-            Client.SendLocation(GetRitualItemName(__instance.m_CollectableType));
+            Client.SendLocation(GetRitualLocationName(__instance.m_CollectableType));
         }
 
 
@@ -37,14 +37,29 @@ namespace BendyAndTheArchipelagoMachine.Patches
         {
             return type switch
             {
-                CH1Pedestal.CollectableType.BOOK => "CH1 Book",
-                CH1Pedestal.CollectableType.DOLL => "CH1 Doll",
-                CH1Pedestal.CollectableType.GEAR => "CH1 Gear",
-                CH1Pedestal.CollectableType.INKWELL => "CH1 Inkwell",
-                CH1Pedestal.CollectableType.RECORD => "CH1 Record",
-                CH1Pedestal.CollectableType.WRENCH => "CH1 Wrench",
+                CH1Pedestal.CollectableType.BOOK => "The Illusion of Living",
+                CH1Pedestal.CollectableType.DOLL => "Bendy Squeaky Toy",
+                CH1Pedestal.CollectableType.GEAR => "Spare Gear",
+                CH1Pedestal.CollectableType.INKWELL => "Animators' Inkwell",
+                CH1Pedestal.CollectableType.RECORD => "Vinyl Record",
+                CH1Pedestal.CollectableType.WRENCH => "'Pocket' Wrench",
                 _ => throw new ArgumentOutOfRangeException(nameof(type), $"Unknown Item Type {type}"),
             };
+        }
+
+
+        private static string GetRitualLocationName(CH1Pedestal.CollectableType type)
+        {
+            return type switch
+            {
+                CH1Pedestal.CollectableType.BOOK => "CH1 Ritual Item - Book",
+                CH1Pedestal.CollectableType.DOLL => "CH1 Ritual Item - Doll",
+                CH1Pedestal.CollectableType.GEAR => "CH1 Ritual Item - Gear",
+                CH1Pedestal.CollectableType.INKWELL => "CH1 Ritual Item - Inkwell",
+                CH1Pedestal.CollectableType.RECORD => "CH1 Ritual Item - Record",
+                CH1Pedestal.CollectableType.WRENCH => "CH1 Ritual Item - Wrench",
+                _ => throw new ArgumentOutOfRangeException(nameof(type), $"Unknown Item Type {type}"),
+            }
         }
     }
 }
