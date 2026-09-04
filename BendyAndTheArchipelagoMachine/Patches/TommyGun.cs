@@ -8,35 +8,28 @@ using System.Threading.Tasks;
 
 namespace BendyAndTheArchipelagoMachine.Patches
 {
-    [HarmonyPatch]
+    [HarmonyPatch(typeof(CH3ProjectionistTaskController))]
     internal class TommyGun
     {
-        private static bool LocationEligable = false;
-
         [HarmonyPostfix]
-        [HarmonyPatch(typeof(CH3ProjectionistTaskController), "CheckTommyGun")]
-        public static void GuaranteeTommyGun(ref bool __result)
+        [HarmonyPatch("Activate")]
+        public static void GuaranteeTommyGun(CH3ProjectionistTaskController __instance)
         {
             if ((long)Client.serverData.GetSlotDataOption("include_tommy_gun") == 0) return;
-            BendyAndTheArchipelagoMachine.Logger.LogDebug($"TommyGunCheck: {__result}");
-            LocationEligable = __result;
-            if (!__result && Client.HasItem("CH3 Tommy Gun"))
+            BendyAndTheArchipelagoMachine.Logger.LogMessage($"TommyGunCheck: {__instance.m_CanHaveTommyGun}");
+            if (__instance.m_CanHaveTommyGun) Client.SendLocation("CH3 Tommy Gun");
+
+            if (Client.HasItem("CH3 Tommy Gun"))
             {
                 GameManager.Instance.GameData.CurrentSaveFile.CH3Data.HasTommyGun = true;
-                __result = true;
+                __instance.m_CanHaveTommyGun = true;
+                __instance.m_Weapon.gameObject.SetActive(true);
+                __instance.m_WeaponFake.gameObject.SetActive(false);
                 return;
             }
-            __result = false;
-        }
-
-
-        [HarmonyPostfix]
-        [HarmonyPatch(typeof(CH3ProjectionistTaskController), "HandleGunOnInteracted")]
-        public static void HandleTommyGunInteract()
-        {
-            if (!LocationEligable) return;
-            if ((long)Client.serverData.GetSlotDataOption("include_tommy_gun") == 0) return;
-            Client.SendLocation("CH3 Tommy Gun");
+            __instance.m_CanHaveTommyGun = false;
+            __instance.m_Weapon.gameObject.SetActive(false);
+            __instance.m_WeaponFake.gameObject.SetActive(true);
         }
     }
 }
