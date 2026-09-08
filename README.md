@@ -38,7 +38,7 @@ If installing manually:
 
 ### Steam Deck/Steam OS/Arch Linux?
 
-Check out this [guide by bonestennyson](https://github.com/Lorecrafter703/BendyAndTheArchipelagoMachine/docs) for a
+Check out this [guide by bonestennyson](https://github.com/Lorecrafter703/BendyAndTheArchipelagoMachine/blob/master/docs/steam_deck_guide.md) for a
 better install guide.
 
 
