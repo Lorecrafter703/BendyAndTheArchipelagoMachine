@@ -141,17 +141,17 @@ namespace BendyAndTheArchipelagoMachine.Patches
             switch (checkpoint)
             {
                 case 0:
-                    return Client.HasItem("Unlock CH1");
+                    return Client.HasItem("CH1 - Moving Pictures");
                 case 1:
                     return Client.HasItem("CH1 Checkpoint - Bendy Chase");
                 case 5:
-                    return Client.HasItem("Unlock CH2");
+                    return Client.HasItem("CH2 - The Old Song");
                 case 6:
                     return Client.HasItem("CH2 Checkpoint - Lost Keys");
                 case 7:
                     return Client.HasItem("CH2 Checkpoint - Sammy's Office");
                 case 10:
-                    return Client.HasItem("Unlock CH3");
+                    return Client.HasItem("CH3 - Rise and Fall");
                 case 11:
                     return Client.HasItem("CH3 Checkpoint - Toy Machine");
                 case 12:
@@ -159,13 +159,13 @@ namespace BendyAndTheArchipelagoMachine.Patches
                 case 13:
                     return Client.HasItem("CH3 Checkpoint - Butcher Gang");
                 case 15:
-                    return Client.HasItem("Unlock CH4");
+                    return Client.HasItem("CH4 - Colossal Wonders");
                 case 16:
                     return Client.HasItem("CH4 Checkpoint - Warehouse");
                 case 17:
                     return Client.HasItem("CH4 Checkpoint - Brute Boris");
                 case 20:
-                    return Client.HasItem("Unlock CH5");
+                    return Client.HasItem("CH5 - The Last Reel");
                 case 21:
                     return Client.HasItem("CH5 Checkpoint - Administration");
                 case 22:
