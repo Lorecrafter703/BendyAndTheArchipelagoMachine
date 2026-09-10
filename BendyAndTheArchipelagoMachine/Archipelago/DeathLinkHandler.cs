@@ -74,6 +74,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
                 var cause = deathLink.Cause.IsNullOrWhiteSpace() ? GetDeathLinkCause(deathLink) : deathLink.Cause;
 
                 DeathLinkController.KillPlayer(DeathLinkController.playerController);
+                //DeathLinkController.playerController.Die();
                 BendyAndTheArchipelagoMachine.Logger.LogMessage(cause);
             }
             catch (Exception e)

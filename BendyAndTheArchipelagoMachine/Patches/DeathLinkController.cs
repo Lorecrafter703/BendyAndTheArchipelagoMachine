@@ -15,6 +15,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
     {
         public static PlayerController playerController;
         public static bool isDead = false;
+        public static bool deathLinkDeath = false;
 
 
         [HarmonyPostfix]
@@ -34,11 +35,23 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
 
         [HarmonyPostfix]
-        [HarmonyPatch(typeof(PlayerController), "Die")]
-        public static void onDeath()
+        [HarmonyPatch(typeof(DeathController), "HandlePlayerOnDeath")]
+        public static void OnPlayerDeath(object sender, EventArgs e)
         {
-            BendyAndTheArchipelagoMachine.Logger.LogDebug("Died");
-            BendyAndTheArchipelagoMachine.ArchipelagoClient.deathLinkHandler.SendDeathLink();
+            if (!deathLinkDeath)
+            {
+                BendyAndTheArchipelagoMachine.Logger.LogWarning($"Sender: {sender} ({sender}) | EventArgs: {e} ({e.GetType()})");
+                BendyAndTheArchipelagoMachine.ArchipelagoClient.deathLinkHandler.SendDeathLink();
+            }
+            deathLinkDeath = false;
+        }
+
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(DeathLinkController), "KillPlayer")]
+        public static void DefineSource()
+        {
+            deathLinkDeath = true;
         }
 
 
