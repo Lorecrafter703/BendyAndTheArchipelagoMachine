@@ -34,7 +34,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         public static bool HandleBookOnInteract()
         {
-            return Client.HasItem("CH4 Books");
+            return Client.HasItem("Book Puzzle");
         }
     }
 }

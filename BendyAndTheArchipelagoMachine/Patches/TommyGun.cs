@@ -20,7 +20,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
             if ((long)Client.serverData.GetSlotDataOption("include_tommy_gun") == 0) return;
             BendyAndTheArchipelagoMachine.Logger.LogDebug($"TommyGunCheck: {__result}");
             LocationEligable = __result;
-            if (!__result && Client.HasItem("CH3 Tommy Gun"))
+            if (!__result && Client.HasItem("Tommy Gun"))
             {
                 GameManager.Instance.GameData.CurrentSaveFile.CH3Data.HasTommyGun = true;
                 __result = true;
@@ -36,7 +36,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         {
             if (!LocationEligable) return;
             if ((long)Client.serverData.GetSlotDataOption("include_tommy_gun") == 0) return;
-            Client.SendLocation("CH3 Tommy Gun");
+            Client.SendLocation("CH3 Tommy Gun Challenge");
         }
     }
 }

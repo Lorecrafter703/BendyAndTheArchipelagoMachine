@@ -40,23 +40,23 @@ namespace BendyAndTheArchipelagoMachine.Patches
             switch (CH1RitualItemInteractablesToType[item])
             {
                 case CH1Pedestal.CollectableType.BOOK:
-                    Client.SendLocation("CH1 Book");
-                    return Client.HasItem("CH1 Book");
+                    Client.SendLocation("CH1 Ritual Item - Book");
+                    return Client.HasItem("The Illusion of Living");
                 case CH1Pedestal.CollectableType.DOLL:
-                    Client.SendLocation("CH1 Doll");
-                    return Client.HasItem("CH1 Doll");
+                    Client.SendLocation("CH1 Ritual Item - Doll");
+                    return Client.HasItem("Bendy Squeaky Toy");
                 case CH1Pedestal.CollectableType.GEAR:
-                    Client.SendLocation("CH1 Gear");
-                    return Client.HasItem("CH1 Gear");
+                    Client.SendLocation("CH1 Ritual Item - Gear");
+                    return Client.HasItem("Spare Gear");
                 case CH1Pedestal.CollectableType.INKWELL:
-                    Client.SendLocation("CH1 Inkwell");
-                    return Client.HasItem("CH1 Inkwell");
+                    Client.SendLocation("CH1 Ritual Item - Inkwell");
+                    return Client.HasItem("Animators' Inkwell");
                 case CH1Pedestal.CollectableType.RECORD:
-                    Client.SendLocation("CH1 Record");
-                    return Client.HasItem("CH1 Record");
+                    Client.SendLocation("CH1 Ritual Item - Record");
+                    return Client.HasItem("Vinyl Record");
                 case CH1Pedestal.CollectableType.WRENCH:
-                    Client.SendLocation("CH1 Wrench");
-                    return Client.HasItem("CH1 Wrench");
+                    Client.SendLocation("CH1 Ritual Item - Wrench");
+                    return Client.HasItem("'Pocket' Wrench");
                 default:
                     BendyAndTheArchipelagoMachine.Logger.LogError($"Unknown Item Type {CH1RitualItemInteractablesToType[item]}");
                     return false;

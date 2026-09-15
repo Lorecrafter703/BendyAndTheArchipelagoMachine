@@ -15,7 +15,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch("TriggerDeath")]
         public static void OnSammyDeath()
         {
-            Client.SendLocation("CH5 Sammy Lawrence Boss");
+            Client.SendLocation("CH5 Boss - Sammy Lawrence");
         }
     }
 }

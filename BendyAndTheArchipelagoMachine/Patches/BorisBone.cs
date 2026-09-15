@@ -24,8 +24,8 @@ namespace BendyAndTheArchipelagoMachine.Patches
         public static bool HandleBonePickup()
         {
             if ((long)Client.serverData.GetSlotDataOption("boris_bone") == 0) return true;
-            Client.SendLocation("CH3 Boris Bone");
-            return Client.HasItem("CH3 Boris Bone");
+            Client.SendLocation("CH3 Boris' Bone");
+            return Client.HasItem("Poor Dog's Bone");
         }
 
 

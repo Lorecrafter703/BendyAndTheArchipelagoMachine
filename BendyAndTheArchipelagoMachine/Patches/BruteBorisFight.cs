@@ -15,7 +15,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch("Death")]
         public static void OnBruteBorisDeath()
         {
-            Client.SendLocation("CH4 Brute Boris Boss");
+            Client.SendLocation("CH4 Boss - Brute Boris");
         }
     }
 }

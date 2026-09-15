@@ -46,7 +46,16 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         public static bool HandleToyPickup()
         {
-            return Client.HasItem("CH3 Toys");
+            return Client.HasItem("Toy Machine");
+        }
+
+
+        [HarmonyPostfix]
+        [HarmonyPatch("HandleToyOnInteracted")]
+        public static void HandleToysPickup(CH3ToyMachine __instance, bool ___m_IsLeftSolved, bool ___m_IsRightSolved)
+        {
+            BendyAndTheArchipelagoMachine.Logger.LogDebug("Toys Picked Up!");
+            if (___m_IsLeftSolved && ___m_IsRightSolved) Client.SendLocation("CH3 Toy Blockage");
         }
     }
 }

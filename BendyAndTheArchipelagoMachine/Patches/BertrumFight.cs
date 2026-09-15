@@ -17,7 +17,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch("HandleDeathOnComplete")]
         public static void OnBertrumDeath()
         {
-            Client.SendLocation("CH4 Bertrum Boss");
+            Client.SendLocation("CH4 Boss - Bertrum");
         }
 
 
@@ -39,7 +39,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         public static bool HandleAudioLogInteract()
         {
-            return Client.HasItem("CH4 Bossfight Bertrum");
+            return Client.HasItem("Bertrum Bossfight");
         }
     }
 }

@@ -32,8 +32,8 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         public static bool HandleValvePickup()
         {
-            Client.SendLocation("CH2 Valve");
-            return Client.HasItem("CH2 Valve");
+            Client.SendLocation("CH2 Sewer Valve");
+            return Client.HasItem("Sewer Valve");
         }
     }
 }

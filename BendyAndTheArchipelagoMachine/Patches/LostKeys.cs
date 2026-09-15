@@ -31,8 +31,8 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         public static bool HandleKeysPickup()
         {
-            Client.SendLocation("CH2 Keys");
-            return Client.HasItem("CH2 Keys");
+            Client.SendLocation("CH2 Lost Keys");
+            return Client.HasItem("Wally's Keys");
         }
     }
 }
