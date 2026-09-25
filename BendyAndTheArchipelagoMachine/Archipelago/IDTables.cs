@@ -46,6 +46,8 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             { "CH5 Checkpoint - The Ink Machine", 502 },
         };
 
+        // Credit goes to @schwendyj on discord for naming the Bacon Soup checks and the Audio Log checks,
+        //   as well as providing the general check name format.
         private static readonly Dictionary<string, long> locationNametoID = new Dictionary<string, long>
         {
 
@@ -186,6 +188,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             { "CH3 Lever Challenge 2", 356 },
             { "CH3 Lever Challenge 3", 357 },
             { "CH3 Boris' Bone", 358 },
+            { "CH3 Toy Blockage", 359 },
             { "CH3 Complete", 399 },
             { "CH4 Bacon Soup 0", 400 },
             { "CH4 Bacon Soup 1", 401 },

@@ -1,10 +1,5 @@
 # BendyAndTheArchipelagoMachine Setup Guide
 
-## NOTICE
-
-In the recent update to the game, Beany and the Ink Machine had it's unity version updated, and as such, BepInEx 5 no longer is compatible. To use this
-mod, you will need to downpatch your game to a previous version.
-
 ## Required Software
 
 - [Bendy and the Ink Machine](https://store.steampowered.com/app/622650/Bendy_and_the_Ink_Machine/)
@@ -14,7 +9,7 @@ mod, you will need to downpatch your game to a previous version.
 
 If installing manually:
 - [Bendy and the Archipelago Machine](https://github.com/Lorecrafter703/BendyAndTheArchipelagoMachine/releases) mod
-- [BepInEx 5](https://github.com/BepInEx/BepInEx/releases)
+- The most recent bleeding edge build of [BepInEx 6](https://builds.bepinex.dev/projects/bepinex_be)
 
 ## Installation
 
@@ -35,6 +30,11 @@ If installing manually:
 	- Enabled in [Logging.Console]
 5. Extract the mod folder into the plugins folder of the BepInEx install
 6. Opening the game should now also bring up a BepInEx console
+
+### Steam Deck/Steam OS/Arch Linux?
+
+Check out this [guide by bonestennyson](https://github.com/Lorecrafter703/BendyAndTheArchipelagoMachine/blob/master/docs/steam_deck_guide.md) for a
+better install guide.
 
 
 ## Joining a new MultiWorld
@@ -92,17 +92,17 @@ configurable number of bacon soup cans to be received. The goal can be changed t
 with later chapters being discluded from randomization unless specifically included. Chapters preceding the
 goal chapter can also be set to be required for completion.
 
-## I received an item, but I can't place it where it needs to go?
+## I received an item, but I can't use it?
 
 Since Bendy and the Ink Machine doesn't have a real inventory, you still have to interact with an item to "pick it up". If
 you don't have an item yet, the interaction will only try to send out the location check, and you will need to interact
 with the object again after receiving the item to be able to use it fully.
 
-## I can't unclog the toy machine in chapter 3 or interact with the books in chapter 4?
+## I can't interact with something?
 
-Both the toys that clog the chapter 3 toy machine and the books needed to open the door in chapter 4 require an item to
-interact with them (CH3 Toys and CH4 Books respectively). Generally, if there is something that won't let you interact
-with it, it is probably an item you are missing, which can be found in the list above.
+Several spots in the game require you to interact with something that has now been locked behind an item in the mod.
+Generally, if there is something that won't let you interact with it, it is probably an item you are missing, which can
+be found in the list above.
 
 ## How does Deathlink work?
 

@@ -22,10 +22,10 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPostfix]
         [HarmonyPatch("HandleToyOnInteracted")]
-        public static void HandleToysPickup()
+        public static void HandleToysPickup(CH3ToyMachine __instance)
         {
             BendyAndTheArchipelagoMachine.Logger.LogMessage("Toys Picked Up!");
-            //if (this.m_IsLeftSolved && this.m_IsRightSolved) Client.SendLocation("CH3 Toy Blockage");
+            if (__instance.m_IsLeftSolved && __instance.m_IsRightSolved) Client.SendLocation("CH3 Toy Blockage");
         }
     }
 }
