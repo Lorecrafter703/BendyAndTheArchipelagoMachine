@@ -15,6 +15,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch("HandleBoneOnInteracted")]
         public static void HandleBonePickup()
         {
+            BendyAndTheArchipelagoMachine.Logger.LogDebug("Boris Bone");
             Client.SendLocation("CH3 Boris's Bone");
         }
 

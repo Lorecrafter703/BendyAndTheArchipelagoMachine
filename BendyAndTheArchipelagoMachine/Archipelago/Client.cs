@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -161,9 +162,11 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
 
         private void OnItemReceived(ReceivedItemsHelper helper)
         {
+            BendyAndTheArchipelagoMachine.Logger.LogDebug("ItemRecieved");
             var receivedItem = helper.DequeueItem();
             Helper = helper;
             ItemQueue.Enqueue(receivedItem);
+            BendyAndTheArchipelagoMachine.Logger.LogDebug($"ItemQueue Size: {ItemQueue.Count}");
         }
 
 
@@ -174,13 +177,20 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             if (serverData.seed.IsNullOrWhiteSpace()) return;
             if (ItemQueue.Count > 0)
             {
+                BendyAndTheArchipelagoMachine.Logger.LogDebug($"Dequeueing: {ItemQueue.Count}");
                 var receivedItem = ItemQueue.Dequeue();
+                BendyAndTheArchipelagoMachine.Logger.LogDebug($"Dequeued: {ItemQueue.Count}");
+
+                // If Item isn't in the list, add it
+                BendyAndTheArchipelagoMachine.Logger.LogDebug($"Helper.Index: {Helper.Index} | serverData.ItemCount: {serverData.ItemCount()}");
+                serverData.PrintReceivedItems();
+                if (Helper.Index >= serverData.ItemCount()) serverData.AddItem(receivedItem.ItemId);
+                serverData.PrintReceivedItems();
 
                 // If Item has been received before return
-                if (Helper.Index <= serverData.Index) return;
+                if (Helper.Index < serverData.Index) return;
 
-                // Add Item to List
-                serverData.AddItem(receivedItem.ItemId);
+                // Mention the added item
                 ArchipelagoConsole.LogMessage($"Received {receivedItem.ItemName} from {receivedItem.Player} ({receivedItem.LocationName}).");
 
                 if (receivedItem.ItemId == IDTables.GetItemID("Wally's Keys")) LostKeys.UnlockDoor();
@@ -218,17 +228,13 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         public static bool HasItem(string itemName)
         {
             long itemID = IDTables.GetItemID(itemName);
-            return serverData.ReceivedItems.Contains(itemID);
+            return serverData.HasItem(itemID);
         }
 
 
         public static string BaconSoupCount()
         {
-            int count = 0;
-            foreach (long _ in serverData.ReceivedItems)
-            {
-                if (_ == IDTables.GetItemID("Bacon Soup")) count++;
-            }
+            int count = serverData.RecievedSoupCount();
 
             var BaconSoupsRequiredOption = (long)Client.serverData.GetSlotDataOption("bacon_soups_required");
             var TotalBaconSoupsOption = (long)Client.serverData.GetSlotDataOption("total_bacon_soups");

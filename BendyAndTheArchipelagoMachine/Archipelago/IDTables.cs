@@ -187,7 +187,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             { "CH3 Lever Challenge 1", 355 },
             { "CH3 Lever Challenge 2", 356 },
             { "CH3 Lever Challenge 3", 357 },
-            { "CH3 Boris's Bone", 358 },
+            { "CH3 Boris' Bone", 358 },
             { "CH3 Toy Blockage", 359 },
             { "CH3 Complete", 399 },
             { "CH4 Bacon Soup 0", 400 },
