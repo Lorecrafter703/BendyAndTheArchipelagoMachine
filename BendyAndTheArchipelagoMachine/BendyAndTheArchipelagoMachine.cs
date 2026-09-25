@@ -36,7 +36,7 @@ namespace BendyAndTheArchipelagoMachine
     {
         public const string pluginGuid = "lorecrafter.bendyandtheinkmachine.archipelago";
         public const string pluginName = "Bendy and the Archipelago Machine";
-        public const string pluginVersion = "2.0.0";
+        public const string pluginVersion = "2.0.1";
 
         public const string ModDisplayInfo = pluginName + " v" + pluginVersion;
         public static ManualLogSource Logger;
