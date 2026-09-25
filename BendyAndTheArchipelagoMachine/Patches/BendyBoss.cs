@@ -15,11 +15,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch("HandleAudioLogOnInteracted")]
         public static bool HandleBendyBossStart(CH5ThroneRoom __instance)
         {
-            int count = 0;
-            foreach (long _ in Client.serverData.ReceivedItems)
-            {
-                if (_ == IDTables.GetItemID("Bacon Soup")) count++;
-            }
+            int count = Client.serverData.RecievedSoupCount();
 
             var BaconSoupsRequiredOption = (long)Client.serverData.GetSlotDataOption("bacon_soups_required");
             var TotalBaconSoupsOption = (long)Client.serverData.GetSlotDataOption("total_bacon_soups");

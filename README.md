@@ -65,7 +65,7 @@ The following can be obtained as items:
 	- Broken Banjo String
  - (optionally) Checkpoints
  - (optionally) The Tommy Gun
- - (optionally) Boris's Bone
+ - (optionally) Boris' Bone
 
 By default, the following can be sent as location checks:
  - Ritual items from chapter 1 (Book, Doll, Gear, Inkwell, Record, and Wrench)
@@ -83,7 +83,7 @@ By default, the following can be sent as location checks:
  - (optionally) Checkpoints
  - (optionally) The Tommy Gun
  - (optionally) Completing the CH3 Lever Challenge (1 check per wave)
- - (optionally) Boris's Bone
+ - (optionally) Boris' Bone
 
 ## What is the goal?
 
@@ -106,7 +106,7 @@ with it, it is probably an item you are missing, which can be found in the list 
 
 ## How does Deathlink work?
 
-Deathlink works mostly how you would expect, with a few caveats. If you are in chapter 1, death links you recieve will
+Deathlink works mostly how you would expect, with a few caveats. If you are in chapter 1, death links you receive will
 still "trigger", but nothing will actually happen. Also, deathlinks cannot happen while you are in the death tunnel
 (though they can still be queued), as well as any time the game considers you to be in a "hidden" state. This includes
 the Miracle Stations and riding the cart at the end of chapter 4 for example.

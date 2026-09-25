@@ -15,7 +15,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         public int Index;
 
         public List<long> CheckedLocations { get; private set; }
-        public List<long> ReceivedItems { get; private set; }
+        private List<long> ReceivedItems;
 
         private int SaveSlot = -1;
         public string seed;
@@ -109,9 +109,11 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
 
         public void AddItem(long itemID)
         {
+            BendyAndTheArchipelagoMachine.Logger.LogDebug($"Adding itemID {itemID}");
             ReceivedItems.Add(itemID);
             Index++;
             SaveData();
+            PrintReceivedItems();
         }
 
         public void CheckLocation(long itemID)
@@ -148,6 +150,41 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
         public float GetConsoleWindowHeight()
         {
             return cfg.ArchipelagoConsoleHeight;
+        }
+
+
+        public bool HasItem(long itemID)
+        {
+            return ReceivedItems.Contains(itemID);
+        }
+
+
+        public int ItemCount()
+        {
+            return ReceivedItems.Count;
+        }
+
+
+        public void PrintReceivedItems()
+        {
+            string message = "Recieved Items:\n";
+            foreach (long id in ReceivedItems)
+            {
+                message += "\t{id}\n";
+            }
+            BendyAndTheArchipelagoMachine.Logger.LogDebug(message);
+        }
+
+
+        public int RecievedSoupCount()
+        {
+            int count = 0;
+            foreach (long _ in ReceivedItems)
+            {
+                if (_ == IDTables.GetItemID("Bacon Soup")) count++;
+            }
+
+            return count;
         }
     }
 }

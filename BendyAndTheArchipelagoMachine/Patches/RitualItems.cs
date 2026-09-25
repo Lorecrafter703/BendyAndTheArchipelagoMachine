@@ -59,7 +59,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
                 CH1Pedestal.CollectableType.RECORD => "CH1 Ritual Item - Record",
                 CH1Pedestal.CollectableType.WRENCH => "CH1 Ritual Item - Wrench",
                 _ => throw new ArgumentOutOfRangeException(nameof(type), $"Unknown Item Type {type}"),
-            }
+            };
         }
     }
 }

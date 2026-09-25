@@ -40,7 +40,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         {
             if (!deathLinkDeath)
             {
-                BendyAndTheArchipelagoMachine.Logger.LogWarning($"Sender: {sender} ({sender}) | EventArgs: {e} ({e.GetType()})");
+                BendyAndTheArchipelagoMachine.Logger.LogDebug($"Sender: {sender} ({sender}) | EventArgs: {e} ({e.GetType()})");
                 BendyAndTheArchipelagoMachine.ArchipelagoClient.deathLinkHandler.SendDeathLink();
             }
             deathLinkDeath = false;
