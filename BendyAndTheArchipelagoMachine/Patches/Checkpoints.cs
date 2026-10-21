@@ -88,11 +88,16 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
 
         [HarmonyPostfix]
-        [HarmonyPatch(typeof(CH3CutoutTaskController), "BreakAllCutouts")]
-        public static void ButcherGangCheckpoint()
+        [HarmonyPatch(typeof(CH3CutoutTaskController), "CheckStatus")]
+        public static void CheckStatusPatch(CH3CutoutTaskController __instance)
         {
-            string checkpoint = "CH3 Checkpoint - Butcher Gang";
-            AddCheckpointItem(checkpoint);
+            BendyAndTheArchipelagoMachine.Logger.LogDebug($"{__instance.m_CutoutCount}/{__instance.m_CutoutMax}");
+            if (__instance.m_CutoutCount >= __instance.m_CutoutMax)
+            {
+                string checkpoint = "CH3 Checkpoint - Butcher Gang";
+                AddCheckpointItem(checkpoint);
+                BendyAndTheArchipelagoMachine.Logger.LogDebug("Checkpoint - Check Status");
+            }
         }
 
 

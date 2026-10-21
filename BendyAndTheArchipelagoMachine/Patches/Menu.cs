@@ -480,7 +480,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
             {
                 case 0:
                     BendyAndTheArchipelagoMachine.Logger.LogDebug($"HasItem(Unlock CH1): {Client.HasItem("CH1 - Moving Pictures")}");
-                    Client.serverData.PrintReceivedItems();
+                    //Client.serverData.PrintReceivedItems();
                     if (!HasCheckpoint(checkpoint))
                     {
                         ArchipelagoConsole.LogMessage($"Locked");

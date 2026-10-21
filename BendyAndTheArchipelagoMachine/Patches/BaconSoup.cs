@@ -16,7 +16,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch(typeof(BaconSoupController), nameof(BaconSoupController.HandleCannedSoupOnInteracted))]
         private static void PickupBaconSoup(object sender, EventArgs e)
         {
-            BendyAndTheArchipelagoMachine.Logger.LogMessage($"sender type: {sender.GetType()}");
+            BendyAndTheArchipelagoMachine.Logger.LogDebug($"sender type: {sender.GetType()}");
             try
             {
                 var il2Obj = (Il2CppSystem.Object)sender;
@@ -31,14 +31,14 @@ namespace BendyAndTheArchipelagoMachine.Patches
             }
         }
 
-        [HarmonyPostfix]
-        [HarmonyPatch(typeof(BaconSoupController), nameof(BaconSoupController.InitOnComplete))]
-        private static void OnInit(BaconSoupController __instance)
-        {
-            BendyAndTheArchipelagoMachine.Logger.LogDebug($"instance: {__instance} | name: {__instance.name}");
-            BendyAndTheArchipelagoMachine.Logger.LogDebug($"    type: {__instance.GetType()}");
-            BendyAndTheArchipelagoMachine.Logger.LogDebug($"    Total BaconSoups: {__instance.m_BaconSoups.Count}");
-            BendyAndTheArchipelagoMachine.Logger.LogDebug($"    Chapter: {__instance.m_Chapter}");
-        }
+        //[HarmonyPostfix]
+        //[HarmonyPatch(typeof(BaconSoupController), nameof(BaconSoupController.InitOnComplete))]
+        //private static void OnInit(BaconSoupController __instance)
+        //{
+        //    BendyAndTheArchipelagoMachine.Logger.LogDebug($"instance: {__instance} | name: {__instance.name}");
+        //    BendyAndTheArchipelagoMachine.Logger.LogDebug($"    type: {__instance.GetType()}");
+        //    BendyAndTheArchipelagoMachine.Logger.LogDebug($"    Total BaconSoups: {__instance.m_BaconSoups.Count}");
+        //    BendyAndTheArchipelagoMachine.Logger.LogDebug($"    Chapter: {__instance.m_Chapter}");
+        //}
     }
 }

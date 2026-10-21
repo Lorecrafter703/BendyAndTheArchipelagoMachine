@@ -69,7 +69,7 @@ namespace BendyAndTheArchipelagoMachine.Utils
                 height1 = textStyle.CalcHeight(new GUIContent(lineWidth), windowWidth);
             }
 
-            BendyAndTheArchipelagoMachine.Logger.LogDebug($"MaxLogLines: {MaxLogLines} | minWrapLength: {minWrapLength}");
+            //BendyAndTheArchipelagoMachine.Logger.LogDebug($"MaxLogLines: {MaxLogLines} | minWrapLength: {minWrapLength}");
             Awoken = true;
         }
         
@@ -104,7 +104,7 @@ namespace BendyAndTheArchipelagoMachine.Utils
             string message = msgQueue.Dequeue();
 
             logLines.Add(message);
-            BendyAndTheArchipelagoMachine.Logger.LogDebug($"logLines size: {logLines.Count} | wrapCount: {wrapCount}");
+            //BendyAndTheArchipelagoMachine.Logger.LogDebug($"logLines size: {logLines.Count} | wrapCount: {wrapCount}");
             BendyAndTheArchipelagoMachine.Logger.LogMessage(message);
 
             int msgLen = message.Length;
@@ -112,7 +112,7 @@ namespace BendyAndTheArchipelagoMachine.Utils
             while (msgLen > minWrapLength)
             {
                 wrapCount++;
-                BendyAndTheArchipelagoMachine.Logger.LogDebug($"wrapCount: {wrapCount}");
+                //BendyAndTheArchipelagoMachine.Logger.LogDebug($"wrapCount: {wrapCount}");
                 index++;
                 msgLen -= minWrapLength;
             }
@@ -122,12 +122,12 @@ namespace BendyAndTheArchipelagoMachine.Utils
                 if (logLines[0].Length > minWrapLength)
                 {
                     int wrapAmount = (logLines[0].Length - 1) / minWrapLength;
-                    BendyAndTheArchipelagoMachine.Logger.LogDebug($"wrapAmount: {wrapAmount}");
+                    //BendyAndTheArchipelagoMachine.Logger.LogDebug($"wrapAmount: {wrapAmount}");
                     wrapCount -= wrapAmount;
-                    BendyAndTheArchipelagoMachine.Logger.LogDebug($"wrapCount: {wrapCount}");
+                    //BendyAndTheArchipelagoMachine.Logger.LogDebug($"wrapCount: {wrapCount}");
                 }
                 logLines.RemoveAt(0);
-                BendyAndTheArchipelagoMachine.Logger.LogDebug($"logLines size: {logLines.Count} | wrapCount: {wrapCount}");
+                //BendyAndTheArchipelagoMachine.Logger.LogDebug($"logLines size: {logLines.Count} | wrapCount: {wrapCount}");
             }
         }
 

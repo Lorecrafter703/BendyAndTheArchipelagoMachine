@@ -183,9 +183,9 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
 
                 // If Item isn't in the list, add it
                 BendyAndTheArchipelagoMachine.Logger.LogDebug($"Helper.Index: {Helper.Index} | serverData.ItemCount: {serverData.ItemCount()}");
-                serverData.PrintReceivedItems();
+                //serverData.PrintReceivedItems();
                 if (Helper.Index >= serverData.ItemCount()) serverData.AddItem(receivedItem.ItemId);
-                serverData.PrintReceivedItems();
+                //serverData.PrintReceivedItems();
 
                 // If Item has been received before return
                 if (Helper.Index < serverData.Index) return;
