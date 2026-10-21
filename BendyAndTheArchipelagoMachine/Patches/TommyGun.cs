@@ -16,7 +16,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         public static void GuaranteeTommyGun(CH3ProjectionistTaskController __instance)
         {
             if ((long)Client.serverData.GetSlotDataOption("include_tommy_gun") == 0) return;
-            BendyAndTheArchipelagoMachine.Logger.LogMessage($"TommyGunCheck: {__instance.m_CanHaveTommyGun}");
+            BendyAndTheArchipelagoMachine.Logger.LogDebug($"TommyGunCheck: {__instance.m_CanHaveTommyGun}");
             if (__instance.m_CanHaveTommyGun) Client.SendLocation("CH3 Tommy Gun Challenge");
 
             if (Client.HasItem("Tommy Gun"))

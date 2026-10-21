@@ -113,7 +113,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             ReceivedItems.Add(itemID);
             Index++;
             SaveData();
-            PrintReceivedItems();
+            //PrintReceivedItems();
         }
 
         public void CheckLocation(long itemID)

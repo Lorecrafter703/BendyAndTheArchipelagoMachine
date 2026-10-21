@@ -24,7 +24,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         [HarmonyPatch("HandleToyOnInteracted")]
         public static void HandleToysPickup(CH3ToyMachine __instance)
         {
-            BendyAndTheArchipelagoMachine.Logger.LogMessage("Toys Picked Up!");
+            BendyAndTheArchipelagoMachine.Logger.LogDebug("Toys Picked Up!");
             if (__instance.m_IsLeftSolved && __instance.m_IsRightSolved) Client.SendLocation("CH3 Toy Blockage");
         }
     }
