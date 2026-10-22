@@ -63,6 +63,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
 
         public void KillPlayer()
         {
+            //BendyAndTheArchipelagoMachine.Logger.LogDebug("Kill Player Function");
             try
             {
                 if (deathLinks.Count < 1) return;
@@ -86,6 +87,7 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
 
         public void ProcessDeaths()
         {
+            //BendyAndTheArchipelagoMachine.Logger.LogDebug($"Process Deaths: {deathLinks.Count}");
             DeathLinkController.Revive();
             if (DeathLinkController.isDead) return;
             KillPlayer();
