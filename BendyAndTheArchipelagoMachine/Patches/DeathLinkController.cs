@@ -16,6 +16,7 @@ namespace BendyAndTheArchipelagoMachine.Patches
         public static PlayerController playerController;
         public static bool isDead = false;
         public static bool deathLinkDeath = false;
+        public static DeathController deathController;
 
 
         [HarmonyPostfix]
@@ -68,6 +69,14 @@ namespace BendyAndTheArchipelagoMachine.Patches
                 return;
             }
             isDead = playerController.CurrentStatus == CombatStatus.Hiding;
+        }
+
+
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(DeathController), "InitOnComplete")]
+        public static void getDeathControllerRef(DeathController __instance)
+        {
+            deathController = __instance;
         }
     }
 }
