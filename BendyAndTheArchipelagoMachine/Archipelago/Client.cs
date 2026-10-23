@@ -162,11 +162,11 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
 
         private void OnItemReceived(ReceivedItemsHelper helper)
         {
-            BendyAndTheArchipelagoMachine.Logger.LogDebug("ItemRecieved");
+            //BendyAndTheArchipelagoMachine.Logger.LogDebug("ItemRecieved");
             var receivedItem = helper.DequeueItem();
             Helper = helper;
             ItemQueue.Enqueue(receivedItem);
-            BendyAndTheArchipelagoMachine.Logger.LogDebug($"ItemQueue Size: {ItemQueue.Count}");
+            //BendyAndTheArchipelagoMachine.Logger.LogDebug($"ItemQueue Size: {ItemQueue.Count}");
         }
 
 
@@ -177,12 +177,12 @@ namespace BendyAndTheArchipelagoMachine.Archipelago
             if (serverData.seed.IsNullOrWhiteSpace()) return;
             if (ItemQueue.Count > 0)
             {
-                BendyAndTheArchipelagoMachine.Logger.LogDebug($"Dequeueing: {ItemQueue.Count}");
+                //BendyAndTheArchipelagoMachine.Logger.LogDebug($"Dequeueing: {ItemQueue.Count}");
                 var receivedItem = ItemQueue.Dequeue();
-                BendyAndTheArchipelagoMachine.Logger.LogDebug($"Dequeued: {ItemQueue.Count}");
+                //BendyAndTheArchipelagoMachine.Logger.LogDebug($"Dequeued: {ItemQueue.Count}");
 
                 // If Item isn't in the list, add it
-                BendyAndTheArchipelagoMachine.Logger.LogDebug($"Helper.Index: {Helper.Index} | serverData.ItemCount: {serverData.ItemCount()}");
+                //BendyAndTheArchipelagoMachine.Logger.LogDebug($"Helper.Index: {Helper.Index} | serverData.ItemCount: {serverData.ItemCount()}");
                 //serverData.PrintReceivedItems();
                 if (Helper.Index >= serverData.ItemCount()) serverData.AddItem(receivedItem.ItemId);
                 //serverData.PrintReceivedItems();

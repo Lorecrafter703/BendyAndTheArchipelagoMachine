@@ -83,6 +83,7 @@ namespace BendyAndTheArchipelagoMachine
             {
                 ArchipelagoConsole.ToggleHidden();
             }
+            PrintLocation();
             ArchipelagoClient.deathLinkHandler?.ProcessDeaths();
         }
 
@@ -93,6 +94,21 @@ namespace BendyAndTheArchipelagoMachine
             bool keyboard = UnityEngine.Input.GetKeyDown(KeyCode.BackQuote);
             if (gamepad) return gamepad;
             return keyboard && keyboard;
+        }
+
+
+        static void PrintLocation()
+        {
+            if (UnityEngine.Input.GetKeyDown(KeyCode.KeypadEnter))
+            {
+                Logger.LogDebug($"Current Position: {DeathLinkController.playerController.transform.position}");
+                Logger.LogDebug($"Start Location: {DeathLinkController.deathController.m_StartLocation.position}");
+                Logger.LogDebug("Spawn Points:");
+                foreach (var spawn in DeathLinkController.deathController.m_SpawnPoints)
+                {
+                    Logger.LogDebug($" > {spawn.transform.position}");
+                }
+            }
         }
 
 
