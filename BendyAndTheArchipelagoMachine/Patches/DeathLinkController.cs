@@ -1,12 +1,15 @@
 ﻿using Archipelago.MultiClient.Net.Enums;
 using BendyAndTheArchipelagoMachine.Archipelago;
 using HarmonyLib;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using S13Audio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.ProBuilder;
 
 namespace BendyAndTheArchipelagoMachine.Patches
 {
@@ -74,9 +77,28 @@ namespace BendyAndTheArchipelagoMachine.Patches
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(DeathController), "InitOnComplete")]
-        public static void getDeathControllerRef(DeathController __instance)
+        public static void getDeathControllerRef(ref DeathController __instance)
         {
             deathController = __instance;
+            if (MyChapterController.currentChapterNumber == Chapters.TWO)
+            {
+                __instance.m_SpawnPoints = AddSpawnPoint(new Vector3(0f, 2.96f, -15.00f), __instance.m_SpawnPoints);
+            }
+        }
+
+
+        public static Il2CppReferenceArray<PlayerSpawnNode> AddSpawnPoint(Vector3 position, Il2CppReferenceArray<PlayerSpawnNode> current)
+        {
+            GameObject newNode = new GameObject();
+            newNode.AddComponent<PlayerSpawnNode>();
+            newNode.transform.position = position;
+            Il2CppReferenceArray<PlayerSpawnNode> output = new Il2CppReferenceArray<PlayerSpawnNode>(current.Length + 1);
+            for (int i = 0; i < current.Length; i++)
+            {
+                output[i] = current[i];
+            }
+            output[current.Length] = newNode.GetComponent<PlayerSpawnNode>();
+            return output;
         }
     }
 }
